@@ -4,34 +4,45 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ZooWebApp</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.tailwind.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ZooWebApp.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ZooWebApp</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+
+    <header class="sticky top-0 z-50 bg-orange-500 shadow">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+
+                
+                <div class="flex-shrink-0">
+                    <a href="/" class="text-white text-xl font-bold">🐾 Zoo</a>
+                    <!-- <img src="/logo.png" class="h-8" alt="Zoo Logo" /> -->
                 </div>
-               
+
+                
+                <nav class="flex-1">
+                    <ul class="flex justify-center space-x-6">
+                        
+                        <li><a href="#" class="text-white font-medium no-underline hover:underline">Tickets</a></li>
+                        <li><a href="#" class="text-white font-medium no-underline hover:underline">Memberships</a></li>
+                        <li><a href="#" class="text-white font-medium no-underline hover:underline">Map</a></li>
+                        <li><a href="#" class="text-white font-medium no-underline hover:underline">Animals</a></li>
+                        <li><a href="#" class="text-white font-medium no-underline hover:underline">Events</a></li>      
+                        <li><a href="#" class="text-white font-medium no-underline hover:underline">Merchandise</a></li>
+                    </ul>
+                </nav>
+
+                
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-white font-medium no-underline hover:underline">Sign In</a>
+                </div>
+
             </div>
-        </nav>
+        </div>
     </header>
+
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
