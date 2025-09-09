@@ -33,6 +33,7 @@ namespace ZooWebApp.Models
         [Required]
         [Display(Name = "Animal Weight")]
         [Range(0, 15000)]
+        [Column(TypeName = "decimal(10,2)")]
         public decimal Weight{ get; set; }
 
         [Required]

@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using ZooWebApp.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<ZooWebAppContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ZooWebAppContext") ?? throw new InvalidOperationException("Connection string 'ZooWebAppContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
