@@ -14,6 +14,16 @@ namespace ZooWebApp.Data
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Example of seed data
+            modelBuilder.Entity<Animal>().HasData(
+                
+                
+            );
+        }
         public DbSet<ZooWebApp.Models.Animal> Animal { get; set; } = default!;
     }
 }
