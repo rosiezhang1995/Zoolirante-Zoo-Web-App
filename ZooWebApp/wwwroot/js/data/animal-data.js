@@ -19,7 +19,7 @@ const mockAnimals = [
         animalAge: 9,
         species: "Marsican Brown Bear",
         gender: "M",
-        animalImage: "/images/animals/brown.avif",
+        animalImage: "/images/animals/brown.png",
         weight: 290,
         dateOfArrival: "2019-06-12",
         mapImage: "xxx"
@@ -40,7 +40,7 @@ const mockAnimals = [
         animalID: 4,
         animalName: "Joey",
         description: "Joey is a playful red kangaroo who loves hopping around his enclosure. As an Australian native, he represents the perfect bridge between Italian heritage and Australian wildlife.",
-        animalAge: 4,
+        animalAge: 1,
         species: "Red Kangaroo",
         gender: "M",
         animalImage: "/images/animals/joey.png",
@@ -50,14 +50,14 @@ const mockAnimals = [
     },
     {
         animalID: 5,
-        animalName: "Echo",
-        description: "Echo is a fascinating fruit bat with exceptional echolocation abilities. She's nocturnal and demonstrates incredible flight patterns during evening presentations.",
-        animalAge: 3,
-        species: "Fruit Bat",
-        gender: "F",
-        animalImage: "/images/animals/echo.png",
-        weight: 1.5,
-        dateOfArrival: "2021-08-15",
+        animalName: "Shawn",
+        description: "Shawn is a charming Italian Bergamasca sheep with distinctive woolly coat. He represents the pastoral heritage of Italy and is known for his gentle temperament and love for fresh grass.",
+        animalAge: 4,
+        species: "Bergamasca Sheep",
+        gender: "M",
+        animalImage: "/images/animals/shawn.png",
+        weight: 75,
+        dateOfArrival: "2022-05-30",
         mapImage: "xxx"
     },
     {
@@ -73,3 +73,5 @@ const mockAnimals = [
         mapImage: "xxx"
     }
 ];
+
+window.mockAnimals = mockAnimals;
