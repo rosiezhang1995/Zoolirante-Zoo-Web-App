@@ -12,15 +12,15 @@ using ZooWebApp.Data;
 namespace ZooWebApp.Migrations
 {
     [DbContext(typeof(ZooWebAppContext))]
-    [Migration("20250909022229_InitialDBCreation")]
-    partial class InitialDBCreation
+    [Migration("20250910101701_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.11")
+                .HasAnnotation("ProductVersion", "8.0.18")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -40,11 +40,16 @@ namespace ZooWebApp.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AnimalName")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("DateOfArrival")
                         .HasColumnType("Date");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Gender")
                         .IsRequired()
