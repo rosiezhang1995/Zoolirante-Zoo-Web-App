@@ -1,4 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {
+    //Mock data
+    const animals = [
+        {
+            name: "test1",
+            species: "Wolf",
+            image: "https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0",
+            age: "4",
+        },
+        {
+            name: "test2",
+            species: "Lion",
+            image: "https://images.unsplash.com/photo-1546182990-dffeafbe841d",
+            age: "5",
+        },
+        {
+            name: "test3",
+            species: "Bear",
+            image: "https://images.unsplash.com/photo-1713062711590-b29c683708e0?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8TWFyc2ljYW4lMjBicm93biUyMGJlYXJ8ZW58MHx8MHx8fDA%3D",
+            age: "2",
+        },
+    ];
+
     //Animal card
     const list = document.getElementById("animal-list");
 
