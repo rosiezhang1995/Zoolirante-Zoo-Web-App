@@ -10,7 +10,7 @@ const mockAnimals = [
         animalImage: "/images/animals/lion.jpg",
         weight: 190,
         dateOfArrival: "2020-03-15",
-        mapImage: "xxx"
+        mapImage: "/images/maps/GorillaMap.png"
     },
     {
         animalID: 2,
@@ -22,7 +22,7 @@ const mockAnimals = [
         animalImage: "/images/animals/brown.png",
         weight: 290,
         dateOfArrival: "2019-06-12",
-        mapImage: "xxx"
+        mapImage: "/images/maps/BearMap.png"
     },
     {
         animalID: 3,
@@ -34,7 +34,7 @@ const mockAnimals = [
         animalImage: "/images/animals/grace.png",
         weight: 850,
         dateOfArrival: "2019-09-22",
-        mapImage: "xxx"
+        mapImage: "/images/maps/GiraffeMap.png"
     },
     {
         animalID: 4,
@@ -46,7 +46,7 @@ const mockAnimals = [
         animalImage: "/images/animals/joey.png",
         weight: 85,
         dateOfArrival: "2022-01-18",
-        mapImage: "xxx"
+        mapImage: "/images/maps/KangarooMap.png"
     },
     {
         animalID: 5,
@@ -58,7 +58,7 @@ const mockAnimals = [
         animalImage: "/images/animals/shawn.png",
         weight: 75,
         dateOfArrival: "2022-05-30",
-        mapImage: "xxx"
+        mapImage: "/images/maps/CapybaraMap.png"
     },
     {
         animalID: 6,
@@ -70,7 +70,7 @@ const mockAnimals = [
         animalImage: "/images/animals/rajah.png",
         weight: 250,
         dateOfArrival: "2020-11-03",
-        mapImage: "xxx"
+        mapImage: "/images/maps/HippoMap.png"
     }
 ];
 
