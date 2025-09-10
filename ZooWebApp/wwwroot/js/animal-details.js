@@ -1,0 +1,38 @@
+document.addEventListener('DOMContentLoaded', function () {
+    loadAnimalDetails();
+});
+
+function loadAnimalDetails() {
+    // Get animal ID 
+    const urlParams = new URLSearchParams(window.location.search);
+    const animalId = parseInt(urlParams.get('id'));
+
+    // Find the animal
+    const animal = window.mockAnimals.find(a => a.animalID === animalId);
+
+    // Get Animal data
+    document.getElementById('animal-image').src = animal.animalImage;
+    document.getElementById('animal-image').alt = animal.animalName;
+    document.getElementById('animal-name').textContent = animal.animalName; 
+    document.getElementById('animal-species').textContent = animal.species;
+    document.getElementById('animal-age').textContent = `${animal.animalAge} ${animal.animalAge === 1 ? "year" : "years"} old`;
+    document.getElementById('animal-weight').textContent = `${animal.weight} kg`;
+    document.getElementById('animal-gender').textContent = animal.gender === "M" ? "Boy" : "Girl";
+    document.getElementById('arrival-date').textContent = formatDate(animal.dateOfArrival);
+    document.getElementById('animal-name-desc').textContent = animal.animalName; 
+    document.getElementById('animal-description').textContent = animal.description; 
+
+    // Update page title
+    document.title = `${animal.animalName} the ${animal.species} - Zoolirante`;
+}
+
+// back to list 
+function backToList() {
+    window.location.href = 'animal-list.html';
+}
+
+//Format datatype
+function formatDate(dateString) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('en-AU', options);
+}

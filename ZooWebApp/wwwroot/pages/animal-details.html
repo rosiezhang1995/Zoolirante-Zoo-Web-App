@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animal Details - Zoolirante</title>
+    <link href="/css/site.tailwind.css" rel="stylesheet">
+    <link href="/css/custom.css" rel="stylesheet">
+</head>
+<body class="bg-zoo-background">
+    <!-- Value badge -->
+    <div class="bg-zoo-cream text-center py-4 text-zoo-brown font-semibold tracking-wide text-lg shadow">
+        Zoolirante – A World of Wildlife, A Lifetime of Wonder
+    </div>
+
+    <!-- Back button -->
+    <div class="container mx-auto px-4 pt-6 mt-3">
+        <button onclick="backToList()" class="bg-zoo-primary hover:!bg-amber-700 text-zoo-cream px-4 py-2 rounded-lg transition flex items-center">
+            ← Back to Animals
+        </button>
+    </div>
+
+    <!-- Animal details -->
+    <div id="animal-details" class="container mx-auto px-4 py-8 mt-3">
+
+        <!-- Name head -->
+        <div class="bg-zoo-soft py-8 mb-8 shadow-lg rounded-2xl">
+            <div class="container mx-auto px-4">
+                <h1 id="animal-name" class="text-6xl font-bold text-zoo-darkbrown text-center"></h1>
+            </div>
+        </div>
+
+        <!-- Animal card -->
+        <div class="bg-zoo-lightpink rounded-4xl overflow-hidden mb-8">
+            <div class="md:flex">
+                <!-- image -->
+                <div class="md:w-2/3">
+                    <img id="animal-image" src="" alt="animal-name" class="w-full aspect-[4/3] object-cover">
+                </div>
+                <div class="md:w-1/2 p-8">
+                    <h1 id="animal-species" class="text-4xl font-bold text-zoo-darkbrown mb-2"></h1>
+                    
+                    <div class="grid grid-cols-2 gap-4 mt-10">
+                        <div class="bg-zoo-cream  p-4 rounded-lg">
+                            <h3 class="font-semibold text-zoo-darkbrown mb-2">Age</h3>
+                            <p id="animal-age" class="text-lg text-zoo-brown"></p>
+                        </div>
+                        <div class="bg-zoo-cream  p-4 rounded-lg">
+                            <h3 class="font-semibold text-zoo-darkbrown mb-2">Weight</h3>
+                            <p id="animal-weight" class="text-lg text-zoo-brown"></p>
+                        </div>
+                        <div class="bg-zoo-cream  p-4 rounded-lg">
+                            <h3 class="font-semibold text-zoo-darkbrown mb-2">Gender</h3>
+                            <p id="animal-gender" class="text-lg text-zoo-brown"></p>
+                        </div>
+                        <div class="bg-zoo-cream p-4 rounded-lg">
+                            <h3 class="font-semibold text-zoo-darkbrown mb-2">Arrival Date</h3>
+                            <p id="arrival-date" class="text-lg text-zoo-brown"></p>
+                        </div>
+                    </div>
+                    
+                    <!-- descfription -->
+                    <h2 id="animal-name-desc" class="text-2xl font-semibold text-zoo-brown mt-5 mb-5"></h2>
+                    <p id="animal-description" class="text-lg font-semibold text-zoo-brown"></p>
+
+                    <!-- Buy ticket button -->
+                    <div class="text-center mt-2">
+                        <img src="/images/homepage/paw.png" alt="paw icon" class="mx-auto w-16 mb-2" />
+                            <button class="bg-zoo-primary hover:!bg-amber-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg transition-colors mt-3">
+                                Buy Ticket
+                            </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Include navbar component -->
+    <script src="/js/components/navbar.js"></script>
+    <script src="/js/data/animal-data.js"></script>
+    <script src="/js/animal-details.js"></script>
+</body>
+</html>
