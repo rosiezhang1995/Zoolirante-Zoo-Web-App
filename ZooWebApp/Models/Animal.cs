@@ -7,6 +7,7 @@ namespace ZooWebApp.Models
     {
         [Key]
         [Display(Name = "Animal Id")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int AnimalID { get; set; }
 
         [Required]

@@ -1,16 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ZooWebApp.Models;
+﻿using ZooWebApp.Models;
 
 namespace ZooWebApp.Data
 {
     public static class AnimalSeed
     {
-        public static void Seed(ModelBuilder modelBuilder)
+        public static void Seed(ZooWebAppContext context)
         {
-            modelBuilder.Entity<Animal>().HasData(
+            // Check if animals already exist
+            if (context.Animal.Any())
+            {
+                return;
+            }
+
+            var animals = new List<Animal>
+            {
                 new Animal
                 {
-                    AnimalID = 1,
                     AnimalName = "Jack",
                     AnimalAge = 6,
                     Species = "Kangaroo",
@@ -23,7 +28,6 @@ namespace ZooWebApp.Data
                 },
                 new Animal
                 {
-                    AnimalID = 2,
                     AnimalName = "Leo",
                     AnimalAge = 7,
                     Species = "Lion",
@@ -36,7 +40,6 @@ namespace ZooWebApp.Data
                 },
                 new Animal
                 {
-                    AnimalID = 3,
                     AnimalName = "Shira",
                     AnimalAge = 5,
                     Species = "Tiger",
@@ -49,7 +52,6 @@ namespace ZooWebApp.Data
                 },
                 new Animal
                 {
-                    AnimalID = 4,
                     AnimalName = "Stretch",
                     AnimalAge = 8,
                     Species = "Giraffe",
@@ -62,7 +64,6 @@ namespace ZooWebApp.Data
                 },
                 new Animal
                 {
-                    AnimalID = 5,
                     AnimalName = "Stripes",
                     AnimalAge = 6,
                     Species = "Zebra",
@@ -75,7 +76,6 @@ namespace ZooWebApp.Data
                 },
                 new Animal
                 {
-                    AnimalID = 6,
                     AnimalName = "Sonya",
                     AnimalAge = 9,
                     Species = "Bear",
@@ -88,7 +88,6 @@ namespace ZooWebApp.Data
                 },
                 new Animal
                 {
-                    AnimalID = 7,
                     AnimalName = "Echo",
                     AnimalAge = 4,
                     Species = "Bat",
@@ -101,7 +100,6 @@ namespace ZooWebApp.Data
                 },
                 new Animal
                 {
-                    AnimalID = 8,
                     AnimalName = "Bubbles",
                     AnimalAge = 12,
                     Species = "Hippo",
@@ -114,7 +112,6 @@ namespace ZooWebApp.Data
                 },
                 new Animal
                 {
-                    AnimalID = 9,
                     AnimalName = "George",
                     AnimalAge = 5,
                     Species = "Monkey",
@@ -127,7 +124,6 @@ namespace ZooWebApp.Data
                 },
                 new Animal
                 {
-                    AnimalID = 10,
                     AnimalName = "Amber",
                     AnimalAge = 7,
                     Species = "Orangutan",
@@ -140,7 +136,6 @@ namespace ZooWebApp.Data
                 },
                 new Animal
                 {
-                    AnimalID = 11,
                     AnimalName = "Snap",
                     AnimalAge = 15,
                     Species = "Crocodile",
@@ -153,20 +148,6 @@ namespace ZooWebApp.Data
                 },
                 new Animal
                 {
-                    AnimalID = 12,
-                    AnimalName = "Chomp",
-                    AnimalAge = 14,
-                    Species = "Alligator",
-                    Gender = "M",
-                    AnimalImage = "images/animals/Chomp.png",
-                    Weight = 480.00m,
-                    DateOfArrival = new DateTime(2019, 6, 23),
-                    MapImage = "xxxx",
-                    Description = "Chomp is an alligator with a massive jaw, often spotted lurking under the water surface."
-                },
-                new Animal
-                {
-                    AnimalID = 13,
                     AnimalName = "Tank",
                     AnimalAge = 11,
                     Species = "Rhino",
@@ -179,7 +160,6 @@ namespace ZooWebApp.Data
                 },
                 new Animal
                 {
-                    AnimalID = 14,
                     AnimalName = "Capy",
                     AnimalAge = 5,
                     Species = "Capybara",
@@ -192,7 +172,6 @@ namespace ZooWebApp.Data
                 },
                 new Animal
                 {
-                    AnimalID = 15,
                     AnimalName = "Chewy",
                     AnimalAge = 7,
                     Species = "Beaver",
@@ -205,7 +184,6 @@ namespace ZooWebApp.Data
                 },
                 new Animal
                 {
-                    AnimalID = 16,
                     AnimalName = "Kong",
                     AnimalAge = 13,
                     Species = "Gorilla",
@@ -218,7 +196,6 @@ namespace ZooWebApp.Data
                 },
                 new Animal
                 {
-                    AnimalID = 17,
                     AnimalName = "Pebble",
                     AnimalAge = 2,
                     Species = "Penguin",
@@ -231,7 +208,6 @@ namespace ZooWebApp.Data
                 },
                 new Animal
                 {
-                    AnimalID = 18,
                     AnimalName = "Julian",
                     AnimalAge = 6,
                     Species = "Lemur",
@@ -242,7 +218,10 @@ namespace ZooWebApp.Data
                     MapImage = "xxxx",
                     Description = "Julian is a lively lemur who enjoys leaping from tree to tree."
                 }
-                );
+            };
+
+            context.Animal.AddRange(animals);
+            context.SaveChanges();
         }
     }
 }

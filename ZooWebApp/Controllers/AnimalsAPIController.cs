@@ -25,7 +25,7 @@ namespace ZooWebApp.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Animal>>> GetAnimal()
         {
-            var animals = _context.Animal.OrderBy(a => a.AnimalName).AsQueryable();
+            var animals = _context.Animal.OrderBy(a => a.AnimalID).AsQueryable();
             return await animals.ToListAsync();
         }
 

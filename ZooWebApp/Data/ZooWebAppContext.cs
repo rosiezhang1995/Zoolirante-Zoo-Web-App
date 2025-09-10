@@ -14,13 +14,6 @@ namespace ZooWebApp.Data
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            // Animal list
-            AnimalSeed.Seed(modelBuilder);
-        }
         public DbSet<ZooWebApp.Models.Animal> Animal { get; set; } = default!;
     }
 }

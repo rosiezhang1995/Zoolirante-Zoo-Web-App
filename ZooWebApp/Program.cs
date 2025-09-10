@@ -25,4 +25,17 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+// Seeding tables
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<ZooWebAppContext>();
+
+    // Apply migrations
+    context.Database.Migrate();
+
+    // Seed each table individually
+    AnimalSeed.Seed(context);
+}
+
 app.Run();
