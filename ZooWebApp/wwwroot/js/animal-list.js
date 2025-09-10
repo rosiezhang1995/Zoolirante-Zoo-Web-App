@@ -21,7 +21,11 @@ document.addEventListener("DOMContentLoaded", function () {
           </div>
         `;
 
-        // TODO: Link to details page
+        // Link card to its details page
+        card.addEventListener('click', function() {
+            window.location.href = `animal-details.html?id=${animal.animalID}`;
+        });
+
         list.appendChild(card);
     });
 });
