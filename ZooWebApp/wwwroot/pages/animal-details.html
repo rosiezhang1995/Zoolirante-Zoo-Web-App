@@ -13,11 +13,24 @@
         Zoolirante – A World of Wildlife, A Lifetime of Wonder
     </div>
 
-    <!-- Back button -->
+    <!-- Brand logo & buttons -->
     <div class="container mx-auto px-4 pt-6 mt-3">
-        <button onclick="backToList()" class="bg-zoo-primary hover:!bg-amber-700 text-zoo-cream px-4 py-2 rounded-lg transition flex items-center">
-            ← Back to Animals
-        </button>
+        <div class="flex justify-between items-center">
+            <!-- Back button -->
+            <button onclick="backToList()" class="bg-zoo-primary hover:!bg-amber-700 text-zoo-cream px-4 py-2 rounded-lg transition flex items-center">
+                ← Back to Animals
+            </button>
+            
+            <!-- brand logo -->
+            <div class="flex-1 flex justify-center">
+                <img src="/images/homepage/logo.png" alt="Zoolirante Logo" class="w-40 h-auto">
+            </div>
+            
+            <!-- edit button -->
+            <button class="bg-zoo-primary hover:!bg-amber-700 text-zoo-cream px-4 py-2 rounded-lg transition flex items-center">
+                Edit Animal details
+            </button>
+        </div>
     </div>
 
     <!-- Animal details -->
