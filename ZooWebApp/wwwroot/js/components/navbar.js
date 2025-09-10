@@ -15,7 +15,7 @@ function createNavbar(){
                 <ul class="flex justify-center space-x-6">
                      <li><a href="#" class="text-zoo-darkbrown font-medium no-underline hover:underline">Tickets</a></li>
                     <li><a href="#" class="text-zoo-darkbrown font-medium no-underline hover:underline">Memberships</a></li>
-                    <li><a href="#" class="text-zoo-darkbrown font-medium no-underline hover:underline">Map</a></li>
+                    <li><a href="map.html" class="text-zoo-darkbrown font-medium no-underline hover:underline">Map</a></li>
                     <li><a href="animal-list.html" class="text-zoo-darkbrown font-medium no-underline hover:underline">Animals</a></li>
                     <li><a href="#" class="text-zoo-darkbrown font-medium no-underline hover:underline">Events</a></li>
                     <li><a href="#" class="text-zoo-darkbrown font-medium no-underline hover:underline">Merchandise</a></li>
