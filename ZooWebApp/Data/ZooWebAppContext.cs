@@ -30,7 +30,8 @@ namespace ZooWebApp.Data
                     AnimalImage = "images/animals/leo.png",
                     Weight = 190.50m,
                     DateOfArrival = new DateTime(2023, 7, 15),
-                    MapImage = "xxxx"
+                    MapImage = "xxxx",
+                    Description = "Leo is a strong and majestic lion, known for his striking mane and commanding presence. He enjoys lounging in the sun and observing the other animals in the zoo."
                 },
                 new Animal
                 {
@@ -42,7 +43,8 @@ namespace ZooWebApp.Data
                     AnimalImage = "images/animals/joey.png",
                     Weight = 85.75m,
                     DateOfArrival = new DateTime(2024, 3, 10),
-                    MapImage = "xxxx"
+                    MapImage = "xxxx",
+                    Description = "Joey is an energetic young kangaroo who loves to hop around and explore her enclosure. She is very curious and often interacts playfully with visitors."
                 },
                 new Animal
                 {
@@ -54,7 +56,8 @@ namespace ZooWebApp.Data
                     AnimalImage = "images/animals/rajah.png",
                     Weight = 220.30m,
                     DateOfArrival = new DateTime(2022, 11, 5),
-                    MapImage = "xxxx"
+                    MapImage = "xxxx",
+                    Description = "Rajah is a powerful tiger with a vivid orange coat and distinctive black stripes. He enjoys stalking through the foliage and is known for his calm but alert demeanor."
                 },
                 new Animal
                 {
@@ -66,7 +69,8 @@ namespace ZooWebApp.Data
                     AnimalImage = "images/animals/grace.png",
                     Weight = 800.40m,
                     DateOfArrival = new DateTime(2021, 6, 2),
-                    MapImage = "xxxx"
+                    MapImage = "xxxx",
+                    Description = "Grace is a tall and graceful giraffe who loves nibbling on the tallest leaves. She is gentle and often seen walking slowly around her enclosure, captivating visitors with her height."
                 },
                 new Animal
                 {
@@ -78,7 +82,8 @@ namespace ZooWebApp.Data
                     AnimalImage = "images/animals/stripes.png",
                     Weight = 380.90m,
                     DateOfArrival = new DateTime(2023, 2, 20),
-                    MapImage = "xxxx"
+                    MapImage = "xxxx",
+                    Description = "Stripes is a lively zebra known for his bold black-and-white pattern. He enjoys running around his enclosure and often plays with other zebras."
                 },
                 new Animal
                 {
@@ -90,8 +95,10 @@ namespace ZooWebApp.Data
                     AnimalImage = "images/animals/echo.png",
                     Weight = 1.25m,
                     DateOfArrival = new DateTime(2024, 1, 14),
-                    MapImage = "xxxx"
+                    MapImage = "xxxx",
+                    Description = "Echo is a small but energetic bat who is most active during the evening. She uses echolocation to navigate and loves exploring every nook of her habitat."
                 }
+
 
             );
         }

@@ -9,9 +9,14 @@ namespace ZooWebApp.Models
         [Display(Name = "Animal Id")]
         public int AnimalID { get; set; }
 
+        [Required]
         [Display(Name = "Animal Name")]
         [StringLength(50, ErrorMessage = "Animal Name must be no more than 50 characters")]
-        public string? AnimalName { get; set; }
+        public string AnimalName { get; set; }
+
+        [Display(Name = "Animal Description")]
+        [StringLength(500, ErrorMessage = "Description must be no more than 500 characters")]
+        public string? Description { get; set; }
 
         [Required]
         [Display(Name = "Animal Age")]

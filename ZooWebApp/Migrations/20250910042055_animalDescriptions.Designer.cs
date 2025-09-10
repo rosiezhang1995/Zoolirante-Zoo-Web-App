@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZooWebApp.Data;
 
@@ -11,9 +12,11 @@ using ZooWebApp.Data;
 namespace ZooWebApp.Migrations
 {
     [DbContext(typeof(ZooWebAppContext))]
-    partial class ZooWebAppContextModelSnapshot : ModelSnapshot
+    [Migration("20250910042055_animalDescriptions")]
+    partial class animalDescriptions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
