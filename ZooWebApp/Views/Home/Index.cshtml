@@ -2,7 +2,115 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<div class="relative w-full h-[350px] bg-cover bg-no-repeat -mt-2"
+     style="background-image: url('/images/homepage/lion-banner.jpg'); ">
+
+    <img src="/images/homepage/logo.png" alt="Zoo Logo"
+         class="absolute -bottom-8 left-8 w-40 h-auto z-10 " />
+
 </div>
+
+<div class="bg-zoo-cream text-center py-4 text-zoo-brown font-semibold tracking-wide text-lg shadow">
+    Zoolirante – A World of Wildlife, A Lifetime of Wonder
+</div>
+
+<!-- Featured Animals -->
+<section class="mt-12 px-16 text-zoo-darkbrown">
+    <div class="text-center ">
+        <img src="/images/homepage/paw.png" alt="paw icon" class="mx-auto w-16 mb-2" />
+        <h2 class="text-3xl font-semibold">Meet Our Stars</h2>
+    </div>
+
+    <!-- Giraffe Grace -->
+    <div class="mt-12 flex flex-col md:flex-row items-start gap-8 px-4 mx-auto max-w-6xl">
+        <img src="/images/homepage/giraffe-homepage.jpg" alt="Giraffe Grace"
+             class="w-full md:w-2/5 rounded-lg shadow-md" />
+        <div class="md:w-3/5 text-justify">
+            <h3 class="text-lg font-semibold mb-4">
+                Elegant and curious – Grace the giraffe charms everyone
+            </h3>
+            <p class="mb-2">
+                Grace towers above her surroundings with elegance. Visitors love watching her stretch
+                for the highest leaves, showcasing her incredible height and balance.
+            </p>
+            <p>
+                With her long lashes and gentle nature, she has quickly become one of the zoo’s most
+                photographed residents. Grace is living proof that beauty and curiosity go hand in hand.
+            </p>
+        </div>
+    </div>
+
+    <!-- Lion Leo -->
+    <div class="mt-12 flex flex-col md:flex-row items-start gap-8 px-4 mx-auto max-w-6xl">
+        <img src="/images/homepage/lion-homepage.jpg" alt="Lion Leo"
+             class="w-full md:w-2/5 rounded-lg shadow-md" />
+        <div class="md:w-3/5 text-justify">
+            <h3 class="text-lg font-semibold mb-4">
+                Big-hearted Leo – A gentle king at rest
+            </h3>
+            <p class="mb-2">
+                Leo, our magnificent African lion, embodies both power and grace. His deep roar can be heard
+                echoing across the zoo at sunrise, reminding everyone why he’s called the king of the savannah.
+            </p>
+            <p>
+                Despite his regal presence, Leo enjoys quiet afternoons basking in the sun and often shows
+                a surprisingly playful side with his keepers. He is a symbol of strength, leadership,
+                and the wild spirit of the animal kingdom.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="mt-12 text-zoo-darkbrown">
+    <div class="text-center mt-12 px-8">
+        <img src="/images/homepage/paw.png" alt="paw icon" class="mx-auto w-16 mb-2" />
+
+        <h2 class="text-3xl font-semibold">Zoo Events & Experiences</h2>
+
+        <h4 class="mt-2">
+            At our zoo, every visit is a chance to connect people with nature and wildlife.
+        </h4>
+    </div>
+
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10 px-8 max-w-6xl mx-auto">
+
+        <a href="#" class="relative h-[500px] block group overflow-hidden rounded-lg shadow-md cursor-pointer">
+            <img src="/images/homepage/event-night.jpg" alt="Safari Night Adventure"
+                 class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+            <div class="absolute bottom-4 left-4 text-white text-xl font-semibold drop-shadow">
+                Night Adventure
+            </div>
+        </a>
+
+
+        <div class="grid grid-rows-2 gap-4">
+
+            <a href="#" class="relative h-[240px] block group overflow-hidden rounded-lg shadow-md cursor-pointer">
+                <img src="/images/homepage/event-keeper.jpg" alt="Keeper for a Day"
+                     class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                <div class="absolute bottom-3 left-3 text-white text-lg font-semibold drop-shadow">
+                    Keeper for a Day
+                </div>
+            </a>
+
+
+            <a href="#" class="relative h-[240px] block group overflow-hidden rounded-lg shadow-md cursor-pointer">
+                <img src="/images/homepage/event-children.jpg" alt="Zoo Junior Explorer Day"
+                     class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                <div class="absolute bottom-3 left-3 text-white text-lg font-semibold drop-shadow">
+                    Zoo Junior Explorer Day
+                </div>
+            </a>
+        </div>
+    </div>
+
+
+</section>
+
+
+
+
+
+
