@@ -417,5 +417,4 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
-# Tailwind build output
-ZooWebApp/wwwroot/css/site.tailwind.css
+
