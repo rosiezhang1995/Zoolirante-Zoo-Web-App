@@ -28,12 +28,16 @@
     background-color: #d38c5f;
 }
 
+.bg-zoo-background {
+    background-color: #f6f3e9;
+}
+
 .text-zoo-primary {
     color: #ea640e;
 }
 
 .text-zoo-cream {
-    color: #f6e5c0;
+    color: #f6e5c0 !important;
 }
 
 .text-zoo-brown {
@@ -45,7 +49,7 @@
 }
 
 .text-zoo-darkbrown {
-    color: #6e3b2a;
+    color: #6e3b2a !important;
 }
 
 .text-zoo-lightpink {
@@ -54,4 +58,8 @@
 
 .text-zoo-lightbrown {
     color: #d38c5f;
+}
+
+.text-zoo-background {
+    color: #f6f3e9;
 }
