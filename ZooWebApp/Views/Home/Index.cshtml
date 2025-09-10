@@ -2,7 +2,74 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+@* <div class="relative w-full h-[350px]">
+  
+    <img src="/images/logo.png" alt="Zoo Logo"
+         class="absolute -bottom-8 left-8 w-40 h-auto z-10" />
+    
+    <img src="/images/giraffe.jpg" alt="Zoo Banner"
+         class="w-full h-full object-contain object-top" />
+</div> *@
+<div class="relative w-full h-[350px] bg-cover bg-no-repeat -mt-2"
+     style="background-image: url('/images/lion.jpg'); ">
+
+    <img src="/images/logo.png" alt="Zoo Logo"
+         class="absolute -bottom-8 left-8 w-40 h-auto z-10 " />
+
 </div>
+
+<div class="bg-zoo-cream text-center py-4 text-zoo-brown font-semibold tracking-wide text-lg shadow">
+    Zoolirante – A World of Wildlife, A Lifetime of Wonder
+</div>
+
+<section class="py-12 bg-beige px-4">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-4xl font-bold text-darkbrown text-center mb-10">Discover More</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            <!-- Card 1 -->
+            <div class="text-center">
+                <img src="/images/membership1.jpg" alt="Annual Membership" class="w-full h-auto rounded shadow">
+                <h3 class="text-2xl font-semibold text-green-900 mt-6">Annual Membership</h3>
+                <p class="text-gray-700 mt-2">
+                    Unlimited visits to Adelaide Zoo, Monarto Safari Park and most Australian zoos
+                </p>
+                <button class="mt-4 bg-orange text-white font-bold py-2 px-6 inline-flex items-center text-lg skew-x-[-5deg]">
+                    <span class="skew-x-[5deg]">View More</span>
+                    <span class="ml-2 skew-x-[5deg] text-xl">🐾</span>
+                </button>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="text-center">
+                <img src="/images/membership2.jpg" alt="Life Membership" class="w-full h-auto rounded shadow">
+                <h3 class="text-2xl font-semibold text-green-900 mt-6">Life Membership</h3>
+                <p class="text-gray-700 mt-2">
+                    Share of lifetime of memorable moments with unlimited visits to Adelaide Zoo and Monarto Safari Park.
+                </p>
+                <button class="mt-4 bg-orange text-white font-bold py-2 px-6 inline-flex items-center text-lg skew-x-[-5deg]">
+                    <span class="skew-x-[5deg]">View More</span>
+                    <span class="ml-2 skew-x-[5deg] text-xl">🐾</span>
+                </button>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="text-center">
+                <img src="/images/membership3.jpg" alt="Animal Experiences" class="w-full h-auto rounded shadow">
+                <h3 class="text-2xl font-semibold text-green-900 mt-6">Animal Experiences</h3>
+                <p class="text-gray-700 mt-2">
+                    Meet the meerkats, feed a giant giraffe or tickle a rhino behind the ears!
+                </p>
+                <button class="mt-4 bg-orange text-white font-bold py-2 px-6 inline-flex items-center text-lg skew-x-[-5deg]">
+                    <span class="skew-x-[5deg]">Discover more</span>
+                    <span class="ml-2 skew-x-[5deg] text-xl">🐾</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
