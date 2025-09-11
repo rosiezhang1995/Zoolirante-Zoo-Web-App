@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Add Animal — Zoolirante</title>
+    <link href="/css/site.tailwind.css" rel="stylesheet">
+    <link href="/css/custom.css" rel="stylesheet">
+</head>
+<body class="bg-zoo-background min-h-screen">
+    <div class="bg-zoo-cream text-center py-4 text-zoo-brown font-semibold tracking-wide text-lg shadow">
+        Zoolirante – A World of Wildlife, A Lifetime of Wonder
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center">
+            <img src="/images/homepage/paw.png" alt="paw icon" class="mx-auto w-16 mb-2" />
+            <h2 class="text-3xl font-semibold text-zoo-darkbrown mb-5">Add New Animal</h2>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <form action="#" class="space-y-6">
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-zoo-darkbrown mb-2">Name</label>
+                            <input type="text" placeholder="e.g. African Elephant" class="w-full rounded-lg border border-zoo-cream/60 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zoo-primary" />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-zoo-darkbrown mb-2">Species / Breed</label>
+                            <input type="text" placeholder="e.g. Italian Bear" class="w-full rounded-lg border border-zoo-cream/60 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zoo-primary" />
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-zoo-darkbrown mb-2">Age</label>
+                            <input type="number" min="0" placeholder="Years" class="w-full rounded-lg border border-zoo-cream/60 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zoo-primary" />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-zoo-darkbrown mb-2">Gender</label>
+                            <select class="w-full rounded-lg border border-zoo-cream/60 px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-zoo-primary">
+                                <option>Unknown</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-zoo-darkbrown mb-2">Enclosure</label>
+                        <input type="text" placeholder="e.g. Savannah enclosure" class="w-full rounded-lg border border-zoo-cream/60 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zoo-primary" />
+                    </div>
+
+                    
+
+                    <div>
+                        <label class="block text-sm font-medium text-zoo-darkbrown mb-2">Image</label>
+                        <div class="flex items-center gap-4">
+                            <div class="w-28 h-28 bg-zoo-cream rounded-lg flex items-center justify-center border border-zoo-cream/60">
+                                <img src="/images/placeholders/animal-placeholder.png" alt="placeholder" class="max-h-24 max-w-full" />
+                            </div>
+                            <div class="flex-1">
+                                <input type="file" disabled class="text-sm" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-zoo-darkbrown mb-2">Short description</label>
+                        <textarea rows="4" placeholder="A short Description of the animal" class="w-full rounded-lg border border-zoo-cream/60 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zoo-primary"></textarea>
+                    </div>
+
+                    <div class="flex items-center justify-between gap-4">
+                        <div class="flex items-center gap-3">
+                            <button type="button" class="bg-zoo-primary hover:!bg-amber-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg transition-colors">Save Animal</button>
+                            <a href="animal-list.html"><button type="button" class="bg-transparent border border-zoo-cream text-zoo-brown px-5 py-3 rounded-lg font-medium">Cancel</button></a>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/components/navbar.js"></script>
+</body>
+</html>
