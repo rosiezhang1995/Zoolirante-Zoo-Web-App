@@ -21,6 +21,8 @@ function loadAnimalDetails() {
     document.getElementById('arrival-date').textContent = formatDate(animal.dateOfArrival);
     document.getElementById('animal-name-desc').textContent = animal.animalName; 
     document.getElementById('animal-description').textContent = animal.description; 
+    document.getElementById('animal-map').src = animal.mapImage;
+    document.getElementById('animal-name-map').textContent = animal.animalName;
 
     // Update page title
     document.title = `${animal.animalName} the ${animal.species} - Zoolirante`;
