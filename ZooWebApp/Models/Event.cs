@@ -29,5 +29,7 @@ namespace ZooWebApp.Models
         [Required]
         [StringLength (100)]
         public string Location { get; set; }
+
+        public ICollection<EventAnimal> EventAnimals { get; set; } = new List<EventAnimal>();
     }
 }
