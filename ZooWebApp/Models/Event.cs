@@ -27,9 +27,12 @@ namespace ZooWebApp.Models
         public TimeOnly EventTime { get; set; }
 
         [Required]
+        public string EventImage { get; set; }
+
+        [Required]
         [StringLength (100)]
         public string Location { get; set; }
 
-        public ICollection<EventAnimal> EventAnimals { get; set; } = new List<EventAnimal>();
+        public ICollection<Animal> Animals { get; set; } = new List<Animal>();
     }
 }
