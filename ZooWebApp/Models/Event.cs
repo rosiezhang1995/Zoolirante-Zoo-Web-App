@@ -20,7 +20,7 @@ namespace ZooWebApp.Models
 
         [Required]
         [Column(TypeName = "Date")]
-        public DateTime EventData { get; set; }
+        public DateTime EventDate { get; set; }
 
         [Required]
         [Column(TypeName = "Time")]
