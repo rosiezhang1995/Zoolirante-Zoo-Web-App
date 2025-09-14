@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
                     
                     <p class="text-zoo-darkbrown text-lg leading-relaxed mb-6">
-                        ${event.description}
+                        ${limitCharacters(event.description, 150)}
                     </p>
                     
                     <div class="mb-6">
@@ -88,4 +88,12 @@ function formatTime(timeString) {
         console.error("Error parsing time:", error);
         return timeString;
     }
+}
+
+// Limit characters for description part
+function limitCharacters(text, charLimit=150) {
+    if (text.length <= charLimit) {
+        return text;
+    }
+    return text.substring(0, charLimit) + '...';
 }
