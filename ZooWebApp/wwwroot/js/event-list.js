@@ -48,12 +48,12 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
         `;
 
-                // Add click event
+            // Add click event
             card.addEventListener('click', function () {
-                    // TODO: Navigate to event details page
-                });
+                window.location.href = `event-details.html?id=${event.eventID}`;
+            });
 
-                list.appendChild(card);
+            list.appendChild(card);
             });
         })
         .catch(error => {
