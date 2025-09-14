@@ -51,6 +51,6 @@ namespace ZooWebApp.Models
         [Display(Name = "Animal location")]
         public string MapImage { get; set; }
 
-
+        public ICollection<Event> Events { get; set; } = new List<Event>();
     }
 }
