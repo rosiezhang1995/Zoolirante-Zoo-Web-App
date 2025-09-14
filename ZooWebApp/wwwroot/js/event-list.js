@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // Format date
                 const eventDate = formatDate(event.eventDate);
+                const eventTime = formatTime(event.eventTime);
 
                 card.innerHTML = `
             <div class="md:flex">
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="md:w-2/3 p-8">
                     <h3 class="text-3xl font-bold text-zoo-primary mb-4">${event.title}</h3>                    
                     <div class="text-lg font-semibold text-zoo-primary mb-4">
-                        ${eventDate} @ ${event.eventTime}
+                        ${eventDate} @ ${eventTime}
                     </div>
                     
                     <p class="text-zoo-darkbrown text-lg leading-relaxed mb-6">
@@ -71,3 +72,20 @@ function formatDate(dateString) {
     return new Date(dateString).toLocaleDateString('en-AU', options);
 }
 
+// Format time
+function formatTime(timeString) {
+    try {
+        const today = new Date().toISOString().split('T')[0];
+        const fullDateTime = `${today}T${timeString}`;
+        const date = new Date(fullDateTime);
+
+        return date.toLocaleTimeString('en-AU', {
+            hour: 'numeric',
+            minute: '2-digit',
+            hour12: true
+        });
+    } catch (error) {
+        console.error("Error parsing time:", error);
+        return timeString;
+    }
+}
