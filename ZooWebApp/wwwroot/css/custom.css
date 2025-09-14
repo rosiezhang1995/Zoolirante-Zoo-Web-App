@@ -63,3 +63,17 @@
 .text-zoo-background {
     color: #f6f3e9;
 }
+
+.border-zoo-primary {
+    border-color: #ea640e;
+}
+
+.hover-white:hover {
+    color: #ffffff;
+}
+
+.title-font {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700; 
+    letter-spacing: 0.5px;
+}

@@ -5,67 +5,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Event Details - Zoolirante</title>
     <link href="/css/site.tailwind.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <link href="/css/custom.css" rel="stylesheet">
 </head>
-<body>
-    <div class="p-4">
-        <button onclick=""
-                class="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-100">
-            ← Back
-        </button>
-    </div>
+<body class="bg-zoo-background">
 
-  
-    <div class="text-white py-6">
-        <div class="bg-zoo-primary max-w-5xl mx-auto text-center">
-            <h1 class="text-3xl font-bold">Event Title</h1>
+    <div class="container mx-auto px-4 pt-6 mt-3">
+        <div class="flex justify-between items-center">
+
+            <button class="bg-zoo-primary hover:!bg-amber-700 text-zoo-cream px-4 py-2 rounded-lg transition flex items-center">
+                ← Back to Events
+            </button>
+
+            <div class="flex gap-3">
+                <button class="w-28 border-2 border-zoo-primary text-zoo-primary hover:!bg-amber-700 hover-white px-4 py-2 rounded-lg transition">
+                    Edit
+                </button>
+                <button class="w-28 border-2 border-zoo-primary text-zoo-primary hover:!bg-amber-700 hover-white px-4 py-2 rounded-lg transition">
+                    Delete
+                </button>
+            </div>
+
         </div>
     </div>
 
+
+    <!-- title -->
+    <div class="relative max-w-4xl mx-auto h-36 overflow-hidden">
+
+        <img src="/images/event-page/title.png"
+             alt="Event Title"
+             class="absolute inset-0 w-full h-full object-fill">
+
+        <h1 id="event-title" class="relative z-10 text-4xl title-font font-bold text-zoo-brown text-center top-1/2 -translate-y-1/2 w-full">
+            My Event Title
+        </h1>
+    </div>
+
+    
+
+
     <!-- Event Details -->
-    <section class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 p-6 bg-white shadow mt-8 rounded-lg">
+    <section class="max-w-5xl mx-auto p-6 mt-8">
         <div>
             <img src="/images/events/sample-event.jpg"
                  alt="Event Image"
                  class="w-full aspect-square object-cover rounded-lg shadow">
         </div>
-        <div class="flex flex-col gap-4">
-            <!-- Date -->
-            <div class="flex items-center gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <p class="text-lg font-medium">14 September 2025</p>
-            </div>
-
-            <!-- Time -->
-            <div class="flex items-center gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <p class="text-lg font-medium">10:00 AM – 2:00 PM</p>
-            </div>
-
-            <!-- Location -->
-            <div class="flex items-center gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5s-3 1.343-3 3 1.343 3 3 3z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M12 22s8-4.5 8-11a8 8 0 10-16 0c0 6.5 8 11 8 11z" />
-                </svg>
-                <p class="text-lg font-medium">Main Safari Hall</p>
-            </div>
-
-            <!-- Description -->
-            <div>
-                <h2 class="text-sm text-gray-500 uppercase mb-1">Description</h2>
-                <p class="text-gray-700 leading-relaxed">
-                    Join us for an exciting wildlife conservation event filled with fun activities, talks, and close encounters with some of our most beloved animals.
-                </p>
-            </div>
+        <!--<div class="flex flex-col gap-4">-->
+        <!-- Date -->
+        <!--<div class="flex items-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <p class="text-lg font-medium">14 September 2025</p>
+        </div>-->
+        <!-- Time -->
+        <!--<div class="flex items-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <p class="text-lg font-medium">10:00 AM – 2:00 PM</p>
+        </div>-->
+        <!-- Location -->
+        <!--<div class="flex items-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5s-3 1.343-3 3 1.343 3 3 3z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 22s8-4.5 8-11a8 8 0 10-16 0c0 6.5 8 11 8 11z" />
+            </svg>
+            <p class="text-lg font-medium">Main Safari Hall</p>
+        </div>-->
+        <!-- Description -->
+        <div>
+            <h2 class="text-sm text-gray-500 uppercase mb-1">Description</h2>
+            <p class="text-gray-700 leading-relaxed">
+                Join us for an exciting wildlife conservation event filled with fun activities, talks, and close encounters with some of our most beloved animals.
+            </p>
+        </div>
 
         </div>
 
@@ -99,6 +119,6 @@
             </div>
         </div>
     </section>
-
+    <script src="/js/components/navbar.js"></script>
 </body>
 </html>
