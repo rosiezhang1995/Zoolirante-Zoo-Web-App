@@ -1,16 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Mock data
-    const events = window.mockEvents;
     const list = document.getElementById("event-list");
 
-    events.forEach((event) => {
-        const card = document.createElement("div");
-        card.className = " bg-zoo-background rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300";
+    fetch("/api/eventsapi")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok " + response.statusText);
+            }
+            return response.json();
+        })
+        .then(events => {
+            events.forEach((event) => {
+                const card = document.createElement("div");
+                card.className = " bg-zoo-background rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300";
 
-        // Format date
-        const eventDate = formatDate(event.eventDate);
-        
-        card.innerHTML = `
+                // Format date
+                const eventDate = formatDate(event.eventDate);
+
+                card.innerHTML = `
             <div class="md:flex">
                 <div class="md:w-1/3">
                     <img src="${event.eventImage}" alt="${event.title}" 
@@ -41,13 +47,19 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
         `;
 
-        // Add click event
-        card.addEventListener('click', function() {
-            // TODO: Navigate to event details page
+                // Add click event
+            card.addEventListener('click', function () {
+                    // TODO: Navigate to event details page
+                });
+
+                list.appendChild(card);
+            });
+        })
+        .catch(error => {
+            console.error("Error fetching animals:", error);
         });
 
-        list.appendChild(card);
-    });
+
 });
 
 // Format date
@@ -58,3 +70,4 @@ function formatDate(dateString) {
     };
     return new Date(dateString).toLocaleDateString('en-AU', options);
 }
+
