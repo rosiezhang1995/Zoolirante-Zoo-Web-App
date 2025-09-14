@@ -17,7 +17,7 @@ function createNavbar(){
                     <li><a href="#" class="text-zoo-darkbrown font-medium no-underline hover:underline">Memberships</a></li>
                     <li><a href="map.html" class="text-zoo-darkbrown font-medium no-underline hover:underline">Map</a></li>
                     <li><a href="animal-list.html" class="text-zoo-darkbrown font-medium no-underline hover:underline">Animals</a></li>
-                    <li><a href="#" class="text-zoo-darkbrown font-medium no-underline hover:underline">Events</a></li>
+                    <li><a href="event-list.html" class="text-zoo-darkbrown font-medium no-underline hover:underline">Events</a></li>
                     <li><a href="#" class="text-zoo-darkbrown font-medium no-underline hover:underline">Merchandise</a></li>
                 </ul>
             </nav>
