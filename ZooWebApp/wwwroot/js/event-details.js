@@ -24,7 +24,7 @@ function loadEventDetails() {
             document.getElementById('event-location').textContent = event.location;
             document.getElementById('event-description').textContent = event.description;
 
-            console.log(event)
+            console.log(event.animals);
             // Animal cards
             const animalsContainer = document.getElementById('event-animals');
             animalsContainer.innerHTML = "";
@@ -32,9 +32,8 @@ function loadEventDetails() {
             event.animals.forEach(animal => {
                 const card = document.createElement('div');
                 card.className = "text-center w-44";
-
                 card.innerHTML = `
-                    <a href="animal-details.html?id=${animal.animal}">
+                    <a href="animal-details.html?id=${animal.animalId}">
                         <img src="${animal.animalImage}" alt="${animal.animalName}"
                          class="w-full aspect-square object-cover rounded-lg shadow hover:opacity-80 transition">
                         <p class="mt-2 text-zoo-brown font-medium">${animal.animalName}</p>
