@@ -61,14 +61,41 @@ namespace ZooWebApp.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Event>> GetEvent(int id)
         {
-            var @event = await _context.Event.FindAsync(id);
+            var eventQuery = await _context.Event
+                .Include(e => e.Animals)
+                .Where(e => e.EventID == id)
+                .Select(e => new
+                {
+                    EventID = e.EventID,
+                    Title = e.Title,
+                    Description = e.Description,
+                    EventDate = e.EventDate,
+                    EventTime = e.EventTime,
+                    EventImage = e.EventImage,
+                    Location = e.Location,
+                    Animals = e.Animals.Select(a => new
+                    {
+                        AnimalId = a.AnimalID,
+                        AnimalName = a.AnimalName,
+                        Description = a.Description,
+                        AnimalAge = a.AnimalAge,
+                        Species = a.Species,
+                        Gender = a.Gender,
+                        AnimalImage = a.AnimalImage,
+                        Weight = a.Weight,
+                        DateOfArrival = a.DateOfArrival,
+                        MapImage = a.MapImage
 
-            if (@event == null)
+                    }).ToList()
+                })
+                .SingleAsync();
+
+            if (eventQuery == null)
             {
                 return NotFound();
             }
 
-            return @event;
+            return Ok(eventQuery);
         }
 
         // PUT: api/EventsAPI/5
