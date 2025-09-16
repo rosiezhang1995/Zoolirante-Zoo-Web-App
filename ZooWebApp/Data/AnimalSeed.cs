@@ -35,7 +35,7 @@ namespace ZooWebApp.Data
                     AnimalImage = "/images/animals/Leo.png",
                     Weight = 190.00m,
                     DateOfArrival = new DateTime(2019, 5, 20),
-                    MapImage = "/images/maps/GiraffeMap.png",
+                    MapImage = "/images/maps/LionMap.png",
                     Description = "Leo is a majestic African lion and the king of our savanna. He's known for his impressive mane and confident demeanor. Leo loves basking in the Australian sun and is a favorite among visitors."
                 },
                 new Animal
@@ -47,7 +47,7 @@ namespace ZooWebApp.Data
                     AnimalImage = "/images/animals/Shira.png",
                     Weight = 160.00m,
                     DateOfArrival = new DateTime(2021, 7, 11),
-                    MapImage = "/images/maps/AlligatorMap.png",
+                    MapImage = "/images/maps/TigerMap.png",
                     Description = "Shira is an agile tigress who enjoys swimming and stalking her toys."
                 },
                 new Animal
@@ -64,15 +64,15 @@ namespace ZooWebApp.Data
                 },
                 new Animal
                 {
-                    AnimalName = "Stripes",
+                    AnimalName = "Sebastian",
                     AnimalAge = 6,
-                    Species = "Zebra",
-                    Gender = "F",
-                    AnimalImage = "/images/animals/Stripes.png",
-                    Weight = 320.00m,
+                    Species = "Sloth",
+                    Gender = "M",
+                    AnimalImage = "/images/animals/Sebastian.png",
+                    Weight = 32.00m,
                     DateOfArrival = new DateTime(2020, 9, 15),
-                    MapImage = "/images/maps/GiraffeMap.png",
-                    Description = "Stripes is a lively zebra with bold markings and a playful spirit."
+                    MapImage = "/images/maps/SlothMap.png",
+                    Description = "Sebastian is a peaceful sloth who likes to take his time and enjoy the little things."
                 },
                 new Animal
                 {
@@ -83,7 +83,7 @@ namespace ZooWebApp.Data
                     AnimalImage = "/images/animals/Brown.png",
                     Weight = 290.00m,
                     DateOfArrival = new DateTime(2019, 6, 12),
-                    MapImage = "/images/maps/AlligatorMap.png",
+                    MapImage = "/images/maps/BearMap.png",
                     Description = "Brown is a rare Marsican brown bear, representing the pride of Italian wildlife. As one of the most endangered bears in the world, he symbolizes Zoolirante's commitment to conservation and our Italian heritage."
                 },
                 new Animal
@@ -119,7 +119,7 @@ namespace ZooWebApp.Data
                     AnimalImage = "/images/animals/George.png",
                     Weight = 14.00m,
                     DateOfArrival = new DateTime(2021, 1, 10),
-                    MapImage = "/images/maps/GorillaMap.png",
+                    MapImage = "/images/maps/MonkeyMap.png",
                     Description = "George is an energetic monkey who is always up to mischief."
                 },
                 new Animal
@@ -148,15 +148,15 @@ namespace ZooWebApp.Data
                 },
                 new Animal
                 {
-                    AnimalName = "Tank",
-                    AnimalAge = 11,
-                    Species = "Rhino",
+                    AnimalName = "Rango",
+                    AnimalAge = 2,
+                    Species = "Chameleon",
                     Gender = "M",
-                    AnimalImage = "/images/animals/Tank.png",
-                    Weight = 2100.00m,
-                    DateOfArrival = new DateTime(2021, 2, 5),
-                    MapImage = "/images/maps/GiraffeMap.png",
-                    Description = "Tank is a strong rhino with a calm demeanor, known for his large horn."
+                    AnimalImage = "/images/animals/Rango.png",
+                    Weight = 1.20m,
+                    DateOfArrival = new DateTime(2024, 2, 5),
+                    MapImage = "/images/maps/LizardMap.png",
+                    Description = "Rango is a curious and friendly chameleon who enjoys some good company and sitting up high."
                 },
                 new Animal
                 {
@@ -203,7 +203,7 @@ namespace ZooWebApp.Data
                     AnimalImage = "/images/animals/Pebble.png",
                     Weight = 8.30m,
                     DateOfArrival = new DateTime(2023, 12, 5),
-                    MapImage = "/images/maps/BirdMap.png",
+                    MapImage = "/images/maps/PenguinMap.png",
                     Description = "Pebble is a young penguin who loves sliding across the ice."
                 },
                 new Animal
@@ -215,7 +215,7 @@ namespace ZooWebApp.Data
                     AnimalImage = "/images/animals/Julian.png",
                     Weight = 9.50m,
                     DateOfArrival = new DateTime(2022, 11, 7),
-                    MapImage = "/images/maps/BirdMap.png",
+                    MapImage = "/images/maps/LemurMap.png",
                     Description = "Julian is a lively lemur who enjoys leaping from tree to tree."
                 }
 
