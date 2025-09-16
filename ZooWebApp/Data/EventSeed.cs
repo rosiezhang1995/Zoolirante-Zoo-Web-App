@@ -14,14 +14,14 @@ namespace ZooWebApp.Data
                 var lionLeo = context.Animal.FirstOrDefault(a => a.AnimalName == "Leo");
                 var tigerShira = context.Animal.FirstOrDefault(a => a.AnimalName == "Shira");
                 var giraffeGrace = context.Animal.FirstOrDefault(a => a.AnimalName == "Grace");
-                var zebraStripes = context.Animal.FirstOrDefault(a => a.AnimalName == "Stripes");
+                var slothSebastian = context.Animal.FirstOrDefault(a => a.AnimalName == "Sebastian");
                 var bearBrown = context.Animal.FirstOrDefault(a => a.AnimalName == "Brown");
                 var batEcho = context.Animal.FirstOrDefault(a => a.AnimalName == "Echo");
                 var hippoBubbles = context.Animal.FirstOrDefault(a => a.AnimalName == "Bubbles");
                 var monkeyGeorge = context.Animal.FirstOrDefault(a => a.AnimalName == "George");
                 var orangutanAmber = context.Animal.FirstOrDefault(a => a.AnimalName == "Amber");
                 var crocidileSnap = context.Animal.FirstOrDefault(a => a.AnimalName == "Snap");
-                var rhinoTank = context.Animal.FirstOrDefault(a => a.AnimalName == "Tank");
+                var lizardRango = context.Animal.FirstOrDefault(a => a.AnimalName == "Rango");
                 var capybaraCapy = context.Animal.FirstOrDefault(a => a.AnimalName == "Capy");
                 var beaverChewy = context.Animal.FirstOrDefault(a => a.AnimalName == "Chewy");
                 var gorillaKong = context.Animal.FirstOrDefault(a => a.AnimalName == "Kong");
@@ -89,7 +89,7 @@ namespace ZooWebApp.Data
                         EventTime = new TimeSpan(15, 0, 0),
                         EventImage = "/images/events/zoo-friends.jpg",
                         Location = "Central Courtyard",
-                        Animals = new List<Animal> { bearBrown, zebraStripes, capybaraCapy, beaverChewy, gorillaKong }
+                        Animals = new List<Animal> { bearBrown, slothSebastian, capybaraCapy, beaverChewy, gorillaKong }
                     }
                 };
                 context.Event.AddRange(events);
