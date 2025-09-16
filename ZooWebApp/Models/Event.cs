@@ -24,7 +24,7 @@ namespace ZooWebApp.Models
 
         [Required]
         [Column(TypeName = "Time")]
-        public TimeOnly EventTime { get; set; }
+        public TimeSpan EventTime { get; set; }
 
         [Required]
         public string EventImage { get; set; }

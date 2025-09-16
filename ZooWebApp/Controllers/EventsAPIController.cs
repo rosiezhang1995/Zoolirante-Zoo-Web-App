@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using ZooWebApp.Data;
+using ZooWebApp.Dtos;
 using ZooWebApp.Models;
 
 namespace ZooWebApp.Controllers
@@ -23,12 +24,12 @@ namespace ZooWebApp.Controllers
 
         // GET: api/EventsAPI
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Event>>> GetEvent()
+        public async Task<ActionResult<IEnumerable<EventReadDto>>> GetEvent()
         {
             var events = await _context.Event
             .Include(e => e.Animals)
             .OrderBy(e => e.EventID)
-            .Select(e => new
+            .Select(e => new EventReadDto
             {
                 EventID = e.EventID,
                 Title = e.Title,
@@ -37,7 +38,7 @@ namespace ZooWebApp.Controllers
                 EventTime = e.EventTime,
                 EventImage = e.EventImage,
                 Location = e.Location,
-                Animals = e.Animals.Select(a => new
+                Animals = e.Animals.Select(a => new AnimalReadDto
                 {
                     AnimalId = a.AnimalID,
                     AnimalName = a.AnimalName,
@@ -59,12 +60,12 @@ namespace ZooWebApp.Controllers
 
         // GET: api/EventsAPI/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Event>> GetEvent(int id)
+        public async Task<ActionResult<EventReadDto>> GetEvent(int id)
         {
-            var eventQuery = await _context.Event
+            var @event = await _context.Event
                 .Include(e => e.Animals)
                 .Where(e => e.EventID == id)
-                .Select(e => new
+                .Select(e => new EventReadDto
                 {
                     EventID = e.EventID,
                     Title = e.Title,
@@ -73,7 +74,7 @@ namespace ZooWebApp.Controllers
                     EventTime = e.EventTime,
                     EventImage = e.EventImage,
                     Location = e.Location,
-                    Animals = e.Animals.Select(a => new
+                    Animals = e.Animals.Select(a => new AnimalReadDto
                     {
                         AnimalId = a.AnimalID,
                         AnimalName = a.AnimalName,
@@ -90,12 +91,12 @@ namespace ZooWebApp.Controllers
                 })
                 .SingleAsync();
 
-            if (eventQuery == null)
+            if (@event == null)
             {
                 return NotFound();
             }
 
-            return Ok(eventQuery);
+            return Ok(@event);
         }
 
         // PUT: api/EventsAPI/5
@@ -132,13 +133,53 @@ namespace ZooWebApp.Controllers
         // POST: api/EventsAPI
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Event>> PostEvent(Event @event)
+        public async Task<ActionResult<Event>> PostEvent([FromBody] EventCreateDto dto)
         {
-            _context.Event.Add(@event);
+            var linkedAnimals = await _context.Animal
+            .Where(a => dto.AnimalIds.Contains(a.AnimalID))
+            .ToListAsync();
+
+            var newEvent = new Event
+            {
+                Title = dto.Title,
+                Description = dto.Description,
+                EventDate = dto.EventDate,
+                EventTime = dto.EventTime,
+                EventImage = dto.EventImage,
+                Location = dto.Location,
+                Animals = linkedAnimals
+            };
+
+            _context.Event.Add(newEvent);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEvent", new { id = @event.EventID }, @event);
+            var responseDto = new EventReadDto
+            {
+                EventID = newEvent.EventID,
+                Title = newEvent.Title,
+                Description = newEvent.Description,
+                EventDate = newEvent.EventDate,
+                EventTime = newEvent.EventTime,
+                EventImage = newEvent.EventImage,
+                Location = newEvent.Location,
+                Animals = newEvent.Animals.Select(a => new AnimalReadDto
+                {
+                    AnimalId = a.AnimalID,
+                    AnimalName = a.AnimalName,
+                    Description = a.Description,
+                    AnimalAge = a.AnimalAge,
+                    Species = a.Species,
+                    Gender = a.Gender,
+                    AnimalImage = a.AnimalImage,
+                    Weight = a.Weight,
+                    DateOfArrival = a.DateOfArrival,
+                    MapImage = a.MapImage
+                }).ToList()
+            };
+
+            return Ok(responseDto);
         }
+
 
         // DELETE: api/EventsAPI/5
         [HttpDelete("{id}")]

@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Event</title>
+</head>
+<body>
+    <h1>Create Event</h1>
+
+    <form id="eventForm">
+        <label>
+            Title:
+            <input type="text" id="title" required>
+        </label>
+
+        <label>
+            Description:
+            <input type="text" id="description" required>
+        </label>
+
+        <label>
+            Event Date:
+            <input type="date" id="eventDate" required>
+        </label>
+
+        <label>
+            Event Time:
+            <input type="time" id="eventTime" required>
+        </label>
+
+        <label>
+            Event Image URL:
+            <input type="text" id="eventImage">
+        </label>
+
+        <label>
+            Location:
+            <input type="text" id="location" required>
+        </label>
+
+        <label>
+            Add Animals:
+            <select id="animalSelect">
+                <option value="">-- Select an animal --</option>
+            </select>
+            <button type="button" id="addAnimal">Add</button>
+        </label>
+
+        <ul id="selectedAnimals"></ul>
+
+        <button type="submit">Create Event</button>
+    </form>
+
+    <script>
+    const animalSelect = document.getElementById('animalSelect');
+    const selectedAnimalsList = document.getElementById('selectedAnimals');
+    const addAnimalButton = document.getElementById('addAnimal');
+    const selectedAnimalIds = [];
+
+    // Example: fetch all animals from API
+    fetch('/api/animalsapi')
+      .then(res => res.json())
+      .then(data => {
+        data.forEach(a => {
+          const option = document.createElement('option');
+          option.value = a.animalID; // or a.AnimalID depending on API casing
+          option.textContent = a.animalName;
+          animalSelect.appendChild(option);
+        });
+      });
+
+    // Add selected animal to the list
+    addAnimalButton.addEventListener('click', () => {
+      const selectedId = animalSelect.value;
+      const selectedText = animalSelect.options[animalSelect.selectedIndex].text;
+
+      if (!selectedId || selectedAnimalIds.includes(selectedId)) return;
+
+      selectedAnimalIds.push(parseInt(selectedId));
+
+      const li = document.createElement('li');
+      li.textContent = selectedText;
+      li.dataset.id = selectedId;
+      li.title = 'Click to remove';
+      li.addEventListener('click', () => {
+        selectedAnimalIds.splice(selectedAnimalIds.indexOf(parseInt(li.dataset.id)), 1); // remove animalId from selectedAnimalIds
+        li.remove();
+      });
+
+      selectedAnimalsList.appendChild(li);
+    });
+
+    // Handle form submission
+    document.getElementById('eventForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const payload = {
+        title: document.getElementById('title').value,
+        description: document.getElementById('description').value,
+        eventDate: document.getElementById('eventDate').value,
+        eventTime: document.getElementById('eventTime').value + ':00', // timeSpan format (json only works with this C# class for database)
+        eventImage: document.getElementById('eventImage').value,
+        location: document.getElementById('location').value,
+        animalIds: selectedAnimalIds
+      };
+
+      fetch('/api/eventsapi', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(res => {
+        if (res.ok) return res.json();
+        return res.json().then(err => Promise.reject(err));
+      })
+      .then(data => {
+        alert('Event created successfully! ID: ' + data.eventID);
+        // optionally reset form
+        document.getElementById('eventForm').reset();
+        selectedAnimalsList.innerHTML = '';
+        selectedAnimalIds.length = 0;
+      })
+      .catch(err => console.error(err));
+    });
+    </script>
+</body>
+</html>
