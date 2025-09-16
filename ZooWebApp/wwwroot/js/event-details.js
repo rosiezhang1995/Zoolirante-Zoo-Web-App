@@ -1,5 +1,13 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
     loadEventDetails();
+
+    const editButton = document.getElementById('editButton');
+    console.log("editButton element is:", editButton);
+    editButton.addEventListener('click', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const eventId = parseInt(urlParams.get('id'));
+        window.location.href = `event-edit.html?id=${eventId}`;
+    });
 });
 
 function loadEventDetails() {
@@ -24,7 +32,6 @@ function loadEventDetails() {
             document.getElementById('event-location').textContent = event.location;
             document.getElementById('event-description').textContent = event.description;
 
-            console.log(event.animals);
             // Animal cards
             const animalsContainer = document.getElementById('event-animals');
             animalsContainer.innerHTML = "";
@@ -54,6 +61,9 @@ function loadEventDetails() {
 function backToEvents() {
     window.location.href = 'event-list.html';
 }
+
+
+
 
 //Format datatype
 function formatDate(dateString) {
