@@ -26,24 +26,24 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-sm font-medium text-zoo-darkbrown mb-2">Name</label>
-                            <input type="text" placeholder="e.g. African Elephant" class="w-full rounded-lg border border-zoo-cream/60 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zoo-primary" />
+                            <input type="text" id="animalName" class="w-full rounded-lg border border-zoo-cream/60 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zoo-primary" />
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium text-zoo-darkbrown mb-2">Species / Breed</label>
-                            <input type="text" placeholder="e.g. Italian Bear" class="w-full rounded-lg border border-zoo-cream/60 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zoo-primary" />
+                            <input type="text" id="species" class="w-full rounded-lg border border-zoo-cream/60 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zoo-primary" />
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
                             <label class="block text-sm font-medium text-zoo-darkbrown mb-2">Age</label>
-                            <input type="number" min="0" placeholder="Years" class="w-full rounded-lg border border-zoo-cream/60 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zoo-primary" />
+                            <input type="number" min="0" id="age" class="w-full rounded-lg border border-zoo-cream/60 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zoo-primary" />
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium text-zoo-darkbrown mb-2">Gender</label>
-                            <select class="w-full rounded-lg border border-zoo-cream/60 px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-zoo-primary">
+                            <select id="gender" class="w-full rounded-lg border border-zoo-cream/60 px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-zoo-primary">
                                 <option>Unknown</option>
                                 <option>Male</option>
                                 <option>Female</option>
@@ -55,7 +55,7 @@
 
                     <div>
                         <label class="block text-sm font-medium text-zoo-darkbrown mb-2">Enclosure</label>
-                        <input type="text" placeholder="e.g. Savannah enclosure" class="w-full rounded-lg border border-zoo-cream/60 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zoo-primary" />
+                        <input type="text" id="enclosure" class="w-full rounded-lg border border-zoo-cream/60 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zoo-primary" />
                     </div>
 
 
@@ -79,7 +79,7 @@
 
                     <div class="flex items-center justify-between gap-4">
                         <div class="flex items-center gap-3">
-                            <button type="button" class="bg-zoo-primary hover:!bg-amber-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg transition-colors">Save Animal</button>
+                            <button type="button" id="saveAnimal" class="bg-zoo-primary hover:!bg-amber-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg transition-colors">Save Animal</button>
                             <a href="animal-list.html"><button type="button" class="bg-transparent border border-zoo-cream text-zoo-brown px-5 py-3 rounded-lg font-medium">Cancel</button></a>
                         </div>
                     </div>
@@ -89,5 +89,6 @@
         </div>
     </div>
 
+    <script src="/js/animal-edit.js"></script>
 </body>
 </html>
