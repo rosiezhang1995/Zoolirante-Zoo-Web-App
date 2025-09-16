@@ -99,40 +99,75 @@ namespace ZooWebApp.Controllers
             return Ok(@event);
         }
 
-        // PUT: api/EventsAPI/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutEvent(int id, Event @event)
-        {
-            if (id != @event.EventID)
-            {
-                return BadRequest();
-            }
+		// PUT: api/EventsAPI/5
+		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+		[HttpPut("{id}")]
+		public async Task<ActionResult<EventReadDto>> PutEvent(int id, [FromBody] EventUpdateDto dto)
+		{
+			if (id != dto.EventID)
+				return BadRequest();
 
-            _context.Entry(@event).State = EntityState.Modified;
+			// Load the existing event including its animals
+			var existingEvent = await _context.Event
+				.Include(e => e.Animals)
+				.FirstOrDefaultAsync(e => e.EventID == id);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!EventExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+			if (existingEvent == null)
+				return NotFound();
 
-            return NoContent();
-        }
+			// Update scalar properties
+			existingEvent.Title = dto.Title;
+			existingEvent.Description = dto.Description;
+			existingEvent.EventDate = dto.EventDate;
+			existingEvent.EventTime = dto.EventTime;
+			existingEvent.EventImage = dto.EventImage;
+			existingEvent.Location = dto.Location;
 
-        // POST: api/EventsAPI
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+			// Update animals based on IDs from DTO
+			var linkedAnimals = await _context.Animal
+				.Where(a => dto.AnimalIds.Contains(a.AnimalID))
+				.ToListAsync();
+
+			existingEvent.Animals.Clear();
+			foreach (var animal in linkedAnimals)
+			{
+				existingEvent.Animals.Add(animal);
+			}
+
+			await _context.SaveChangesAsync();
+
+			// Map to EventUpdateDto for safe JSON response
+			var responseDto = new EventReadDto
+			{
+				EventID = existingEvent.EventID,
+				Title = existingEvent.Title,
+				Description = existingEvent.Description,
+				EventDate = existingEvent.EventDate,
+				EventTime = existingEvent.EventTime,
+				EventImage = existingEvent.EventImage,
+				Location = existingEvent.Location,
+				Animals = existingEvent.Animals.Select(a => new AnimalReadDto
+				{
+					AnimalId = a.AnimalID,
+					AnimalName = a.AnimalName,
+					Description = a.Description,
+					AnimalAge = a.AnimalAge,
+					Species = a.Species,
+					Gender = a.Gender,
+					AnimalImage = a.AnimalImage,
+					Weight = a.Weight,
+					DateOfArrival = a.DateOfArrival,
+					MapImage = a.MapImage
+				}).ToList()
+			};
+
+			return Ok(responseDto);
+		}
+
+
+		// POST: api/EventsAPI
+		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+		[HttpPost]
         public async Task<ActionResult<Event>> PostEvent([FromBody] EventCreateDto dto)
         {
             var linkedAnimals = await _context.Animal
