@@ -1,0 +1,17 @@
+﻿@ZooWebApp_HostAddress = http://localhost:5194
+
+PUT {{ZooWebApp_HostAddress}}/api/eventsapi/0
+Content-Type: application/json
+
+{
+  "eventID": 5,
+  "title": "Penguin Parade",
+  "description": "Come and watch our penguins waddle through the zoo.",
+  "eventDate": "2025-09-25",
+  "eventTime": "14:30:00",
+  "eventImage": "https://example.com/images/penguin-parade.jpg",
+  "location": "Main Plaza",
+  "animals": []
+}
+
+###
