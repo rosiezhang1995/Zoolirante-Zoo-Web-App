@@ -35,7 +35,7 @@ namespace ZooWebApp.Data
                     AnimalImage = "/images/animals/Leo.png",
                     Weight = 190.00m,
                     DateOfArrival = new DateTime(2019, 5, 20),
-                    MapImage = "/images/maps/GiraffeMap.png",
+                    MapImage = "/images/maps/LionMap.png",
                     Description = "Leo is a majestic African lion and the king of our savanna. He's known for his impressive mane and confident demeanor. Leo loves basking in the Australian sun and is a favorite among visitors."
                 },
                 new Animal
@@ -47,7 +47,7 @@ namespace ZooWebApp.Data
                     AnimalImage = "/images/animals/Shira.png",
                     Weight = 160.00m,
                     DateOfArrival = new DateTime(2021, 7, 11),
-                    MapImage = "/images/maps/AlligatorMap.png",
+                    MapImage = "/images/maps/TigerMap.png",
                     Description = "Shira is an agile tigress who enjoys swimming and stalking her toys."
                 },
                 new Animal
@@ -83,7 +83,7 @@ namespace ZooWebApp.Data
                     AnimalImage = "/images/animals/Brown.png",
                     Weight = 290.00m,
                     DateOfArrival = new DateTime(2019, 6, 12),
-                    MapImage = "/images/maps/AlligatorMap.png",
+                    MapImage = "/images/maps/BearMap.png",
                     Description = "Brown is a rare Marsican brown bear, representing the pride of Italian wildlife. As one of the most endangered bears in the world, he symbolizes Zoolirante's commitment to conservation and our Italian heritage."
                 },
                 new Animal
@@ -119,7 +119,7 @@ namespace ZooWebApp.Data
                     AnimalImage = "/images/animals/George.png",
                     Weight = 14.00m,
                     DateOfArrival = new DateTime(2021, 1, 10),
-                    MapImage = "/images/maps/GorillaMap.png",
+                    MapImage = "/images/maps/MonkeyMap.png",
                     Description = "George is an energetic monkey who is always up to mischief."
                 },
                 new Animal
@@ -203,7 +203,7 @@ namespace ZooWebApp.Data
                     AnimalImage = "/images/animals/Pebble.png",
                     Weight = 8.30m,
                     DateOfArrival = new DateTime(2023, 12, 5),
-                    MapImage = "/images/maps/BirdMap.png",
+                    MapImage = "/images/maps/PenguinMap.png",
                     Description = "Pebble is a young penguin who loves sliding across the ice."
                 },
                 new Animal
@@ -215,7 +215,7 @@ namespace ZooWebApp.Data
                     AnimalImage = "/images/animals/Julian.png",
                     Weight = 9.50m,
                     DateOfArrival = new DateTime(2022, 11, 7),
-                    MapImage = "/images/maps/BirdMap.png",
+                    MapImage = "/images/maps/LemurMap.png",
                     Description = "Julian is a lively lemur who enjoys leaping from tree to tree."
                 }
 
