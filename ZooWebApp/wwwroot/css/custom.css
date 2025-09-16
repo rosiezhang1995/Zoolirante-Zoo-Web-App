@@ -77,3 +77,12 @@
     font-weight: 700; 
     letter-spacing: 0.5px;
 }
+
+.ring-zoo-primary {
+    --tw-ring-color: #ea640e;
+}
+
+.focus\:ring-zoo-primary:focus {
+    --tw-ring-color: #ea640e;
+}
+

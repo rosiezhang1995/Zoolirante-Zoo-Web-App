@@ -1,127 +1,124 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Create Event</title>
+    <meta charset="UTF-8" />
+    <title>Create New Event</title>
+    <link href="/css/site.tailwind.css" rel="stylesheet">
+    <link href="/css/custom.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Create Event</h1>
+<body class="bg-zoo-background">
+    <!-- Value badge -->
+    <div class="bg-zoo-cream text-center py-4 text-zoo-brown font-semibold tracking-wide text-lg shadow">
+        Zoolirante – A World of Wildlife, A Lifetime of Wonder
+    </div>
 
-    <form id="eventForm">
-        <label>
-            Title:
-            <input type="text" id="title" required>
-        </label>
 
-        <label>
-            Description:
-            <input type="text" id="description" required>
-        </label>
+    <div class="container mx-auto px-4 py-8">
+        <!-- Back button -->
+        <button onclick="window.location.href='event-list.html'" class="bg-zoo-primary hover:!bg-amber-700 text-zoo-cream px-4 py-2 rounded-lg transition flex items-center mt-8 mb-5">
+            ← Back to Events
+        </button>
 
-        <label>
-            Event Date:
-            <input type="date" id="eventDate" required>
-        </label>
+        <div class="text-center ">
+            <img src="/images/homepage/paw.png" alt="paw icon" class="mx-auto w-16 mb-2" />
+            <h2 class="text-3xl font-semibold text-zoo-darkbrown mb-2">Create New Event </h2>
+        </div>
 
-        <label>
-            Event Time:
-            <input type="time" id="eventTime" required>
-        </label>
+        <form id="eventForm" class="p-8 space-y-6">
+            <!-- Event info -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-zoo-darkbrown font-semibold mb-2">
+                        Event Title *
+                    </label>
+                    <input type="text" id="title" required
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition">
+                </div>
 
-        <label>
-            Event Image URL:
-            <input type="text" id="eventImage">
-        </label>
+                <div>
+                    <label class="block text-zoo-darkbrown font-semibold mb-2">
+                        Location *
+                    </label>
+                    <input type="text" id="location" required
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition">
+                </div>
+            </div>
 
-        <label>
-            Location:
-            <input type="text" id="location" required>
-        </label>
+            <!-- Description -->
+            <div>
+                <label class="block text-zoo-darkbrown font-semibold mb-2">
+                    Description *
+                </label>
+                <textarea id="description" required rows="4"
+                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition resize-none"></textarea>
+            </div>
 
-        <label>
-            Add Animals:
-            <select id="animalSelect">
-                <option value="">-- Select an animal --</option>
-            </select>
-            <button type="button" id="addAnimal">Add</button>
-        </label>
+            <!-- Date & Time -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-zoo-darkbrown font-semibold mb-2">
+                        Event Date *
+                    </label>
+                    <input type="date" id="eventDate" required
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition">
+                </div>
 
-        <ul id="selectedAnimals"></ul>
+                <div>
+                    <label class="block text-zoo-darkbrown font-semibold mb-2">
+                        Event Time *
+                    </label>
+                    <input type="time" id="eventTime" required
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition">
+                </div>
+            </div>
 
-        <button type="submit">Create Event</button>
-    </form>
+            <!-- Event image -->
+            <div>
+                <label class="block text-zoo-darkbrown font-semibold mb-2">
+                    Event Image *
+                </label>
+                <input type="text" id="eventImage" required placeholder="https://example.com/event-image.jpg"
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition">
+                <p class="text-sm text-zoo-lightbrown mt-1">Add a URL for the event image</p>
+            </div>
 
-    <script>
-    const animalSelect = document.getElementById('animalSelect');
-    const selectedAnimalsList = document.getElementById('selectedAnimals');
-    const addAnimalButton = document.getElementById('addAnimal');
-    const selectedAnimalIds = [];
+            <!-- Animals Section -->
+            <div class="bg-zoo-cream rounded-lg p-6">
+                <h3 class="text-xl font-semibold text-zoo-darkbrown mb-4">Featured Animals</h3>
 
-    // Example: fetch all animals from API
-    fetch('/api/animalsapi')
-      .then(res => res.json())
-      .then(data => {
-        data.forEach(a => {
-          const option = document.createElement('option');
-          option.value = a.animalID; // or a.AnimalID depending on API casing
-          option.textContent = a.animalName;
-          animalSelect.appendChild(option);
-        });
-      });
+                <div class="flex gap-4 mb-4">
+                    <div class="w-1/2">
+                        <select id="animalSelect"
+                                class="w-full border border-gray-300 rounded-lg px-4 py-3 text-zoo-darkbrown focus:outline focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
+                            <option value="">-- Select an animal --</option>
+                        </select>
+                    </div>
+                    <button type="button" id="addAnimal"
+                            class="bg-zoo-primary hover:!bg-amber-700 text-white px-6 py-3 rounded-lg font-semibold transition flex items-center">
+                        + Add
+                    </button>
+                </div>
+                <div class="flex gap-4 mb-4">
+                    <ul id="selectedAnimals" class="space-y-3 mt-4 max-h-48 rounded text-zoo-brown bg-zoo-soft overflow-y-auto"></ul>
+                </div>
+            </div>
 
-    // Add selected animal to the list
-    addAnimalButton.addEventListener('click', () => {
-      const selectedId = animalSelect.value;
-      const selectedText = animalSelect.options[animalSelect.selectedIndex].text;
+            <!-- Create Action -->
+            <div class="flex justify-center pt-6 border-t border-gray-200">
+                <button type="submit"
+                        class="bg-zoo-primary hover:!bg-amber-700 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-lg transition-colors duration-200 flex items-center">
+                    Create Event
+                </button>
+            </div>
+        </form>
 
-      if (!selectedId || selectedAnimalIds.includes(selectedId)) return;
+    </div>
 
-      selectedAnimalIds.push(parseInt(selectedId));
+    <script src="/js/components/navbar.js"></script>
+    <script src="/js/event-create.js"></script>
+    <script src="/js/event-list.js"></script>
 
-      const li = document.createElement('li');
-      li.textContent = selectedText;
-      li.dataset.id = selectedId;
-      li.title = 'Click to remove';
-      li.addEventListener('click', () => {
-        selectedAnimalIds.splice(selectedAnimalIds.indexOf(parseInt(li.dataset.id)), 1); // remove animalId from selectedAnimalIds
-        li.remove();
-      });
 
-      selectedAnimalsList.appendChild(li);
-    });
 
-    // Handle form submission
-    document.getElementById('eventForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const payload = {
-        title: document.getElementById('title').value,
-        description: document.getElementById('description').value,
-        eventDate: document.getElementById('eventDate').value,
-        eventTime: document.getElementById('eventTime').value + ':00', // timeSpan format (json only works with this C# class for database)
-        eventImage: document.getElementById('eventImage').value,
-        location: document.getElementById('location').value,
-        animalIds: selectedAnimalIds
-      };
-
-      fetch('/api/eventsapi', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      })
-      .then(res => {
-        if (res.ok) return res.json();
-        return res.json().then(err => Promise.reject(err));
-      })
-      .then(data => {
-        alert('Event created successfully! ID: ' + data.eventID);
-        // optionally reset form
-        document.getElementById('eventForm').reset();
-        selectedAnimalsList.innerHTML = '';
-        selectedAnimalIds.length = 0;
-      })
-      .catch(err => console.error(err));
-    });
-    </script>
 </body>
 </html>
