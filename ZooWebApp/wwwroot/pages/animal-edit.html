@@ -50,26 +50,21 @@
                             </select>
                         </div>
 
+                        <div>
+                            <label class="block text-sm font-medium text-zoo-darkbrown mb-2">Weight (kg)</label>
+                            <input type="number" min="0" id="weight" class="w-full rounded-lg border border-zoo-cream/60 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zoo-primary" />
+                        </div>
                     </div>
 
 
                     <div>
-                        <label class="block text-sm font-medium text-zoo-darkbrown mb-2">Enclosure</label>
+                        <label class="block text-sm font-medium text-zoo-darkbrown mb-2">Map Image URL</label>
                         <input type="text" id="enclosure" class="w-full rounded-lg border border-zoo-cream/60 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zoo-primary" />
                     </div>
 
-
-
                     <div>
-                        <label class="block text-sm font-medium text-zoo-darkbrown mb-2">Image</label>
-                        <div class="flex items-center gap-4">
-                            <div class="w-28 h-28 bg-zoo-cream rounded-lg flex items-center justify-center border border-zoo-cream/60">
-                                <img src="/images/placeholders/animal-placeholder.png" alt="placeholder" class="max-h-24 max-w-full" />
-                            </div>
-                            <div class="flex-1">
-                                <input type="file" disabled class="text-sm" />
-                            </div>
-                        </div>
+                        <label class="block text-sm font-medium text-zoo-darkbrown mb-2">Animal Image URL</label>
+                        <input type="text" id="animalImage" class="w-full rounded-lg border border-zoo-cream/60 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zoo-primary" />
                     </div>
 
                     <div>
@@ -89,6 +84,8 @@
         </div>
     </div>
 
+    <div id="toast" class="hidden fixed top-20 right-5 z-[100] bg-green-600 text-white px-4 py-2 rounded shadow-lg transition-opacity duration-500"></div>
+    <script src="/js/components/navbar.js"></script>
     <script src="/js/animal-edit.js"></script>
 </body>
 </html>

@@ -13,11 +13,9 @@ if (animalId) {
             document.getElementById('gender').value = animal.gender || 'Unknown';
             document.getElementById('enclosure').value = animal.mapImage || '';
             document.getElementById('description').value = animal.description || '';
+            document.getElementById('weight').value = animal.weight || '';
+            document.getElementById('animalImage').value = animal.animalImage || '';
 
-            // Update placeholder image
-            if (animal.animalImage) {
-                document.querySelector('img[alt="placeholder"]').src = animal.animalImage;
-            }
         })
         .catch(err => console.error('Error loading animal:', err));
 }
@@ -30,9 +28,10 @@ document.getElementById('saveAnimal').addEventListener('click', () => {
         species: document.getElementById('species').value,
         animalAge: parseInt(document.getElementById('age').value),
         gender: document.getElementById('gender').value,
+        weight: parseFloat(document.getElementById('weight').value),
         mapImage: document.getElementById('enclosure').value,
         description: document.getElementById('description').value,
-        animalImage: document.querySelector('img[alt="placeholder"]').src
+        animalImage: document.getElementById('animalImage').value
     };
 
     fetch(`/api/AnimalsAPI/${animalId}`, {
@@ -42,11 +41,29 @@ document.getElementById('saveAnimal').addEventListener('click', () => {
     })
         .then(res => {
             if (!res.ok) return res.json().then(err => Promise.reject(err));
-            return res.json();
+            return res; // just return the response object
         })
-        .then(data => {
-            alert('Animal updated successfully! ID: ' + data.animalID);
-            window.location.href = `animal-details.html?id=${animalId}`;
+        .then(() => {
+            showToast('Animal updated successfully!');
+            setTimeout(() => {
+                window.location.href = `/pages/animal-details.html?id=${animalId}`;
+            }, 1500);
         })
-        .catch(err => console.error('Error saving animal:', err));
+        .catch(err => console.error(err));
 });
+
+// Toast message
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.remove('hidden');
+    toast.classList.add('opacity-100');
+
+    setTimeout(() => {
+        toast.classList.add('opacity-0');
+        setTimeout(() => {
+            toast.classList.add('hidden');
+            toast.classList.remove('opacity-0', 'opacity-100');
+        }, 500);
+    }, 2500);
+}
