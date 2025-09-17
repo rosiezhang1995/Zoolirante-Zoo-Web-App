@@ -27,6 +27,10 @@ namespace ZooWebApp.Data
                 var gorillaKong = context.Animal.FirstOrDefault(a => a.AnimalName == "Kong");
                 var penguinPebble = context.Animal.FirstOrDefault(a => a.AnimalName == "Pebble");
                 var lemurJulian = context.Animal.FirstOrDefault(a => a.AnimalName == "Julian");
+                var peacockPatrick = context.Animal.FirstOrDefault(a => a.AnimalName == "Patrick");
+                var beaverLogger = context.Animal.FirstOrDefault(a => a.AnimalName == "Logger");
+                var penguinFishguts = context.Animal.FirstOrDefault(a => a.AnimalName == "Fishguts");
+                var parrotCracker = context.Animal.FirstOrDefault(a => a.AnimalName == "Cracker");
 
                 // Create new events
                 var events = new List<Event>

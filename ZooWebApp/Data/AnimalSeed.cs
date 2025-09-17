@@ -184,6 +184,18 @@ namespace ZooWebApp.Data
                 },
                 new Animal
                 {
+                    AnimalName = "Logger",
+                    AnimalAge = 7,
+                    Species = "Beaver",
+                    Gender = "M",
+                    AnimalImage = "/images/animals/Logger.png",
+                    Weight = 28.30m,
+                    DateOfArrival = new DateTime(2021, 6, 5),
+                    MapImage = "/images/maps/BeaverMap.png",
+                    Description = "Logger is a slacker beaver who would rather watch Chewy repair the lodge."
+                },
+                new Animal
+                {
                     AnimalName = "Kong",
                     AnimalAge = 13,
                     Species = "Gorilla",
@@ -205,6 +217,18 @@ namespace ZooWebApp.Data
                     DateOfArrival = new DateTime(2023, 12, 5),
                     MapImage = "/images/maps/PenguinMap.png",
                     Description = "Pebble is a young penguin who loves sliding across the ice."
+                    },
+                new Animal
+                {
+                    AnimalName = "Fishguts",
+                    AnimalAge = 3,
+                    Species = "Penguin",
+                    Gender = "M",
+                    AnimalImage = "/images/animals/Fishguts.png",
+                    Weight = 8.50m,
+                    DateOfArrival = new DateTime(2023, 12, 4),
+                    MapImage = "/images/maps/PenguinMap.png",
+                    Description = "Fishguts is a strong, silent type who spends his days swimming about."
                 },
                 new Animal
                 {
@@ -217,6 +241,30 @@ namespace ZooWebApp.Data
                     DateOfArrival = new DateTime(2022, 11, 7),
                     MapImage = "/images/maps/LemurMap.png",
                     Description = "Julian is a lively lemur who enjoys leaping from tree to tree."
+                },
+                new Animal
+                {
+                    AnimalName = "Cracker",
+                    AnimalAge = 2,
+                    Species = "Parrot",
+                    Gender = "F",
+                    AnimalImage = "/images/animals/Cracker.png",
+                    Weight = 1.20m,
+                    DateOfArrival = new DateTime(2025, 5, 5),
+                    MapImage = "/images/maps/BirdMap.png",
+                    Description = "Cracker is a flappy bundle of joy who loves singing."
+                },
+                new Animal
+                {
+                    AnimalName = "Patrick",
+                    AnimalAge = 4,
+                    Species = "Peacock",
+                    Gender = "M",
+                    AnimalImage = "/images/animals/Patrick.png",
+                    Weight = 4.00m,
+                    DateOfArrival = new DateTime(2022, 10, 9),
+                    MapImage = "/images/maps/PeacockMap.png",
+                    Description = "Patrick is a male peacock who loves putting on a show."
                 }
 
             };
