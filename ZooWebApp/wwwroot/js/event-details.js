@@ -1,5 +1,42 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
     loadEventDetails();
+
+    const editButton = document.getElementById('editButton');
+    console.log("editButton element is:", editButton);
+    console.log("test");
+    editButton.addEventListener('click', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const eventId = parseInt(urlParams.get('id'));
+        window.location.href = `event-edit.html?id=${eventId}`;
+    });
+
+    // delete button
+    const deleteButton = document.getElementById('deleteButton');
+    deleteButton.addEventListener('click', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const eventId = parseInt(urlParams.get('id'));
+
+        if (confirm("Are you sure you want to delete this event? This action cannot be undone.")) {
+            fetch(`/api/EventsAPI/${eventId}`, {
+                method: 'DELETE'
+            })
+                .then(response => {
+                    if (response.ok) {
+                        showToast('Event Deleted successfully!');
+                        setTimeout(() => {
+                            window.location.href = "event-list.html";
+                        }, 1500);
+                        
+                    } else {
+                        throw new Error("Failed to delete event. Status: " + response.status);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error deleting event:", error);
+                    alert("An error occurred while deleting the event.");
+                });
+        }
+    });
 });
 
 function loadEventDetails() {
@@ -24,7 +61,6 @@ function loadEventDetails() {
             document.getElementById('event-location').textContent = event.location;
             document.getElementById('event-description').textContent = event.description;
 
-            console.log(event.animals);
             // Animal cards
             const animalsContainer = document.getElementById('event-animals');
             animalsContainer.innerHTML = "";
@@ -54,6 +90,23 @@ function loadEventDetails() {
 function backToEvents() {
     window.location.href = 'event-list.html';
 }
+
+// Toast message
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.remove('hidden');
+    toast.classList.add('opacity-100');
+
+    setTimeout(() => {
+        toast.classList.add('opacity-0');
+        setTimeout(() => {
+            toast.classList.add('hidden');
+            toast.classList.remove('opacity-0', 'opacity-100');
+        }, 500);
+    }, 2500);
+}
+
 
 //Format datatype
 function formatDate(dateString) {

@@ -30,10 +30,10 @@
             </button>
 
             <div class="flex gap-3">
-                <button class="w-28 border-2 border-zoo-primary font-semibold text-zoo-primary hover:!bg-amber-700 hover-white px-4 py-2 rounded-lg transition">
+                <button id="editButton" class="w-28 border-2 border-zoo-primary font-semibold text-zoo-primary hover:!bg-amber-700 hover-white px-4 py-2 rounded-lg transition">
                     Edit
                 </button>
-                <button class="w-28 border-2 border-zoo-primary font-semibold text-zoo-primary hover:!bg-amber-700 hover-white px-4 py-2 rounded-lg transition">
+                <button id="deleteButton" class="w-28 border-2 border-zoo-primary font-semibold text-zoo-primary hover:!bg-amber-700 hover-white px-4 py-2 rounded-lg transition">
                     Delete
                 </button>
             </div>
@@ -104,7 +104,7 @@
         <div id="event-animals" class="flex flex-wrap justify-center gap-6"></div>
     </section>
 
-
+    <div id="toast" class="hidden fixed top-20 right-5 z-[100] bg-green-600 text-white px-4 py-2 rounded shadow-lg transition-opacity duration-500"></div>
     <script src="/js/components/navbar.js"></script>
     <script src="/js/data/event-data.js"></script>
     <script src="/js/event-details.js"></script>
