@@ -63,7 +63,7 @@ namespace ZooWebApp.Data
                         EventTime = new TimeSpan(14, 0, 0),
                         EventImage = "/images/events/penguin-feeding.jpg",
                         Location = "Penguin Pool",
-                        Animals = new List<Animal> { penguinPebble }
+                        Animals = new List<Animal> { penguinPebble, penguinFishguts }
                     },
                     new Event
                     {
