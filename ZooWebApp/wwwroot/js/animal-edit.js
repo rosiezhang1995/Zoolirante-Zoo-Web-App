@@ -6,7 +6,7 @@ if (animalId) {
     fetch(`/api/AnimalsAPI/${animalId}`)
         .then(res => res.json())
         .then(animal => {
-            console.log.(animal);
+            console.log(animal);
             document.getElementById('animalName').value = animal.animalName || '';
             document.getElementById('species').value = animal.species || '';
             document.getElementById('age').value = animal.animalAge || 0;

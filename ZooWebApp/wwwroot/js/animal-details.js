@@ -1,5 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
     loadAnimalDetails();
+
+    // Set the Edit button to navigate to edit page
+    const editButton = document.getElementById("editAnimalBtn");
+    editButton.addEventListener('click', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const animalId = parseInt(urlParams.get('id'));
+        window.location.href = `animal-edit.html?id=${animalId}`;
+    });
 });
 
 function loadAnimalDetails() {
@@ -32,14 +40,6 @@ function loadAnimalDetails() {
 
             // Update page title
             document.title = `${animal.animalName} the ${animal.species} - Zoolirante`;
-
-            // Set the Edit button to navigate to edit page
-            const editBtn = document.getElementById("editAnimalBtn");
-            if (editBtn) {
-                editBtn.addEventListener('click', () => {
-                    window.location.href = `animal-edit.html?id=${animal.animalID}`;
-                });
-            }
         })
         .catch(error => {
             console.error("Error fetching animal details:", error);
