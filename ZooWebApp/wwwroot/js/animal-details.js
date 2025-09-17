@@ -32,6 +32,14 @@ function loadAnimalDetails() {
 
             // Update page title
             document.title = `${animal.animalName} the ${animal.species} - Zoolirante`;
+
+            // Set the Edit button to navigate to edit page
+            const editBtn = document.getElementById("editAnimalBtn");
+            if (editBtn) {
+                editBtn.addEventListener('click', () => {
+                    window.location.href = `animal-edit.html?id=${animal.animalID}`;
+                });
+            }
         })
         .catch(error => {
             console.error("Error fetching animal details:", error);
