@@ -32,21 +32,35 @@ function loadEventData() {
             document.getElementById('eventImage').value = event.eventImage;
             document.getElementById('location').value = event.location;
 
-            // Pre-fill animals
+            // Prefill animals
             event.animals.forEach(a => {
                 if (!selectedAnimalIds.includes(a.animalId)) {
                     selectedAnimalIds.push(a.animalId);
+
                     const li = document.createElement('li');
-                    li.textContent = a.animalName;
+                    li.className = "inline-flex items-center bg-zoo-soft text-white px-3 py-1 rounded-lg mr-2 mb-2 text-sm";
                     li.dataset.id = a.animalId;
-                    li.title = 'Click to remove';
-                    li.addEventListener('click', () => {
-                        selectedAnimalIds.splice(selectedAnimalIds.indexOf(parseInt(li.dataset.id)), 1);
+
+                    // Animal names
+                    const nameSpan = document.createElement('span');
+                    nameSpan.textContent = a.animalName;                   
+
+                    // Delete button
+                    const removeBtn = document.createElement('button');
+                    removeBtn.textContent = '×';
+                    removeBtn.className = "ml-2 text-white bg-zoo-primary hover:!bg-amber-700 rounded-full w-5 h-5 flex items-center justify-center text-xs";
+
+                    removeBtn.addEventListener('click', () => {
+                        selectedAnimalIds.splice(selectedAnimalIds.indexOf(a.animalId), 1);
                         li.remove();
                     });
+
+                    li.appendChild(nameSpan);
+                    li.appendChild(removeBtn);
                     selectedAnimalsList.appendChild(li);
                 }
             });
+           
         });
 }
 
@@ -60,14 +74,26 @@ addAnimalButton.addEventListener('click', () => {
     selectedAnimalIds.push(selectedId);
 
     const li = document.createElement('li');
-    li.textContent = selectedText;
-    li.dataset.id = selectedId;
-    li.title = 'Click to remove';
-    li.addEventListener('click', () => {
-        selectedAnimalIds.splice(selectedAnimalIds.indexOf(parseInt(li.dataset.id)), 1);
+    li.className = "inline-flex items-center bg-zoo-soft text-white px-3 py-1 rounded-lg mr-2 mb-2 text-sm";
+    // Animal names
+    const nameSpan = document.createElement('span');
+    nameSpan.textContent = selectedText;
+
+    // Remove button
+    const removeBtn = document.createElement('button');
+    removeBtn.textContent = '×';
+    removeBtn.className = "ml-2 text-white bg-zoo-primary hover:!bg-amber-700 rounded-full w-5 h-5 flex items-center justify-center text-xs";
+
+    removeBtn.addEventListener('click', () => {
+        selectedAnimalIds.splice(selectedAnimalIds.indexOf(selectedId), 1);
         li.remove();
     });
 
+    li.dataset.id = selectedId;
+
+    // Append animal labels
+    li.appendChild(nameSpan);
+    li.appendChild(removeBtn);
     selectedAnimalsList.appendChild(li);
 });
 
@@ -96,8 +122,26 @@ document.getElementById('eventForm').addEventListener('submit', (e) => {
             return res.json();
         })
         .then(data => {
-            alert('Event updated successfully! ID: ' + data.eventID);
-            window.location.href = `/event-details.html?id=${eventId}`;
+            showToast('Event updated successfully!');
+            setTimeout(() => {
+                window.location.href = `/pages/event-details.html?id=${data.eventID}`;
+            }, 1500);
         })
         .catch(err => console.error(err));
 });
+
+// Toast message
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.remove('hidden');
+    toast.classList.add('opacity-100');
+
+    setTimeout(() => {
+        toast.classList.add('opacity-0');
+        setTimeout(() => {
+            toast.classList.add('hidden');
+            toast.classList.remove('opacity-0', 'opacity-100');
+        }, 500); 
+    }, 2500);
+}
