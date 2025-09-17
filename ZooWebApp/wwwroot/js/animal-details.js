@@ -1,5 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
     loadAnimalDetails();
+
+    // Set the Edit button to navigate to edit page
+    const editButton = document.getElementById("editAnimalBtn");
+    editButton.addEventListener('click', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const animalId = parseInt(urlParams.get('id'));
+        window.location.href = `animal-edit.html?id=${animalId}`;
+    });
 });
 
 function loadAnimalDetails() {
