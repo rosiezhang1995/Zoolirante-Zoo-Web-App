@@ -16,6 +16,6 @@ namespace ZooWebApp.Data
 
         public DbSet<ZooWebApp.Models.Animal> Animal { get; set; } = default!;
         public DbSet<ZooWebApp.Models.Event> Event { get; set; } = default!;
-
+        public DbSet<ZooWebApp.Models.Merchandise> Merchandise { get; set; } = default!;
     }
 }

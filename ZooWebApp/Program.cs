@@ -37,6 +37,7 @@ using (var scope = app.Services.CreateScope())
     // Seed each table individually
     AnimalSeed.Seed(context);
     EventSeed.Seed(context);
+	MerchandiseSeed.Seed(context);
 }
 
 app.Run();
