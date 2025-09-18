@@ -20,7 +20,7 @@ namespace ZooWebApp.Data
                     Description = "A soft and cuddly kangaroo plush toy, perfect for kids and as a souvenir.",
                     Price = 24.99m,
                     Avaliable = true,
-                    MerchandiseImage = "/images/merch/kangaroo_plush.png",
+                    MerchandiseImage = "/images/merchandise/kangaroo_plush.png",
                     Size = "Medium"
                 },
                 new Merchandise
@@ -29,7 +29,7 @@ namespace ZooWebApp.Data
                     Description = "A comfortable cotton t-shirt with the zoo logo printed on the front.",
                     Price = 19.99m,
                     Avaliable = true,
-                    MerchandiseImage = "/images/merch/zoo_tshirt.png",
+                    MerchandiseImage = "/images/merchandise/zoo_tshirt.png",
                     Size = "Large"
                 },
                 new Merchandise
@@ -38,16 +38,16 @@ namespace ZooWebApp.Data
                     Description = "Reusable stainless steel water bottle with zoo branding.",
                     Price = 14.50m,
                     Avaliable = true,
-                    MerchandiseImage = "/images/merch/zoo_bottle.png",
+                    MerchandiseImage = "/images/merchandise/zoo_bottle.png",
                     Size = null
                 },
                 new Merchandise
                 {
-                    MerchandiseName = "Koala Keychain",
-                    Description = "A small koala keychain to carry a piece of the zoo with you everywhere.",
+                    MerchandiseName = "Lion Keychain",
+                    Description = "A small lion keychain to carry the king of the jungle with you everywhere.",
                     Price = 5.00m,
                     Avaliable = false,
-                    MerchandiseImage = "/images/merch/koala_keychain.png",
+                    MerchandiseImage = "/images/merchandise/lion_keychain.png",
                     Size = null
                 },
                 new Merchandise
@@ -56,7 +56,7 @@ namespace ZooWebApp.Data
                     Description = "Warm and cozy hoodie with kangaroo pouch pockets and zoo branding.",
                     Price = 39.99m,
                     Avaliable = true,
-                    MerchandiseImage = "/images/merch/zoo_hoodie.png",
+                    MerchandiseImage = "/images/merchandise/zoo_hoodie.png",
                     Size = "XL"
                 }
 
