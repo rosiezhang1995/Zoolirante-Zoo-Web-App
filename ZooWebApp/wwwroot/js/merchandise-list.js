@@ -26,9 +26,9 @@
                 `;
 
                 // Link card to its details page
-                //card.addEventListener('click', function () {
-                //    window.location.href = `merchandise-details.html?id=${merchandise.merchandiseID}`;
-                //});
+                card.addEventListener('click', function () {
+                    window.location.href = `merchandise-details.html?id=${merchandise.merchandiseID}`;
+                });
 
                 list.appendChild(card);
             });

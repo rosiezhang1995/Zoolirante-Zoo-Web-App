@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Merchandise Details</title>
+    <link href="/css/site.tailwind.css" rel="stylesheet">
+    <link href="/css/custom.css" rel="stylesheet">
+</head>
+<body class="bg-zoo-background">
+
+    <!-- Value badge -->
+    <div class="bg-zoo-cream text-center py-4 text-zoo-brown font-semibold tracking-wide text-lg shadow">
+        Zoolirante – A World of Wildlife, A Lifetime of Wonder
+    </div>
+
+    <!-- Brand logo & buttons -->
+    <div class="container mx-auto px-4 pt-6 mt-3">
+        <div class="flex justify-between items-center">
+            <!-- Back button -->
+            <button onclick="backToList()" class="bg-zoo-primary hover:!bg-amber-700 text-zoo-cream px-4 py-2 rounded-lg transition flex items-center">
+                ← Back to Merchandise
+            </button>
+
+            <!-- brand logo -->
+            <div class="flex-1 flex justify-center">
+                <img src="/images/homepage/logo.png" alt="Zoolirante Logo" class="w-40 h-auto">
+            </div>
+        </div>
+    </div>
+
+    <!-- Merchandise details -->
+    <div id="merchandise-details" class="container mx-auto px-4 py-8 mt-3">
+
+        <!-- Merch name head -->
+        <div class="bg-zoo-soft py-8 mb-8 shadow-lg rounded-2xl">
+            <div class="container mx-auto px-4">
+                <h1 id="merchandise-name" class="text-6xl font-bold text-zoo-darkbrown text-center"></h1>
+            </div>
+        </div>
+
+        <!-- Animal card -->
+        <div class="bg-zoo-lightpink rounded-4xl overflow-hidden mb-8">
+            <div class="md:flex">
+
+                <!-- Merchandise Image -->
+                <div class="md:w-2/3">
+                    <img id="merchandise-image" src="" alt="merchandise-name" class="w-full aspect-[4/3] object-cover">
+                </div>
+
+                <div class="md:w-1/2 p-8">
+                    <div class="grid grid-cols-2 gap-4 mt-10">
+                        <!-- Price -->
+                        <div class="bg-zoo-cream  p-4 rounded-lg">
+                            <h3 class="font-semibold text-zoo-darkbrown mb-2">Price</h3>
+                            <p id="merchandise-price" class="text-lg text-zoo-brown"></p>
+                        </div>
+                        <!-- Avaliable -->
+                        <div class="bg-zoo-cream  p-4 rounded-lg">
+                            <h3 class="font-semibold text-zoo-darkbrown mb-2">Avaliablity</h3>
+                            <p id="merchandise-avaliable" class="text-lg text-zoo-brown"></p>
+                        </div>
+                        <!-- Size -->
+                        <div class="bg-zoo-cream  p-4 rounded-lg">
+                            <h3 class="font-semibold text-zoo-darkbrown mb-2">Size</h3>
+                            <p id="merchandise-size" class="text-lg text-zoo-brown"></p>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <h2 id="merchandise-name-desc" class="text-2xl font-semibold text-zoo-brown mt-5 mb-5"></h2>
+                    <p id="merchandise-description" class="text-lg font-semibold text-zoo-brown"></p>
+
+                    <!-- Add to cart button -->
+                    <div class="text-center mt-2">
+                        <img src="/images/homepage/paw.png" alt="paw icon" class="mx-auto w-16 mb-2" />
+                        <button class="bg-zoo-primary hover:!bg-amber-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg transition-colors mt-3">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include navbar component -->
+    <script src="/js/components/navbar.js"></script>
+    <script src="/js/merchandise-details.js"></script>
+
+</body>
+</html>
