@@ -19,21 +19,30 @@
             <p class="font-semibold text-lg mb-6">John Doe</p>
 
             <!-- buttons -->
-            <button class="tab-btn active" data-tab="profile">Your Profile</button>
-            <button class="tab-btn" data-tab="animals">Animals</button>
-            <button class="tab-btn" data-tab="events">Events</button>
-            <button class="tab-btn" data-tab="orders">Orders</button>
-            <button class="tab-btn" data-tab="tickets">Tickets</button>
-            <button class="tab-btn" data-tab="membership">Membership</button>
-            <button class="tab-btn" data-tab="payment">Payment</button>
+            <div class="w-full space-y-2">
+                <button class="tab-btn active" data-tab="profile">Your Profile</button>
+                <button class="tab-btn" data-tab="animals">Animals</button>
+                <button class="tab-btn" data-tab="events">Events</button>
+                <button class="tab-btn" data-tab="orders">Orders</button>
+                <button class="tab-btn" data-tab="tickets">Tickets</button>
+                <button class="tab-btn" data-tab="membership">Membership</button>
+                <button class="tab-btn" data-tab="payment">Payment</button>
+            </div>
+            
         </div>
 
         <!-- content -->
         <div class="flex-1 p-8">
             <!-- Profile -->
             <div id="profile" class="tab-content">
-                <h2 class="text-xl font-bold text-orange-600 mb-4">Profile</h2>
+                <div class="max-w-3xl mx-auto">
+                    <div class="bg-zoo-soft text-white font-semibold rounded-lg px-10 py-2 text-center text-xl">
+                        Profile
+                    </div>
+                </div>
+                
             </div>
+            
 
             <!-- Animals -->
             <div id="animals" class="tab-content hidden">
