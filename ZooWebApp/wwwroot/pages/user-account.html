@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>User Account — Zoolirante</title>
+    <link href="/css/site.tailwind.css" rel="stylesheet">
+    <link href="/css/custom.css" rel="stylesheet">
+</head>
+<body>
+    <div class="flex min-h-screen bg-zoo-background">
+
+        <!-- Tabs -->
+        <div class="w-64 p-4 flex flex-col items-center bg-zoo-lightpink">
+            <!-- image -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-15 h-15 rounded-full mb-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            </svg>
+            <!-- name -->
+            <p class="font-semibold text-lg mb-6">John Doe</p>
+
+            <!-- buttons -->
+            <button class="tab-btn active" data-tab="profile">Your Profile</button>
+            <button class="tab-btn" data-tab="animals">Animals</button>
+            <button class="tab-btn" data-tab="events">Events</button>
+            <button class="tab-btn" data-tab="orders">Orders</button>
+            <button class="tab-btn" data-tab="tickets">Tickets</button>
+            <button class="tab-btn" data-tab="membership">Membership</button>
+            <button class="tab-btn" data-tab="payment">Payment</button>
+        </div>
+
+        <!-- content -->
+        <div class="flex-1 p-8">
+            <!-- Profile -->
+            <div id="profile" class="tab-content">
+                <h2 class="text-xl font-bold text-orange-600 mb-4">Profile</h2>
+            </div>
+
+            <!-- Animals -->
+            <div id="animals" class="tab-content hidden">
+                <h2 class="text-xl font-bold text-orange-600 mb-4">Animals</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white p-4 rounded shadow">Lion</div>
+                    <div class="bg-white p-4 rounded shadow">Giraffe</div>
+                </div>
+            </div>
+
+            <!-- Events -->
+            <div id="events" class="tab-content hidden">
+                <h2 class="text-xl font-bold text-orange-600 mb-4">Events</h2>
+                <ul class="list-disc pl-6">
+                    <li>Zoo Festival</li>
+                    <li>Bird Show</li>
+                </ul>
+            </div>
+
+            <!-- Orders -->
+            <div id="orders" class="tab-content hidden">
+                <h2 class="text-xl font-bold text-orange-600 mb-4">Orders</h2>
+                <table class="table-auto w-full border">
+                    <thead class="bg-orange-100">
+                        <tr>
+                            <th class="px-4 py-2">Item</th>
+                            <th class="px-4 py-2">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border px-4 py-2">T-shirt</td>
+                            <td class="border px-4 py-2">$25</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tickets -->
+            <div id="tickets" class="tab-content hidden">
+                <h2 class="text-xl font-bold text-orange-600 mb-4">tickets</h2>
+            </div>
+
+            <!-- Membership -->
+            <div id="membership" class="tab-content hidden">
+                <h2 class="text-xl font-bold text-orange-600 mb-4">membership</h2>
+            </div>
+
+            <!-- Payment -->
+            <div id="payment" class="tab-content hidden">
+                <h2 class="text-xl font-bold text-orange-600 mb-4">payment</h2>
+            </div>
+        </div>
+    </div>  
+</body>
+</html>
