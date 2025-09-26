@@ -16,9 +16,28 @@
         const data = await response.json();
         sessionStorage.setItem('userId', data.userID);
         sessionStorage.setItem('isAdmin', data.isAdmin);
-        alert(`Welcome ${data.username}!`);
-        window.location.href = '/';
+        sessionStorage.setItem('username', data.username);
+        showToast('Sucessfully logged in!');
+        setTimeout(() => {
+            window.location.href = `/`;
+        }, 1500);
     } else {
         alert('Invalid username or password.');
     }
 });
+
+// Toast message
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.remove('hidden');
+    toast.classList.add('opacity-100');
+
+    setTimeout(() => {
+        toast.classList.add('opacity-0');
+        setTimeout(() => {
+            toast.classList.add('hidden');
+            toast.classList.remove('opacity-0', 'opacity-100');
+        }, 500);
+    }, 2500);
+}
