@@ -74,11 +74,13 @@ namespace ZooWebApp.Controllers
             return NoContent();
         }
 
-        // POST: api/UsersAPI
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        // POST: api/UsersAPI/signup
+        [HttpPost("signup")]
+        public async Task<ActionResult<User>> Signup(User user)
         {
+            // Hash the password before saving
+            user.PasswordHash = PasswordHelper.HashPassword(user.PasswordHash);
+
             _context.User.Add(user);
             await _context.SaveChangesAsync();
 
