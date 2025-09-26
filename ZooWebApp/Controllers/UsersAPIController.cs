@@ -87,6 +87,27 @@ namespace ZooWebApp.Controllers
             return CreatedAtAction("GetUser", new { id = user.UserID }, user);
         }
 
+        // POST: api/UsersAPI/login
+        [HttpPost("login")]
+        public async Task<ActionResult<string>> Login([FromBody] User loginRequest)
+        {
+            var user = await _context.User
+                .FirstOrDefaultAsync(u => u.Username == loginRequest.Username);
+
+            if (user == null)
+            {
+                return Unauthorized("Invalid username or password.");
+            }
+
+            bool valid = PasswordHelper.VerifyPassword(loginRequest.PasswordHash, user.PasswordHash);
+            if (!valid)
+            {
+                return Unauthorized("Invalid username or password.");
+            }
+
+            return Ok($"Welcome back, {user.FullName}!");
+        }
+
         // DELETE: api/UsersAPI/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
