@@ -95,18 +95,17 @@ namespace ZooWebApp.Controllers
             var user = await _context.User
                 .FirstOrDefaultAsync(u => u.Username == loginRequest.Username);
 
-            if (user == null)
+            if (user == null || !PasswordHelper.VerifyPassword(loginRequest.Password, user.PasswordHash))
             {
                 return Unauthorized("Invalid username or password.");
             }
 
-            bool valid = PasswordHelper.VerifyPassword(loginRequest.Password, user.PasswordHash);
-            if (!valid)
+            return Ok(new
             {
-                return Unauthorized("Invalid username or password.");
-            }
-
-            return Ok($"Welcome back, {user.FullName}!");
+                userID = user.UserID,
+                username = user.Username,
+                isAdmin = user.IsAdmin
+            });
         }
 
         // DELETE: api/UsersAPI/5
