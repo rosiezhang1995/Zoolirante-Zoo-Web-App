@@ -50,40 +50,21 @@
                     Sign Up
                 </button>
             </div>
+
+            <div class="text-center mt-6">
+                <p class="text-zoo-darkbrown">
+                    Already have an account?
+                    <a href="/pages/login.html"
+                       class="text-zoo-primary font-semibold hover:underline hover:text-amber-700 transition">
+                        Login here
+                    </a>
+                </p>
+            </div>
         </form>
     </div>
 
     <script src="/js/components/navbar.js"></script>
-    <script>
-    document.getElementById('signupForm').addEventListener('submit', async function (e) {
-            e.preventDefault();
-
-            const user = {
-                username: document.getElementById('username').value,
-                passwordHash: document.getElementById('password').value, // will be hashed on server
-                fullName: document.getElementById('fullName').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                isAdmin: false,
-                isMember: false
-            };
-
-            const response = await fetch('/api/UsersAPI/signup', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(user)
-            });
-
-            if (response.ok) {
-                const createdUser = await response.json();
-                sessionStorage.setItem('userId', createdUser.userID);
-                sessionStorage.setItem('isAdmin', createdUser.isAdmin);
-                alert('Signup successful!');
-                window.location.href = '/';
-            } else {
-                alert('Error signing up.');
-            }
-        });</script>
+    <script src="/js/signup.js"></script>
 
 </body>
 </html>

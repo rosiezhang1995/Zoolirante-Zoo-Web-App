@@ -35,34 +35,20 @@
                     Login
                 </button>
             </div>
+            <div class="text-center mt-6">
+                <p class="text-zoo-darkbrown">
+                    Don’t have an account?
+                    <a href="/pages/signup.html"
+                       class="text-zoo-primary font-semibold hover:underline hover:text-amber-700 transition">
+                        Sign up here
+                    </a>
+                </p>
+            </div>
         </form>
     </div>
 
     <script src="/js/components/navbar.js"></script>
-    <script>document.getElementById('loginForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    const loginRequest = {
-        username: document.getElementById('username').value,
-        password: document.getElementById('password').value
-    };
-
-    const response = await fetch('/api/UsersAPI/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(loginRequest)
-    });
-
-    if (response.ok) {
-        const data = await response.json();
-        sessionStorage.setItem('userId', data.userID);
-        sessionStorage.setItem('isAdmin', data.isAdmin);
-        alert(`Welcome ${data.username}!`);
-        window.location.href = '/';
-    } else {
-        alert('Invalid username or password.');
-    }
-});</script>
+    <script src="/js/login.js"></script>
 
 </body>
 </html>
