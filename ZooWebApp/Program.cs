@@ -38,6 +38,7 @@ using (var scope = app.Services.CreateScope())
     AnimalSeed.Seed(context);
     EventSeed.Seed(context);
 	MerchandiseSeed.Seed(context);
+    UserSeed.Seed(context);
 }
 
 app.Run();
