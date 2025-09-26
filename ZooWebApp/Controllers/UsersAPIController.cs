@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ZooWebApp.Data;
 using ZooWebApp.Models;
 using ZooWebApp.Helpers;
+using ZooWebApp.Dtos;
 
 namespace ZooWebApp.Controllers
 {
@@ -89,7 +90,7 @@ namespace ZooWebApp.Controllers
 
         // POST: api/UsersAPI/login
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login([FromBody] User loginRequest)
+        public async Task<ActionResult<string>> Login([FromBody] UserLoginDto loginRequest)
         {
             var user = await _context.User
                 .FirstOrDefaultAsync(u => u.Username == loginRequest.Username);
@@ -99,7 +100,7 @@ namespace ZooWebApp.Controllers
                 return Unauthorized("Invalid username or password.");
             }
 
-            bool valid = PasswordHelper.VerifyPassword(loginRequest.PasswordHash, user.PasswordHash);
+            bool valid = PasswordHelper.VerifyPassword(loginRequest.Password, user.PasswordHash);
             if (!valid)
             {
                 return Unauthorized("Invalid username or password.");
