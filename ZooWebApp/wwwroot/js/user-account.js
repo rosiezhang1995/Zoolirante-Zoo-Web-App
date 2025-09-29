@@ -1,4 +1,14 @@
-﻿const buttons = document.querySelectorAll(".tab-btn");
+﻿// Display username
+document.addEventListener("DOMContentLoaded", function () {
+    const username = sessionStorage.getItem("username"); 
+    const usernameElement = document.getElementById("username");
+    if (username && usernameElement) {
+        usernameElement.textContent = username;
+    }
+});
+
+// Dynamic tabs
+const buttons = document.querySelectorAll(".tab-btn");
 const tabs = document.querySelectorAll(".tab-content");
 
 buttons.forEach(btn => {
