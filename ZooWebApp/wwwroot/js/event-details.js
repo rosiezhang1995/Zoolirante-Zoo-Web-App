@@ -2,8 +2,6 @@
     loadEventDetails();
 
     const editButton = document.getElementById('editButton');
-    console.log("editButton element is:", editButton);
-    console.log("test");
     editButton.addEventListener('click', () => {
         const urlParams = new URLSearchParams(window.location.search);
         const eventId = parseInt(urlParams.get('id'));
@@ -37,6 +35,36 @@
                 });
         }
     });
+
+    // Favourite star logic
+    const favStar = document.getElementById("favouriteStar");
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const eventId = String(urlParams.get('id'));
+    const storageKey = "favouriteEvents";
+
+    // Get favourites list from localStorage
+    let favourites = JSON.parse(localStorage.getItem(storageKey)) || [];
+    let isFavourite = favourites.includes(eventId);
+
+    updateStar();
+
+    favStar.addEventListener("click", () => {
+        if (isFavourite) {
+            favourites = favourites.filter(id => id !== eventId);
+            isFavourite = false;
+        } else {
+            favourites.push(eventId);
+            isFavourite = true;
+        }
+
+        localStorage.setItem(storageKey, JSON.stringify(favourites));
+        updateStar();
+    });
+
+    function updateStar() {
+        favStar.setAttribute("fill", isFavourite ? "orange" : "none");
+    }
 });
 
 function loadEventDetails() {
