@@ -3,7 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const list = document.getElementById("animal-list");
 
     // get favourites status from localStorage
-    let favouriteAnimalIds = JSON.parse(localStorage.getItem("favouriteAnimals")) || [];
+    const storageKey = "favouriteAnimals";
+    let favourites = JSON.parse(localStorage.getItem(storageKey)) || [];
 
     fetch("/api/animalsapi")
         .then(response => {
@@ -14,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(animals => {
             animals.forEach((animal) => {
-                const isFavourite = favouriteAnimalIds.includes(animal.animalID); 
+                const isFavourite = favourites.includes(String(animal.animalID));
 
                 const card = document.createElement("div");
                 card.className =
@@ -51,20 +52,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 favIcon.addEventListener("click", (e) => {
                     e.stopPropagation(); 
 
-                    if (isFavourite) {
-                        // remove from favourites
-                        favouriteAnimalIds = favouriteAnimalIds.filter(id => id !== animal.animalID);
+                    const idStr = String(animal.animalID);
+                    if (favourites.includes(idStr)) {
+                        favourites = favourites.filter(id => id !== idStr);
+                        favIcon.setAttribute("fill", "none");
                     } else {
-                        // add to favourites
-                        favouriteAnimalIds.push(animal.animalID);
+                        favourites.push(idStr);
+                        favIcon.setAttribute("fill", "red");
                     }
 
-                    // save to localStorage
-                    localStorage.setItem("favouriteAnimals", JSON.stringify(favouriteAnimalIds));
-
-                    // update colour
-                    favIcon.setAttribute("fill", isFavourite ? "none" : "red");
-
+                    localStorage.setItem(storageKey, JSON.stringify(favourites));
                 });
 
                 list.appendChild(card);
