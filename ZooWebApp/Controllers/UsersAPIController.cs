@@ -27,7 +27,10 @@ namespace ZooWebApp.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
-            return await _context.User.ToListAsync();
+            return await _context.User
+                .Include(u => u.FavouriteAnimals)
+                .Include(u => u.SavedEvents)
+                .ToListAsync();
         }
 
         // GET: api/UsersAPI/5
@@ -93,6 +96,8 @@ namespace ZooWebApp.Controllers
         public async Task<ActionResult<string>> Login([FromBody] UserLoginDto loginRequest)
         {
             var user = await _context.User
+                .Include(u => u.FavouriteAnimals)
+                .Include(u => u.SavedEvents)
                 .FirstOrDefaultAsync(u => u.Username == loginRequest.Username);
 
             if (user == null || !PasswordHelper.VerifyPassword(loginRequest.Password, user.PasswordHash))
@@ -104,7 +109,9 @@ namespace ZooWebApp.Controllers
             {
                 userID = user.UserID,
                 username = user.Username,
-                isAdmin = user.IsAdmin
+                isAdmin = user.IsAdmin,
+                favouriteAnimals = user.FavouriteAnimals?.Select(a => a.AnimalID).ToList(),
+                savedEvents = user.SavedEvents?.Select(e => e.EventID).ToList()
             });
         }
 
