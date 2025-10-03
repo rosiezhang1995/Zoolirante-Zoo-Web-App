@@ -59,7 +59,7 @@ function renderSavedEvents() {
                   View Details
                 </button>
                 <button 
-                  class="border-2 border-zoo-primary hover:bg-gray-100 bg-white px-4 py-2 rounded-lg shadow-md transition"
+                  class="border-2 border-zoo-primary text-gray-700 hover:bg-gray-100 px-4 py-2 rounded-lg shadow-md transition"
                   onclick="removeFromFavourites(${event.eventID}, this)">
                   Remove
                 </button>

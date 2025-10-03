@@ -94,7 +94,7 @@ function removeFromAnimalFavourites(animalId, btn) {
 
     // Show reminder if no animals left
     const container = document.getElementById("favourite-animals-list");
-    if (!container.querySelector(".bg-zoo-background")) {
+    if (!container.querySelector(".bg-zoo-lightpink")) {
         container.innerHTML = `
         <div class="text-center mt-6">
             <p class="text-zoo-brown text-lg font-medium mb-4">
