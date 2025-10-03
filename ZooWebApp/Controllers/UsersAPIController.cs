@@ -131,6 +131,49 @@ namespace ZooWebApp.Controllers
             return NoContent();
         }
 
+        // Add a favourite animal
+        [HttpPost("{userId}/favouriteAnimals/{animalId}")]
+        public async Task<IActionResult> AddFavouriteAnimal(int userId, int animalId)
+        {
+            var user = await _context.User
+                .Include(u => u.FavouriteAnimals)
+                .FirstOrDefaultAsync(u => u.UserID == userId);
+
+            if (user == null) return NotFound("User not found");
+
+            var animal = await _context.Animal.FindAsync(animalId);
+            if (animal == null) return NotFound("Animal not found");
+
+            if (!user.FavouriteAnimals.Contains(animal))
+            {
+                user.FavouriteAnimals.Add(animal);
+                await _context.SaveChangesAsync();
+            }
+
+            return NoContent();
+        }
+
+        // Remove a favourite animal
+        [HttpDelete("{userId}/favouriteAnimals/{animalId}")]
+        public async Task<IActionResult> RemoveFavouriteAnimal(int userId, int animalId)
+        {
+            var user = await _context.User
+                .Include(u => u.FavouriteAnimals)
+                .FirstOrDefaultAsync(u => u.UserID == userId);
+
+            if (user == null) return NotFound("User not found");
+
+            var animal = user.FavouriteAnimals.FirstOrDefault(a => a.AnimalID == animalId);
+            if (animal != null)
+            {
+                user.FavouriteAnimals.Remove(animal);
+                await _context.SaveChangesAsync();
+            }
+
+            return NoContent();
+        }
+
+
         private bool UserExists(int id)
         {
             return _context.User.Any(e => e.UserID == id);
