@@ -40,8 +40,9 @@
     const favStar = document.getElementById("favouriteStar");
     const toast = document.getElementById("toast");
 
+    const userId = sessionStorage.getItem("userId");
     const urlParams = new URLSearchParams(window.location.search);
-    const eventId = String(urlParams.get('id'));
+    const eventId = parseInt(urlParams.get('id'));
     const storageKey = "favouriteEvents";
 
     // Get favourites list from localStorage
@@ -63,11 +64,17 @@
 
     favStar.addEventListener("click", () => {
         if (isFavourite) {
+            // remove from session storage
             favourites = favourites.filter(id => id !== eventId);
+            // remove from database
+            fetch(`/api/UsersAPI/${userId}/savedEvents/${eventId}`, { method: 'DELETE' });
             isFavourite = false;
             showToast("Removed from Saved Events!");
         } else {
+            // add to session storage
             favourites.push(eventId);
+            // add to database
+            fetch(`/api/UsersAPI/${userId}/savedEvents/${eventId}`, { method: 'POST' });
             isFavourite = true;
             showToast("Added to Saved Events!");
         }

@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     const list = document.getElementById("event-list");
+
+    // get user ID for user specific favourites
+    const userId = sessionStorage.getItem("userId");
+
     // store favourite events
     const storageKey = "favouriteEvents";
     let favourites = JSON.parse(sessionStorage.getItem(storageKey)) || [];
@@ -13,8 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(events => {
             events.forEach((event) => {
-                const idStr = String(event.eventID);
-                const isFavourite = favourites.includes(idStr); 
+                const isFavourite = favourites.includes(event.eventID); 
 
                 const card = document.createElement("div");
                 card.className = "relative bg-zoo-background rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300";
@@ -74,11 +77,17 @@ document.addEventListener("DOMContentLoaded", function () {
                     e.stopPropagation();
                     const idStr = String(event.eventID);
 
-                    if (favourites.includes(idStr)) {
-                        favourites = favourites.filter(id => id !== idStr);
+                    if (favourites.includes(event.eventID)) {
+                        // remove from session storage
+                        favourites = favourites.filter(id => id !== event.eventID);
+                        // remove from database
+                        fetch(`/api/UsersAPI/${userId}/savedEvents/${event.eventID}`, { method: 'DELETE' });
                         star.setAttribute("fill", "none");
                     } else {
-                        favourites.push(idStr);
+                        // add to session storage
+                        favourites.push(event.eventID);
+                        // add to database
+                        fetch(`/api/UsersAPI/${userId}/savedEvents/${event.eventID}`, { method: 'POST' });
                         star.setAttribute("fill", "orange");
                     }
                     sessionStorage.setItem(storageKey, JSON.stringify(favourites));

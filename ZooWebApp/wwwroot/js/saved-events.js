@@ -81,10 +81,11 @@ function viewEventDetails(eventId) {
 
 // Removed from saved list
 function removeFromFavourites(eventId, btn) {
+    const userId = sessionStorage.getItem("userId");
     const storageKey = "favouriteEvents";
     let favourites = JSON.parse(sessionStorage.getItem(storageKey)) || [];
-    favourites = favourites.filter(id => id !== String(eventId));
-    localStorage.setItem(storageKey, JSON.stringify(favourites));
+    favourites = favourites.filter(id => id !== eventId);
+    sessionStorage.setItem(storageKey, JSON.stringify(favourites));
     fetch(`/api/UsersAPI/${userId}/savedEvents/${eventId}`, { method: 'DELETE' });
 
     // Remove card
