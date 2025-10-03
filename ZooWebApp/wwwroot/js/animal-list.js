@@ -57,7 +57,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         favourites = favourites.filter(id => id !== idStr);
                         favIcon.setAttribute("fill", "none");
                     } else {
-                        favourites.push(idStr);
+                        if (!favourites.includes(idStr)) {
+                            favourites.push(idStr);
+                        }
                         favIcon.setAttribute("fill", "red");
                     }
 

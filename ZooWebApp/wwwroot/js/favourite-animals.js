@@ -11,6 +11,7 @@ function renderFavouriteAnimals() {
 
     // No animals saved
     if (favourites.length === 0) {
+        container.className = "";
         container.innerHTML = `
         <div class="text-center mt-6">
             <p class="text-zoo-brown text-lg font-medium mb-4">
@@ -95,6 +96,7 @@ function removeFromAnimalFavourites(animalId, btn) {
     // Show reminder if no animals left
     const container = document.getElementById("favourite-animals-list");
     if (!container.querySelector(".bg-zoo-lightpink")) {
+        container.className = ""; // remove grid layout
         container.innerHTML = `
         <div class="text-center mt-6">
             <p class="text-zoo-brown text-lg font-medium mb-4">

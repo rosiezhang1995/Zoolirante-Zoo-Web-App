@@ -28,7 +28,9 @@ document.addEventListener('DOMContentLoaded', function () {
             isFavourite = false;
             showToast("Removed from Favourites!");
         } else {
-            favourites.push(animalId);
+            if (!favourites.includes(animalId)) {
+                favourites.push(animalId);
+            }
             isFavourite = true;
             showToast("Added to Favourites!");
         }
