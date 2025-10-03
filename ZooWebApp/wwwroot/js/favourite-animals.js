@@ -53,10 +53,11 @@ function renderFavouriteAnimals() {
               class="w-full aspect-square object-cover">
           </div>
           <div class="p-4">
-            <h3 class="text-lg font-bold text-zoo-primary">${animal.species}</h3>
-            <p class="text-base text-zoo-darkbrown mb-3">${animal.animalName}</p>
-
-            <div class="flex justify-center gap-2">
+            <div class="flex  justify-between items-center mb-2">
+                <h3 class="text-lg font-bold text-zoo-primary">${animal.species}</h3>
+                <p class="text-base text-zoo-darkbrown mb-3">${animal.animalName}</p>
+            </div>
+            <div class="flex gap-2">
               <button 
                 class="bg-zoo-primary hover:!bg-amber-700 text-white px-3 py-1 rounded-md text-sm shadow-md transition"
                 onclick="viewAnimalDetails(${animal.animalID})">
