@@ -131,6 +131,7 @@ namespace ZooWebApp.Controllers
             return NoContent();
         }
 
+        // Adding/Removing Animals/Events
         // Add a favourite animal
         [HttpPost("{userId}/favouriteAnimals/{animalId}")]
         public async Task<IActionResult> AddFavouriteAnimal(int userId, int animalId)
@@ -167,6 +168,48 @@ namespace ZooWebApp.Controllers
             if (animal != null)
             {
                 user.FavouriteAnimals.Remove(animal);
+                await _context.SaveChangesAsync();
+            }
+
+            return NoContent();
+        }
+
+        // Add a saved event
+        [HttpPost("{userId}/savedEvents/{eventId}")]
+        public async Task<IActionResult> AddSavedEvent(int userId, int eventId)
+        {
+            var user = await _context.User
+                .Include(u => u.SavedEvents)
+                .FirstOrDefaultAsync(u => u.UserID == userId);
+
+            if (user == null) return NotFound("User not found");
+
+            var evt = await _context.Event.FindAsync(eventId);
+            if (evt == null) return NotFound("Event not found");
+
+            if (!user.SavedEvents.Contains(evt))
+            {
+                user.SavedEvents.Add(evt);
+                await _context.SaveChangesAsync();
+            }
+
+            return NoContent();
+        }
+
+        // Remove a saved event
+        [HttpDelete("{userId}/savedEvents/{eventId}")]
+        public async Task<IActionResult> RemoveSavedEvent(int userId, int eventId)
+        {
+            var user = await _context.User
+                .Include(u => u.SavedEvents)
+                .FirstOrDefaultAsync(u => u.UserID == userId);
+
+            if (user == null) return NotFound("User not found");
+
+            var evt = user.SavedEvents.FirstOrDefault(e => e.EventID == eventId);
+            if (evt != null)
+            {
+                user.SavedEvents.Remove(evt);
                 await _context.SaveChangesAsync();
             }
 
