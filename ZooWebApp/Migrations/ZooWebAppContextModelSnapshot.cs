@@ -77,10 +77,15 @@ namespace ZooWebApp.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int?>("UserID")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Weight")
                         .HasColumnType("decimal(10,2)");
 
                     b.HasKey("AnimalID");
+
+                    b.HasIndex("UserID");
 
                     b.ToTable("Animal");
                 });
@@ -118,7 +123,12 @@ namespace ZooWebApp.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int?>("UserID")
+                        .HasColumnType("int");
+
                     b.HasKey("EventID");
+
+                    b.HasIndex("UserID");
 
                     b.ToTable("Event");
                 });
@@ -217,6 +227,27 @@ namespace ZooWebApp.Migrations
                         .HasForeignKey("EventsEventID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ZooWebApp.Models.Animal", b =>
+                {
+                    b.HasOne("ZooWebApp.Models.User", null)
+                        .WithMany("FavouriteAnimals")
+                        .HasForeignKey("UserID");
+                });
+
+            modelBuilder.Entity("ZooWebApp.Models.Event", b =>
+                {
+                    b.HasOne("ZooWebApp.Models.User", null)
+                        .WithMany("SavedEvents")
+                        .HasForeignKey("UserID");
+                });
+
+            modelBuilder.Entity("ZooWebApp.Models.User", b =>
+                {
+                    b.Navigation("FavouriteAnimals");
+
+                    b.Navigation("SavedEvents");
                 });
 #pragma warning restore 612, 618
         }
