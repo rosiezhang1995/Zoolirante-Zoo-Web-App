@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // get favourites status from localStorage
     const storageKey = "favouriteAnimals";
-    let favourites = JSON.parse(localStorage.getItem(storageKey)) || [];
+    let favourites = JSON.parse(sessionStorage.getItem(storageKey)) || [];
 
     fetch("/api/animalsapi")
         .then(response => {
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         favIcon.setAttribute("fill", "red");
                     }
 
-                    localStorage.setItem(storageKey, JSON.stringify(favourites));
+                    sessionStorage.setItem(storageKey, JSON.stringify(favourites));
                 });
 
                 list.appendChild(card);

@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const list = document.getElementById("event-list");
     // store favourite events
     const storageKey = "favouriteEvents";
-    let favourites = JSON.parse(localStorage.getItem(storageKey)) || [];
+    let favourites = JSON.parse(sessionStorage.getItem(storageKey)) || [];
 
     fetch("/api/eventsapi")
         .then(response => {
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         favourites.push(idStr);
                         star.setAttribute("fill", "orange");
                     }
-                    localStorage.setItem(storageKey, JSON.stringify(favourites));
+                    sessionStorage.setItem(storageKey, JSON.stringify(favourites));
                 });
 
             list.appendChild(card);

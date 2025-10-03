@@ -45,7 +45,7 @@
     const storageKey = "favouriteEvents";
 
     // Get favourites list from localStorage
-    let favourites = JSON.parse(localStorage.getItem(storageKey)) || [];
+    let favourites = JSON.parse(sessionStorage.getItem(storageKey)) || [];
     let isFavourite = favourites.includes(eventId);
 
     updateStar();
@@ -72,7 +72,7 @@
             showToast("Added to Saved Events!");
         }
 
-        localStorage.setItem(storageKey, JSON.stringify(favourites));
+        sessionStorage.setItem(storageKey, JSON.stringify(favourites));
         updateStar();
     });
 

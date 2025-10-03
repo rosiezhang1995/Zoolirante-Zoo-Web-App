@@ -13,12 +13,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const favIcon = document.getElementById("favouriteIcon");
     const toast = document.getElementById("toast");
 
+    const userId = sessionStorage.getItem("userId");
     const urlParams = new URLSearchParams(window.location.search);
     const animalId = String(urlParams.get('id'));
     const storageKey = "favouriteAnimals";
 
     // Get favourites list from storage
-    let favourites = JSON.parse(localStorage.getItem(storageKey)) || [];
+    let favourites = JSON.parse(sessionStorage.getItem(storageKey)) || [];
     let isFavourite = favourites.includes(animalId);
     updateHeart();
 
@@ -35,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
             showToast("Added to Favourites!");
         }
 
-        localStorage.setItem(storageKey, JSON.stringify(favourites));
+        sessionStorage.setItem(storageKey, JSON.stringify(favourites));
         updateHeart();
     });
 
