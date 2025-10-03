@@ -2,7 +2,10 @@ document.addEventListener("DOMContentLoaded", function () {
     //Animal card
     const list = document.getElementById("animal-list");
 
-    // get favourites status from localStorage
+    // get user ID for user specific favourites
+    const userId = sessionStorage.getItem("userId");
+
+    // get favourites status from sessionStorage
     const storageKey = "favouriteAnimals";
     let favourites = JSON.parse(sessionStorage.getItem(storageKey)) || [];
 
@@ -15,8 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(animals => {
             animals.forEach((animal) => {
-                const isFavourite = favourites.includes(String(animal.animalID));
-
+                const isFavourite = favourites.includes(animal.animalID);
                 const card = document.createElement("div");
                 card.className =
                     "relative bg-zoo-lightpink text-zoo-darkbrown rounded-lg overflow-hidden shadow-lg hover:ring-4 hover:ring-orange-600 hover:bg-orange-600 transition cursor-pointer";
@@ -52,13 +54,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 favIcon.addEventListener("click", (e) => {
                     e.stopPropagation(); 
 
-                    const idStr = String(animal.animalID);
-                    if (favourites.includes(idStr)) {
-                        favourites = favourites.filter(id => id !== idStr);
-                        favIcon.setAttribute("fill", "none");
+                    if (favourites.includes(animal.animalID)) {
+                        // remove from session storage
+                        favourites = favourites.filter(id => id !== animal.animalID);
+                        // remove from database
+                        fetch(`/api/UsersAPI/${userId}/favouriteAnimals/${animal.animalID}`, { method: 'DELETE' });
+                        favIcon.setAttribute("fill", "none");                      
                     } else {
-                        if (!favourites.includes(idStr)) {
-                            favourites.push(idStr);
+                        if (!favourites.includes(animal.animalID)) {
+                            // add to session storage
+                            favourites.push(animal.animalID);
+                            // add to database
+                            fetch(`/api/UsersAPI/${userId}/favouriteAnimals/${animal.animalID}`, { method: 'POST' });
                         }
                         favIcon.setAttribute("fill", "red");
                     }
