@@ -12,9 +12,17 @@ function renderSavedEvents() {
     // No event saved
     if (favourites.length === 0) {
         container.innerHTML = `
-      <p class="text-center text-zoo-brown text-lg font-medium mt-6">
-        You haven't saved any events yet 🦘
-      </p>`;
+        <div class="text-center mt-6">
+            <p class="text-center text-zoo-brown text-lg font-medium mt-6">
+                You haven't saved any events yet 🦘
+            </p>
+          <button
+            onclick="window.location.href='event-list.html'"
+            class="bg-zoo-primary hover:!bg-amber-700 text-white mt-4 px-4 py-2 rounded-lg font-semibold shadow-md transition">
+            Explore Events
+          </button>
+        </div>
+      `;
         return;
     }
 
@@ -86,9 +94,17 @@ function removeFromFavourites(eventId, btn) {
     const container = document.getElementById("saved-events-list");
     if (!container.querySelector(".bg-zoo-background")) {
         container.innerHTML = `
-      <p class="text-center text-zoo-brown text-lg font-medium mt-6">
-        You haven't saved any events yet 🦘
-      </p>`;
+        <div class="text-center mt-6">
+            <p class="text-center text-zoo-brown text-lg font-medium mt-6">
+                You haven't saved any events yet 🦘
+            </p>
+          <button
+            onclick="window.location.href='event-list.html'"
+            class="bg-zoo-primary hover:!bg-amber-700 text-white mt-4 px-4 py-2 rounded-lg font-semibold shadow-md transition">
+            Explore Events
+          </button>
+        </div>
+      `;
     }
 }
 
