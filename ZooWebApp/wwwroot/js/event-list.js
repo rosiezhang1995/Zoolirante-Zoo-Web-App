@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     const list = document.getElementById("event-list");
+    // store favourite events
+    const storageKey = "favouriteEvents";
+    let favourites = JSON.parse(localStorage.getItem(storageKey)) || [];
 
     fetch("/api/eventsapi")
         .then(response => {
@@ -10,15 +13,27 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(events => {
             events.forEach((event) => {
+                const idStr = String(event.eventID);
+                const isFavourite = favourites.includes(idStr); 
+
                 const card = document.createElement("div");
-                card.className = " bg-zoo-background rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300";
+                card.className = "relative bg-zoo-background rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300";
 
                 // Format date
                 const eventDate = formatDate(event.eventDate);
                 const eventTime = formatTime(event.eventTime);
 
                 card.innerHTML = `
-            <div class="md:flex">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                        fill="${isFavourite ? 'orange' : 'none'}"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="orange"
+                        class="favourite-star size-8 absolute top-3 right-3 cursor-pointer hover:scale-125 transition-transform">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
+                    </svg>
+             <div class="md:flex">
                 <div class="md:w-1/3">
                     <img src="${event.eventImage}" alt="${event.title}" 
                     class="w-full h-64 md:h-full object-cover">
@@ -52,6 +67,22 @@ document.addEventListener("DOMContentLoaded", function () {
             card.addEventListener('click', function () {
                 window.location.href = `event-details.html?id=${event.eventID}`;
             });
+
+                // click star to save events
+                const star = card.querySelector(".favourite-star");
+                star.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    const idStr = String(event.eventID);
+
+                    if (favourites.includes(idStr)) {
+                        favourites = favourites.filter(id => id !== idStr);
+                        star.setAttribute("fill", "none");
+                    } else {
+                        favourites.push(idStr);
+                        star.setAttribute("fill", "orange");
+                    }
+                    localStorage.setItem(storageKey, JSON.stringify(favourites));
+                });
 
             list.appendChild(card);
             });

@@ -52,8 +52,22 @@
                     <img id="animal-image" src="" alt="animal-name" class="w-full aspect-[4/3] object-cover">
                 </div>
                 <div class="md:w-1/2 p-8">
-                    <h1 id="animal-species" class="text-4xl font-bold text-zoo-darkbrown mb-2"></h1>
-                    
+                    <div class="flex items-center mb-2">
+                        <h1 id="animal-species" class="text-4xl font-bold text-zoo-darkbrown mr-3"></h1>
+
+                        <!-- Favourite Heart -->
+                        <svg id="favouriteIcon"
+                             xmlns="http://www.w3.org/2000/svg"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke-width="1.5"
+                             stroke="red"
+                             class="size-7 cursor-pointer transition-transform hover:scale-110">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                        </svg>
+                    </div>
+
                     <div class="grid grid-cols-2 gap-4 mt-10">
                         <div class="bg-zoo-cream  p-4 rounded-lg">
                             <h3 class="font-semibold text-zoo-darkbrown mb-2">Age</h3>
@@ -72,17 +86,19 @@
                             <p id="arrival-date" class="text-lg text-zoo-brown"></p>
                         </div>
                     </div>
-                    
+
                     <!-- description -->
                     <h2 id="animal-name-desc" class="text-2xl font-semibold text-zoo-brown mt-5 mb-5"></h2>
                     <p id="animal-description" class="text-lg font-semibold text-zoo-brown"></p>
 
-                    <!-- Buy ticket button -->
                     <div class="text-center mt-2">
                         <img src="/images/homepage/paw.png" alt="paw icon" class="mx-auto w-16 mb-2" />
-                            <button class="bg-zoo-primary hover:!bg-amber-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg transition-colors mt-3">
-                                Buy Ticket
-                            </button>
+
+                        <!-- Buy ticket -->
+                        <button id="buyTicketBtn"
+                                class="bg-zoo-primary hover:!bg-amber-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg transition">
+                            Buy Ticket
+                        </button>
                     </div>
                 </div>
             </div>
@@ -102,9 +118,11 @@
             </div>
         </div>
     </div>
+
+    <div id="toast"
+         class="fixed top-20 right-5 z-[100] bg-green-600 text-white px-4 py-2 rounded shadow-lg
+            opacity-0 transition-opacity duration-500">
     </div>
-
-
     <!-- Include navbar component -->
     <script src="/js/components/navbar.js"></script>
     <script src="/js/data/animal-data.js"></script>
