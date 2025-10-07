@@ -458,6 +458,8 @@ namespace ZooWebApp.Migrations
             modelBuilder.Entity("ZooWebApp.Models.Booking", b =>
                 {
                     b.Navigation("Items");
+
+                });
             modelBuilder.Entity("ZooWebApp.Models.Animal", b =>
                 {
                     b.HasOne("ZooWebApp.Models.User", null)
