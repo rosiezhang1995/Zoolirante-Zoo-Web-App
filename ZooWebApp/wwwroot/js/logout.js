@@ -6,27 +6,10 @@
         // Clear session
         sessionStorage.clear();
 
-        // Show toast
-        showToast("You’ve successfully logged out!");
+        // Save message before redirect
+        sessionStorage.setItem("toastMessage", "You’ve successfully logged out!");
 
-        // Short delay, then redirect
-        setTimeout(() => {
-            window.location.replace("/"); 
-        }, 800); 
+        // Go home
+        window.location.href = "/";
     });
 });
-
-function showToast(message) {
-    const toast = document.getElementById('toast');
-    toast.textContent = message;
-    toast.classList.remove('hidden');
-    toast.classList.add('opacity-100');
-
-    setTimeout(() => {
-        toast.classList.add('opacity-0');
-        setTimeout(() => {
-            toast.classList.add('hidden');
-            toast.classList.remove('opacity-0', 'opacity-100');
-        }, 500);
-    }, 800);
-}
