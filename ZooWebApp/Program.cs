@@ -39,6 +39,7 @@ using (var scope = app.Services.CreateScope())
     EventSeed.Seed(context);
 	MerchandiseSeed.Seed(context);
     UserSeed.Seed(context);
+    TicketTypeSeed.Seed(context);
 }
 
 app.Run();

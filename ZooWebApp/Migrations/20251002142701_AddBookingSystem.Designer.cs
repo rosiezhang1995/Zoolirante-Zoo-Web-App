@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZooWebApp.Data;
 
@@ -11,9 +12,11 @@ using ZooWebApp.Data;
 namespace ZooWebApp.Migrations
 {
     [DbContext(typeof(ZooWebAppContext))]
-    partial class ZooWebAppContextModelSnapshot : ModelSnapshot
+    [Migration("20251002142701_AddBookingSystem")]
+    partial class AddBookingSystem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,15 +80,10 @@ namespace ZooWebApp.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int?>("UserID")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Weight")
                         .HasColumnType("decimal(10,2)");
 
                     b.HasKey("AnimalID");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Animal");
                 });
@@ -225,12 +223,7 @@ namespace ZooWebApp.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int?>("UserID")
-                        .HasColumnType("int");
-
                     b.HasKey("EventID");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Event");
                 });
@@ -458,25 +451,6 @@ namespace ZooWebApp.Migrations
             modelBuilder.Entity("ZooWebApp.Models.Booking", b =>
                 {
                     b.Navigation("Items");
-            modelBuilder.Entity("ZooWebApp.Models.Animal", b =>
-                {
-                    b.HasOne("ZooWebApp.Models.User", null)
-                        .WithMany("FavouriteAnimals")
-                        .HasForeignKey("UserID");
-                });
-
-            modelBuilder.Entity("ZooWebApp.Models.Event", b =>
-                {
-                    b.HasOne("ZooWebApp.Models.User", null)
-                        .WithMany("SavedEvents")
-                        .HasForeignKey("UserID");
-                });
-
-            modelBuilder.Entity("ZooWebApp.Models.User", b =>
-                {
-                    b.Navigation("FavouriteAnimals");
-
-                    b.Navigation("SavedEvents");
                 });
 #pragma warning restore 612, 618
         }
