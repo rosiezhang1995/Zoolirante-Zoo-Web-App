@@ -8,6 +8,10 @@
         window.location.href = `event-edit.html?id=${eventId}`;
     });
 
+    if (sessionStorage.getItem('isAdmin') == "true") {
+        document.getElementById("admin-buttons").hidden = false;
+    };
+
     // delete button
     const deleteButton = document.getElementById('deleteButton');
     deleteButton.addEventListener('click', () => {
