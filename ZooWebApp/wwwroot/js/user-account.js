@@ -9,11 +9,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     // Load user info
     const userId = sessionStorage.getItem("userId");
-    if (!userId) {
-        console.warn("No user ID found — user might not be logged in.");
-        return;
-    }
-
+    if (userId) {
     try {
         const response = await fetch(`/api/UsersAPI/${userId}`);
         if (!response.ok) {
@@ -32,9 +28,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     } catch (error) {
         console.error("Error loading user profile:", error);
     }
-});
+}
 
-// Dynamic tabs
 const buttons = document.querySelectorAll(".tab-btn");
 const tabs = document.querySelectorAll(".tab-content");
 
@@ -46,6 +41,28 @@ buttons.forEach(btn => {
         const tabId = btn.dataset.tab;
         tabs.forEach(tab => tab.classList.add("hidden"));
         document.getElementById(tabId).classList.remove("hidden");
+
+        // update url without refresh
+        const newUrl = `${window.location.pathname}?tab=${tabId}`;
+        history.replaceState(null, '', newUrl);
     });
+});
+
+// URL param to auto-switch tab
+const params = new URLSearchParams(window.location.search);
+const tabParam = params.get("tab");
+
+if (tabParam) {
+    const targetBtn = document.querySelector(`.tab-btn[data-tab="${tabParam}"]`);
+    const targetTab = document.getElementById(tabParam);
+
+    if (targetBtn && targetTab) {
+        buttons.forEach(b => b.classList.remove("active"));
+        tabs.forEach(t => t.classList.add("hidden"));
+
+        targetBtn.classList.add("active");
+        targetTab.classList.remove("hidden");
+    }
+}
 });
 
