@@ -1,6 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
     loadAnimalDetails();
 
+    if (sessionStorage.getItem('isAdmin') == "true") {
+        document.getElementById("editAnimalBtn").hidden = false;
+    };
+
     // Set the Edit button to navigate to edit page
     const editButton = document.getElementById("editAnimalBtn");
     editButton.addEventListener('click', () => {
