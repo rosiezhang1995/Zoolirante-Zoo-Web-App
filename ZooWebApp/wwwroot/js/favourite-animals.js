@@ -7,7 +7,7 @@ function renderFavouriteAnimals() {
     if (!container) return;
 
     const storageKey = "favouriteAnimals";
-    const favourites = JSON.parse(localStorage.getItem(storageKey)) || [];
+    const favourites = JSON.parse(sessionStorage.getItem(storageKey)) || [];
 
     // No animals saved
     if (favourites.length === 0) {
@@ -85,10 +85,12 @@ function viewAnimalDetails(animalId) {
 
 // Remove from saved list
 function removeFromAnimalFavourites(animalId, btn) {
+    const userId = sessionStorage.getItem("userId");
     const storageKey = "favouriteAnimals";
-    let favourites = JSON.parse(localStorage.getItem(storageKey)) || [];
-    favourites = favourites.filter(id => id !== String(animalId));
-    localStorage.setItem(storageKey, JSON.stringify(favourites));
+    let favourites = JSON.parse(sessionStorage.getItem(storageKey)) || [];
+    favourites = favourites.filter(id => id !== animalId);
+    sessionStorage.setItem(storageKey, JSON.stringify(favourites));
+    fetch(`/api/UsersAPI/${userId}/favouriteAnimals/${animalId}`, { method: 'DELETE' });
 
     // Remove card from UI
     const card = btn.closest(".bg-zoo-lightpink");

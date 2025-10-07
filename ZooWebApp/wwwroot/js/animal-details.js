@@ -13,29 +13,36 @@ document.addEventListener('DOMContentLoaded', function () {
     const favIcon = document.getElementById("favouriteIcon");
     const toast = document.getElementById("toast");
 
+    const userId = sessionStorage.getItem("userId");
     const urlParams = new URLSearchParams(window.location.search);
-    const animalId = String(urlParams.get('id'));
+    const animalId = parseInt(urlParams.get('id'));
     const storageKey = "favouriteAnimals";
 
     // Get favourites list from storage
-    let favourites = JSON.parse(localStorage.getItem(storageKey)) || [];
+    let favourites = JSON.parse(sessionStorage.getItem(storageKey)) || [];
     let isFavourite = favourites.includes(animalId);
     updateHeart();
 
     favIcon.addEventListener("click", () => {
         if (isFavourite) {
+            // remove from session storage
             favourites = favourites.filter(id => id !== animalId);
+            // remove from database
+            fetch(`/api/UsersAPI/${userId}/favouriteAnimals/${animalId}`, { method: 'DELETE' });
             isFavourite = false;
             showToast("Removed from Favourites!");
         } else {
             if (!favourites.includes(animalId)) {
+                // add to session storage
                 favourites.push(animalId);
+                // add to database
+                fetch(`/api/UsersAPI/${userId}/favouriteAnimals/${animalId}`, { method: 'POST' });
             }
             isFavourite = true;
             showToast("Added to Favourites!");
         }
 
-        localStorage.setItem(storageKey, JSON.stringify(favourites));
+        sessionStorage.setItem(storageKey, JSON.stringify(favourites));
         updateHeart();
     });
 

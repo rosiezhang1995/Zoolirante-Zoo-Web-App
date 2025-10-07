@@ -7,7 +7,7 @@ function renderSavedEvents() {
     if (!container) return;
 
     const storageKey = "favouriteEvents";
-    const favourites = JSON.parse(localStorage.getItem(storageKey)) || [];
+    const favourites = JSON.parse(sessionStorage.getItem(storageKey)) || [];
 
     // No event saved
     if (favourites.length === 0) {
@@ -81,10 +81,12 @@ function viewEventDetails(eventId) {
 
 // Removed from saved list
 function removeFromFavourites(eventId, btn) {
+    const userId = sessionStorage.getItem("userId");
     const storageKey = "favouriteEvents";
-    let favourites = JSON.parse(localStorage.getItem(storageKey)) || [];
-    favourites = favourites.filter(id => id !== String(eventId));
-    localStorage.setItem(storageKey, JSON.stringify(favourites));
+    let favourites = JSON.parse(sessionStorage.getItem(storageKey)) || [];
+    favourites = favourites.filter(id => id !== eventId);
+    sessionStorage.setItem(storageKey, JSON.stringify(favourites));
+    fetch(`/api/UsersAPI/${userId}/savedEvents/${eventId}`, { method: 'DELETE' });
 
     // Remove card
     const card = btn.closest(".bg-zoo-background");
