@@ -44,5 +44,9 @@ namespace ZooWebApp.Models
         [Required]
         [Display(Name = "Member")]
         public bool IsMember { get; set; }
+
+        public ICollection<Animal> FavouriteAnimals { get; set; } = new List<Animal>();
+
+        public ICollection<Event> SavedEvents { get; set; } = new List<Event>();
     }
 }

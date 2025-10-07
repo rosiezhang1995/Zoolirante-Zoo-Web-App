@@ -2,13 +2,15 @@
     loadEventDetails();
 
     const editButton = document.getElementById('editButton');
-    console.log("editButton element is:", editButton);
-    console.log("test");
     editButton.addEventListener('click', () => {
         const urlParams = new URLSearchParams(window.location.search);
         const eventId = parseInt(urlParams.get('id'));
         window.location.href = `event-edit.html?id=${eventId}`;
     });
+
+    if (sessionStorage.getItem('isAdmin') == "true") {
+        document.getElementById("admin-buttons").hidden = false;
+    };
 
     // delete button
     const deleteButton = document.getElementById('deleteButton');
@@ -37,6 +39,57 @@
                 });
         }
     });
+
+    // Favourite star logic
+    const favStar = document.getElementById("favouriteStar");
+    const toast = document.getElementById("toast");
+
+    const userId = sessionStorage.getItem("userId");
+    const urlParams = new URLSearchParams(window.location.search);
+    const eventId = parseInt(urlParams.get('id'));
+    const storageKey = "favouriteEvents";
+
+    // Get favourites list from localStorage
+    let favourites = JSON.parse(sessionStorage.getItem(storageKey)) || [];
+    let isFavourite = favourites.includes(eventId);
+
+    updateStar();
+
+    function showToast(message) {
+        toast.textContent = message;
+        toast.classList.remove("opacity-0");
+        toast.classList.add("opacity-100");
+
+        setTimeout(() => {
+            toast.classList.add("opacity-0");
+            toast.classList.remove("opacity-100");
+        }, 2000);
+    }
+
+    favStar.addEventListener("click", () => {
+        if (isFavourite) {
+            // remove from session storage
+            favourites = favourites.filter(id => id !== eventId);
+            // remove from database
+            fetch(`/api/UsersAPI/${userId}/savedEvents/${eventId}`, { method: 'DELETE' });
+            isFavourite = false;
+            showToast("Removed from Saved Events!");
+        } else {
+            // add to session storage
+            favourites.push(eventId);
+            // add to database
+            fetch(`/api/UsersAPI/${userId}/savedEvents/${eventId}`, { method: 'POST' });
+            isFavourite = true;
+            showToast("Added to Saved Events!");
+        }
+
+        sessionStorage.setItem(storageKey, JSON.stringify(favourites));
+        updateStar();
+    });
+
+    function updateStar() {
+        favStar.setAttribute("fill", isFavourite ? "orange" : "none");
+    }
 });
 
 function loadEventDetails() {
@@ -93,21 +146,15 @@ function backToEvents() {
 
 // Toast message
 function showToast(message) {
-    const toast = document.getElementById('toast');
     toast.textContent = message;
-    toast.classList.remove('hidden');
-    toast.classList.add('opacity-100');
+    toast.classList.remove("opacity-0");
+    toast.classList.add("opacity-100");
 
     setTimeout(() => {
-        toast.classList.add('opacity-0');
-        setTimeout(() => {
-            toast.classList.add('hidden');
-            toast.classList.remove('opacity-0', 'opacity-100');
-        }, 500);
-    }, 2500);
+        toast.classList.add("opacity-0");
+        toast.classList.remove("opacity-100");
+    }, 2000);
 }
-
-
 //Format datatype
 function formatDate(dateString) {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };

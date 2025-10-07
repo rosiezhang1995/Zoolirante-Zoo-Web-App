@@ -35,7 +35,10 @@
         sessionStorage.setItem('isAdmin', data.isAdmin);
         sessionStorage.setItem('username', data.username);
 
-        showToast('Successfully logged in!');
+        sessionStorage.setItem('favouriteAnimals', JSON.stringify(data.favouriteAnimals));
+        sessionStorage.setItem('favouriteEvents', JSON.stringify(data.savedEvents));
+
+        showToast('Sucessfully logged in!');
         setTimeout(() => {
             window.location.href = `/`;
         }, 1500);
