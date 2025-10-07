@@ -81,14 +81,12 @@
             </div>
 
             <!-- Log Out -->
-            <div class="w-full pt-4">
-                <a href="/" class="tab-btn flex space-x-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
-                    </svg>
-                    <span>Log Out</span>
-                </a>
-            </div>
+            <button class="tab-btn flex items-center space-x-3" id="logoutBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
+                </svg>
+                <span>Log Out</span>
+            </button>
         </div>
 
         <!-- content -->
@@ -188,8 +186,10 @@
         </div>
     </div>
 
+    <div id="toast" class="hidden fixed top-20 right-5 z-[100] bg-green-600 text-white px-4 py-2 rounded shadow-lg transition-opacity duration-500"></div>
     <script src="/js/user-account.js"></script>
     <script src="/js/saved-events.js"></script>
     <script src="/js/favourite-animals.js"></script>
+    <script src="/js/logout.js"></script>
 </body>
 </html>
