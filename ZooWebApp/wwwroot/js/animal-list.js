@@ -2,6 +2,10 @@ document.addEventListener("DOMContentLoaded", function () {
     //Animal card
     const list = document.getElementById("animal-list");
 
+    if (sessionStorage.getItem('isAdmin') == "true") {
+        document.getElementById("add-animal-button").hidden = false;
+    };
+
     // get favourites status from localStorage
     const storageKey = "favouriteAnimals";
     let favourites = JSON.parse(localStorage.getItem(storageKey)) || [];

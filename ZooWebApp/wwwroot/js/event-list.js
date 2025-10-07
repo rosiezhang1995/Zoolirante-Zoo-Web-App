@@ -4,6 +4,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const storageKey = "favouriteEvents";
     let favourites = JSON.parse(localStorage.getItem(storageKey)) || [];
 
+    if (sessionStorage.getItem('isAdmin') == "true") {
+        document.getElementById("add-event-button").hidden = false;
+    };
+
     fetch("/api/eventsapi")
         .then(response => {
             if (!response.ok) {
