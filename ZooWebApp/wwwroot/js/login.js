@@ -14,27 +14,9 @@
 
     if (response.ok) {
         const data = await response.json();
-
-        console.log('Login response data:', data);  // ADD THIS DEBUG LINE
-
-        // Store complete user object in localStorage
-        const userObject = {
-            UserID: data.userID,
-            Username: data.username,
-            Email: data.email,
-            FullName: data.fullName,
-            IsAdmin: data.isAdmin
-        };
-
-        console.log('Saving to localStorage:', userObject);  // ADD THIS DEBUG LINE
-        localStorage.setItem('user', JSON.stringify(userObject));
-        console.log('localStorage after save:', localStorage.getItem('user'));  // ADD THIS DEBUG LINE
-
-        // Keep sessionStorage for compatibility
         sessionStorage.setItem('userId', data.userID);
         sessionStorage.setItem('isAdmin', data.isAdmin);
         sessionStorage.setItem('username', data.username);
-
         sessionStorage.setItem('favouriteAnimals', JSON.stringify(data.favouriteAnimals));
         sessionStorage.setItem('favouriteEvents', JSON.stringify(data.savedEvents));
 
@@ -42,6 +24,8 @@
         setTimeout(() => {
             window.location.href = `/`;
         }, 1500);
+    } else {
+        alert('Invalid username or password.');
     }
 });
 
