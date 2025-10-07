@@ -24,6 +24,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         document.getElementById("profile-address").textContent = user.address || "—";
         document.getElementById("profile-email").textContent = user.email || "—";
         document.getElementById("profile-phone").textContent = user.phone || "—";
+
+        //check if the user is an admin role
+        checkAdminAccess(user);
+
     } catch (error) {
         console.error("Error loading user profile:", error);
     }
@@ -31,6 +35,19 @@ document.addEventListener("DOMContentLoaded", async function () {
     setupTabs();
     checkAndOpenTabFromHash();
 });
+
+// Check if user is admin
+function checkAdminAccess(user) {
+    const isAdmin = user.isAdmin || user.IsAdmin || false;
+
+    if (isAdmin) {
+        // Show admin manage bookings button
+        const manageBookingsBtn = document.getElementById('adminManageBookings');
+        if (manageBookingsBtn) {
+            manageBookingsBtn.classList.remove('hidden');
+        }
+    }
+}
 
 
 // Dynamic tabs
