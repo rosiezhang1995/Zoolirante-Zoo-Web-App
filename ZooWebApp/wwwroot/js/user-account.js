@@ -27,25 +27,44 @@ document.addEventListener("DOMContentLoaded", async function () {
     } catch (error) {
         console.error("Error loading user profile:", error);
     }
+
+    setupTabs();
+    checkAndOpenTabFromHash();
 });
+
 
 // Dynamic tabs
-const buttons = document.querySelectorAll(".tab-btn");
-const tabs = document.querySelectorAll(".tab-content");
-buttons.forEach(btn => {
-    btn.addEventListener("click", () => {
-        buttons.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        const tabId = btn.dataset.tab;
-        tabs.forEach(tab => tab.classList.add("hidden"));
-        document.getElementById(tabId).classList.remove("hidden");
+function setupTabs() {
+    const buttons = document.querySelectorAll(".tab-btn");
+    const tabs = document.querySelectorAll(".tab-content");
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            buttons.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            const tabId = btn.dataset.tab;
+            tabs.forEach(tab => tab.classList.add("hidden"));
+            document.getElementById(tabId).classList.remove("hidden");
 
-        // Load bookings
-        if (tabId === "tickets") {
-            loadUserBookingsForTab();
-        }
+            // Load bookings 
+            if (tabId === "tickets") {
+                loadUserBookingsForTab();
+            }
+        });
     });
-});
+}
+
+// Function to open tab based on URL hash
+function checkAndOpenTabFromHash() {
+    const hash = window.location.hash.substring(1); 
+
+    if (hash) {
+        const tabButton = document.querySelector(`[data-tab="${hash}"]`);
+
+        if (tabButton) {
+            tabButton.click();
+        }
+    }
+}
 
 // Bookings functionality for My Tickets tab
 async function loadUserBookingsForTab() {
