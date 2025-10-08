@@ -54,8 +54,10 @@
 
 // hide after clicking
 document.addEventListener("click", function (e) {
-    const link = e.target.closest('a[href*="notification"]');
-    if (link) {
+    const isNotificationLink = e.target.closest('a[href*="notification"]');
+    const isNotificationTab = e.target.closest('.tab-btn[data-tab="notification"]');
+
+    if (isNotificationLink || isNotificationTab) {
         const badge = document.getElementById("notification-badge");
         if (badge) badge.classList.add("hidden");
         sessionStorage.setItem("notifRead", "true");
