@@ -156,8 +156,8 @@ function displaySavedPaymentMethod() {
                 <div class="flex justify-between items-center">
                     <div>
                         <p class="font-bold text-zoo-darkbrown">${savedPaymentMethod.cardType} •••• ${savedPaymentMethod.lastFourDigits}</p>
-                        <p class="text-sm text-gray-600">Cardholder: ${savedPaymentMethod.cardHolderName}</p>
-                        <p class="text-sm text-gray-600">Expires: ${savedPaymentMethod.expiryMonth}/${savedPaymentMethod.expiryYear}</p>
+                        <p class="text-sm text-zoo-darkbrown font-semibold">Cardholder: ${savedPaymentMethod.cardHolderName}</p>
+                        <p class="text-sm text-zoo-darkbrown font-semibold">Expires: ${savedPaymentMethod.expiryMonth}/${savedPaymentMethod.expiryYear}</p>
                         ${savedPaymentMethod.isExpired ? '<p class="text-sm text-red-600 font-semibold mt-1">⚠️ This card has expired</p>' : ''}
                     </div>
                     <div class="text-right">
@@ -165,7 +165,7 @@ function displaySavedPaymentMethod() {
                     </div>
                 </div>
             </div>
-            <p class="text-xs text-gray-600 mt-2">
+            <p class="text-xs text-zoo-brown font-semibold mt-2">
                 This saved payment method will be used for this booking. You can manage your payment methods in your account settings.
             </p>
         </div>
