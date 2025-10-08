@@ -45,12 +45,36 @@ function showStep(step) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-document.getElementById('completeBooking').textContent = "Complete Purchase";
 document.getElementById('completeBooking').addEventListener('click', async () => {
+    const userId = sessionStorage.getItem('userId');
 
-    // Update member status
+    if (!userId) {
+        alert('Please log in to purchase membership');
+        window.location.href = '/pages/login.html';
+        return;
+    }
 
-    // Show the success modal
-    const modal = document.getElementById('successModal');
-    modal.classList.remove('hidden');
+    try {
+        // Update membership status
+        const response = await fetch(`/api/UsersAPI/${userId}/membership`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(true)
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to update membership');
+        }
+
+        // Show the success modal
+        const modal = document.getElementById('successModal');
+        modal.classList.remove('hidden');
+
+        console.log('Membership activated successfully');
+        } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to complete purchase. Please try again.');
+        }
 });
