@@ -69,11 +69,15 @@ function setupTabs() {
             tabs.forEach(tab => tab.classList.add("hidden"));
             document.getElementById(tabId).classList.remove("hidden");
 
-            // Load bookings 
+            // Load bookings
             if (tabId === "tickets") {
                 loadUserBookingsForTab();
             }
 
+            // Load payment method
+            if (tabId === "payment") {
+                loadPaymentMethod();
+            }
             // update url without refresh
             const newUrl = `${window.location.pathname}?tab=${tabId}`;
             history.replaceState(null, '', newUrl);
@@ -83,7 +87,7 @@ function setupTabs() {
 
 // Function to open tab based on URL hash
 function checkAndOpenTabFromHash() {
-    const hash = window.location.hash.substring(1); 
+    const hash = window.location.hash.substring(1);
 
     if (hash) {
         const tabButton = document.querySelector(`[data-tab="${hash}"]`);
