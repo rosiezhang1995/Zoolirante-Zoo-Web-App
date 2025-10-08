@@ -6,11 +6,96 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ZooWebApp.Migrations
 {
     /// <inheritdoc />
-    public partial class AddBookingSystem : Migration
+    public partial class SetUpTables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AddColumn<int>(
+                name: "UserID",
+                table: "Animal",
+                type: "int",
+                nullable: true);
+
+            migrationBuilder.CreateTable(
+                name: "Merchandise",
+                columns: table => new
+                {
+                    MerchandiseID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MerchandiseName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    Avaliable = table.Column<bool>(type: "bit", nullable: false),
+                    MerchandiseImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Size = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Merchandise", x => x.MerchandiseID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TicketTypes",
+                columns: table => new
+                {
+                    TicketTypeID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TypeName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    MaxQuantityPerBooking = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TicketTypes", x => x.TicketTypeID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    UserID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Username = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    IsAdmin = table.Column<bool>(type: "bit", nullable: false),
+                    IsMember = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.UserID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Event",
+                columns: table => new
+                {
+                    EventID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    EventDate = table.Column<DateTime>(type: "Date", nullable: false),
+                    EventTime = table.Column<TimeSpan>(type: "Time", nullable: false),
+                    EventImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    UserID = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Event", x => x.EventID);
+                    table.ForeignKey(
+                        name: "FK_Event_User_UserID",
+                        column: x => x.UserID,
+                        principalTable: "User",
+                        principalColumn: "UserID");
+                });
+
             migrationBuilder.CreateTable(
                 name: "PaymentMethods",
                 columns: table => new
@@ -38,20 +123,27 @@ namespace ZooWebApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TicketTypes",
+                name: "AnimalEvent",
                 columns: table => new
                 {
-                    TicketTypeID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TypeName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    MaxQuantityPerBooking = table.Column<int>(type: "int", nullable: false)
+                    AnimalsAnimalID = table.Column<int>(type: "int", nullable: false),
+                    EventsEventID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TicketTypes", x => x.TicketTypeID);
+                    table.PrimaryKey("PK_AnimalEvent", x => new { x.AnimalsAnimalID, x.EventsEventID });
+                    table.ForeignKey(
+                        name: "FK_AnimalEvent_Animal_AnimalsAnimalID",
+                        column: x => x.AnimalsAnimalID,
+                        principalTable: "Animal",
+                        principalColumn: "AnimalID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AnimalEvent_Event_EventsEventID",
+                        column: x => x.EventsEventID,
+                        principalTable: "Event",
+                        principalColumn: "EventID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -120,6 +212,16 @@ namespace ZooWebApp.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Animal_UserID",
+                table: "Animal",
+                column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AnimalEvent_EventsEventID",
+                table: "AnimalEvent",
+                column: "EventsEventID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_BookingItems_BookingID",
                 table: "BookingItems",
                 column: "BookingID");
@@ -146,16 +248,41 @@ namespace ZooWebApp.Migrations
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Event_UserID",
+                table: "Event",
+                column: "UserID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PaymentMethods_UserID",
                 table: "PaymentMethods",
                 column: "UserID");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Animal_User_UserID",
+                table: "Animal",
+                column: "UserID",
+                principalTable: "User",
+                principalColumn: "UserID");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Animal_User_UserID",
+                table: "Animal");
+
+            migrationBuilder.DropTable(
+                name: "AnimalEvent");
+
             migrationBuilder.DropTable(
                 name: "BookingItems");
+
+            migrationBuilder.DropTable(
+                name: "Merchandise");
+
+            migrationBuilder.DropTable(
+                name: "Event");
 
             migrationBuilder.DropTable(
                 name: "Bookings");
@@ -165,6 +292,17 @@ namespace ZooWebApp.Migrations
 
             migrationBuilder.DropTable(
                 name: "PaymentMethods");
+
+            migrationBuilder.DropTable(
+                name: "User");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Animal_UserID",
+                table: "Animal");
+
+            migrationBuilder.DropColumn(
+                name: "UserID",
+                table: "Animal");
         }
     }
 }

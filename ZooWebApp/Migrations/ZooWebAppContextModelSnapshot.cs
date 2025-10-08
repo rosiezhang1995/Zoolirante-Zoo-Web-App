@@ -408,6 +408,13 @@ namespace ZooWebApp.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ZooWebApp.Models.Animal", b =>
+                {
+                    b.HasOne("ZooWebApp.Models.User", null)
+                        .WithMany("FavouriteAnimals")
+                        .HasForeignKey("UserID");
+                });
+
             modelBuilder.Entity("ZooWebApp.Models.Booking", b =>
                 {
                     b.HasOne("ZooWebApp.Models.PaymentMethod", "PaymentMethod")
@@ -444,6 +451,13 @@ namespace ZooWebApp.Migrations
                     b.Navigation("TicketType");
                 });
 
+            modelBuilder.Entity("ZooWebApp.Models.Event", b =>
+                {
+                    b.HasOne("ZooWebApp.Models.User", null)
+                        .WithMany("SavedEvents")
+                        .HasForeignKey("UserID");
+                });
+
             modelBuilder.Entity("ZooWebApp.Models.PaymentMethod", b =>
                 {
                     b.HasOne("ZooWebApp.Models.User", "User")
@@ -458,20 +472,6 @@ namespace ZooWebApp.Migrations
             modelBuilder.Entity("ZooWebApp.Models.Booking", b =>
                 {
                     b.Navigation("Items");
-
-                });
-            modelBuilder.Entity("ZooWebApp.Models.Animal", b =>
-                {
-                    b.HasOne("ZooWebApp.Models.User", null)
-                        .WithMany("FavouriteAnimals")
-                        .HasForeignKey("UserID");
-                });
-
-            modelBuilder.Entity("ZooWebApp.Models.Event", b =>
-                {
-                    b.HasOne("ZooWebApp.Models.User", null)
-                        .WithMany("SavedEvents")
-                        .HasForeignKey("UserID");
                 });
 
             modelBuilder.Entity("ZooWebApp.Models.User", b =>
