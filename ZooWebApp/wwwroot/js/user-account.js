@@ -312,10 +312,16 @@ function showAddPaymentForm() {
     ).join('')}
                         </select>
                     </div>
+
+                    <div class="md:col-span-2">
+                        <label class="block text-zoo-darkbrown font-semibold mb-2">CVV (Verification Only) *</label>
+                        <input type="text" id="newCardCVV" placeholder="123" maxlength="4" required
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zoo-primary">
+                    </div>
                 </div>
                 
-                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                    <p class="text-sm text-yellow-800">
+                <div class="bg-zoo-cream rounded-lg p-4 mt-2 mb-2">
+                    <p class="text-sm text-zoo-brown ">
                         <strong>⚠️ Important:</strong> You can only save one payment method. This card will be used for future bookings.
                     </p>
                 </div>
