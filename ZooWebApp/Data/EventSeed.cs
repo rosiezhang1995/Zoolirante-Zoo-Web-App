@@ -39,7 +39,7 @@ namespace ZooWebApp.Data
                     {
                         Title = "Morning Safari Parade",
                         Description = "Join our animals for a fun morning parade across the zoo!",
-                        EventDate = new DateTime(2025, 9, 15),
+                        EventDate = new DateTime(2025, 10, 8),
                         EventTime = new TimeSpan(9, 30, 0),
                         EventImage = "/images/events/safari-parade.jpg",
                         Location = "Main Plaza",
@@ -49,7 +49,7 @@ namespace ZooWebApp.Data
                     {
                         Title = "Kangaroo Interaction Hour",
                         Description = "Get up close with our kangaroos and learn about their habitat.",
-                        EventDate = new DateTime(2025, 9, 16),
+                        EventDate = new DateTime(2025, 10, 16),
                         EventTime = new TimeSpan(11, 0, 0),
                         EventImage = "/images/events/kangaroo-interaction.jpg",
                         Location = "Kangaroo Exhibit",
@@ -59,7 +59,7 @@ namespace ZooWebApp.Data
                     {
                         Title = "Penguin Feeding Fun",
                         Description = "Watch the penguins get fed and learn about their diet and care.",
-                        EventDate = new DateTime(2025, 9, 17),
+                        EventDate = new DateTime(2025, 10, 17),
                         EventTime = new TimeSpan(14, 0, 0),
                         EventImage = "/images/events/penguin-feeding.jpg",
                         Location = "Penguin Pool",
@@ -69,7 +69,7 @@ namespace ZooWebApp.Data
                     {
                         Title = "Primate Playtime",
                         Description = "See our primates swing, climb, and interact with enrichment activities.",
-                        EventDate = new DateTime(2025, 9, 18),
+                        EventDate = new DateTime(2025, 10, 18),
                         EventTime = new TimeSpan(13, 30, 0),
                         EventImage = "/images/events/primate-playtime.jpg",
                         Location = "Primate Zone",
@@ -79,7 +79,7 @@ namespace ZooWebApp.Data
                     {
                         Title = "Aquatic Giants Showcase",
                         Description = "Meet the hippos and crocodiles up close during this educational event.",
-                        EventDate = new DateTime(2025, 9, 19),
+                        EventDate = new DateTime(2025, 10, 19),
                         EventTime = new TimeSpan(10, 30, 0),
                         EventImage = "/images/events/aquatic-giants.jpg",
                         Location = "Water Exhibit",
@@ -89,7 +89,7 @@ namespace ZooWebApp.Data
                     {
                         Title = "Zoo Friends Meet & Greet",
                         Description = "A fun afternoon interacting with a variety of animals from across the zoo.",
-                        EventDate = new DateTime(2025, 9, 20),
+                        EventDate = new DateTime(2025, 10, 20),
                         EventTime = new TimeSpan(15, 0, 0),
                         EventImage = "/images/events/zoo-friends.jpg",
                         Location = "Central Courtyard",

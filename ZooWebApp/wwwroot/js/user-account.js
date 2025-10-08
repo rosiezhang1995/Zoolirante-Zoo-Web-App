@@ -33,7 +33,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     setupTabs();
-    checkAndOpenTabFromHash();
+    const params = new URLSearchParams(window.location.search);
+    const tabParam = params.get("tab");
+    if (tabParam) {
+        const tabButton = document.querySelector(`[data-tab="${tabParam}"]`);
+        if (tabButton) tabButton.click();
+    } else {
+        checkAndOpenTabFromHash(); 
+    }
 });
 
 // Check if user is admin
@@ -71,6 +78,9 @@ function setupTabs() {
             if (tabId === "payment") {
                 loadPaymentMethod();
             }
+            // update url without refresh
+            const newUrl = `${window.location.pathname}?tab=${tabId}`;
+            history.replaceState(null, '', newUrl);
         });
     });
 }
@@ -171,5 +181,4 @@ function displayBookingsInTab(bookings) {
 
     html += '</div>';
     container.innerHTML = html;
-}
-
+};

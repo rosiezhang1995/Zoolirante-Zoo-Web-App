@@ -193,6 +193,36 @@ namespace ZooWebApp.Controllers
             return user?.IsAdmin ?? false;
         }
 
+        // GET: api/BookingsAPI/user/{userId}/upcoming
+        [HttpGet("user/{userId}/upcoming")]
+        public async Task<IActionResult> GetUserUpcomingBookings(int userId)
+        {
+            var now = DateTime.Now;
+            var nextDay = now.AddDays(1);
+
+            var bookings = await _context.Bookings
+                .Where(b => b.UserID == userId && b.VisitDate >= now && b.VisitDate <= nextDay)
+                .OrderBy(b => b.VisitDate)
+                .Select(b => new {
+                    b.BookingID,
+                    b.BookingReference,
+                    b.VisitDate,
+                    b.TotalAmount,
+                    Items = b.Items.Select(i => new {
+                        i.BookingItemID,
+                        i.Quantity,
+                        i.UnitPrice,
+                        i.Subtotal,
+                        TicketTypeName = i.TicketType.TypeName
+                    })
+                })
+                .ToListAsync();
+
+            return Ok(bookings);
+        }
+
+
+
         private string GenerateBookingReference()
         {
             return $"ZOO{DateTime.Now:yyyyMMdd}{new Random().Next(1000, 9999)}";
