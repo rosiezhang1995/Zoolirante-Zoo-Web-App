@@ -6,24 +6,39 @@
     if (!badge) return;
 
     try {
-        const response = await fetch(`/api/UsersAPI/${userId}/upcomingEvents`);
-        if (!response.ok) throw new Error("Failed to fetch notifications");
+        // request event and booking
+        const [eventsRes, bookingsRes] = await Promise.all([
+            fetch(`/api/UsersAPI/${userId}/upcomingEvents`),
+            fetch(`/api/BookingsAPI/user/${userId}/upcoming`)
+        ]);
 
-        const events = await response.json();
-        const eventIds = events.map(e => e.eventID).sort(); 
-        const eventKey = JSON.stringify(eventIds);
+        if (!eventsRes.ok || !bookingsRes.ok) {
+            throw new Error("Failed to fetch notifications");
+        }
 
-        // read last record
+        const events = await eventsRes.json();
+        const bookings = await bookingsRes.json();
+
+        // generate keys
+        const eventIds = (events || []).map(e => `E-${e.eventID}`);
+        const bookingIds = (bookings || []).map(b => `B-${b.BookingID}`);
+        const combinedIds = [...eventIds, ...bookingIds].sort();
+
+        const notifKey = JSON.stringify(combinedIds);
+
+        // read previous status
         const prevKey = sessionStorage.getItem("notifEventKey") || "";
         const notifRead = sessionStorage.getItem("notifRead") === "true";
 
-        // if collection changes
-        if (eventKey !== prevKey) {
-            sessionStorage.setItem("notifRead", "false"); 
-            sessionStorage.setItem("notifEventKey", eventKey); 
+        // reset to unread if collection changes
+        if (notifKey !== prevKey) {
+            sessionStorage.setItem("notifRead", "false");
+            sessionStorage.setItem("notifEventKey", notifKey);
         }
 
-        const shouldShow = events.length > 0 && sessionStorage.getItem("notifRead") !== "true";
+        // check if need to show red dot
+        const hasNotifications = combinedIds.length > 0;
+        const shouldShow = hasNotifications && sessionStorage.getItem("notifRead") !== "true";
         badge.classList.toggle("hidden", !shouldShow);
 
     } catch (err) {
@@ -31,7 +46,7 @@
     }
 });
 
-// mark as read after clicking
+// hide after clicking
 document.addEventListener("click", function (e) {
     const link = e.target.closest('a[href*="notification"]');
     if (link) {
