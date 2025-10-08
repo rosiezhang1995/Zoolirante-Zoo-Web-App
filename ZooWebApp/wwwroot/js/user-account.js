@@ -33,7 +33,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     setupTabs();
-    checkAndOpenTabFromHash();
+    const params = new URLSearchParams(window.location.search);
+    const tabParam = params.get("tab");
+    if (tabParam) {
+        const tabButton = document.querySelector(`[data-tab="${tabParam}"]`);
+        if (tabButton) tabButton.click();
+    } else {
+        checkAndOpenTabFromHash(); 
+    }
 });
 
 // Check if user is admin
@@ -66,6 +73,10 @@ function setupTabs() {
             if (tabId === "tickets") {
                 loadUserBookingsForTab();
             }
+
+            // update url without refresh
+            const newUrl = `${window.location.pathname}?tab=${tabId}`;
+            history.replaceState(null, '', newUrl);
         });
     });
 }
@@ -164,21 +175,6 @@ function displayBookingsInTab(bookings) {
         `;
     });
 
-// URL param to auto-switch tab
-const params = new URLSearchParams(window.location.search);
-const tabParam = params.get("tab");
-
-if (tabParam) {
-    const targetBtn = document.querySelector(`.tab-btn[data-tab="${tabParam}"]`);
-    const targetTab = document.getElementById(tabParam);
-
-    if (targetBtn && targetTab) {
-        buttons.forEach(b => b.classList.remove("active"));
-        tabs.forEach(t => t.classList.add("hidden"));
-
-        targetBtn.classList.add("active");
-        targetTab.classList.remove("hidden");
-    }
-}
-});
-
+    html += '</div>';
+    container.innerHTML = html;
+};
