@@ -197,6 +197,22 @@
                     <div class="bg-zoo-soft text-white font-semibold rounded-lg px-10 py-2 text-center text-xl">
                         Membership
                     </div>
+
+                    <!-- Membership Status -->
+                    <div id="membershipStatus" style="display: none;" class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-zoo-darkbrown mb-1">booking ref</h3>
+                                <p class="text-sm text-gray-600">Membership: 12-Months</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">
+                                    Membership Zoo Pass: Active
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -227,6 +243,16 @@
             </div>
         </div>
     </div>
+
+    <script>
+        var element = document.getElementById("membershipStatus");
+
+        if (isMember) {
+            element.style.display = "block";
+        } else {
+            element.style.display = "none";
+        }
+    </script>
     <script src="/js/user-account.js"></script>
     <script src="/js/payment-method.js"></script>
     <script src="/js/saved-events.js"></script>
