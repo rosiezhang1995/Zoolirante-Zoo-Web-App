@@ -24,8 +24,6 @@
 
         const events = await eventsRes.json();
         const bookings = await bookingsRes.json();
-        console.log("Upcoming events:", events);
-        console.log("Upcoming bookings:", bookings);
 
         // clear container
         listContainer.innerHTML = "";

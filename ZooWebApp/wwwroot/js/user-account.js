@@ -83,6 +83,10 @@ function setupTabs() {
             if (tabId === "membership") {
                 loadMembershipStatus();
             }
+
+            if (tabId === "notification") {
+                sessionStorage.setItem("notifRead", "true");
+            }
             // update url without refresh
             const newUrl = `${window.location.pathname}?tab=${tabId}`;
             history.replaceState(null, '', newUrl);
