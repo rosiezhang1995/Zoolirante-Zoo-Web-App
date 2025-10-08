@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Membership | Zoolirante</title>
+    <link href="/css/site.tailwind.css" rel="stylesheet">
+    <link href="/css/custom.css" rel="stylesheet">
+</head>
+<body class="bg-zoo-background">
+    <div class="bg-zoo-cream text-center py-4 text-zoo-brown font-semibold tracking-wide text-lg shadow">
+        Zoolirante – A World of Wildlife, A Lifetime of Wonder
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center ">
+            <img src="/images/homepage/paw.png" alt="paw icon" class="mx-auto w-16 mb-2" />
+            <h2 class="text-3xl font-semibold text-zoo-darkbrown mb-5">Membership</h2>
+            <p class="text-zoo-lightbrown text-lg">See the benefits of a Zoo Membership!</p>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center">
+            <p class="text-3xl font-semibold text-zoo-darkbrown mb-5">For the biggest animal lovers, we offer a zoo membership! With a zoo membership, you will receive:</p>
+            <ul class="text-4xl font-bold text-zoo-darkbrown mb-5">12-month unlimited zoo access - Only for $380!</ul>
+            <ul class="text-3xl font-semibold text-zoo-darkbrown mb-5">One free zoo merchandise item of your choice (collect at zoo)</ul>
+            <p class="text-3xl font-semibold text-zoo-darkbrown mb-5">Get a zoo membership today to enhance your zoo visits!</p>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <button id="becomeMember" class="bg-zoo-primary hover:!bg-amber-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg transition-colors mt-3">
+            Become a Member
+        </button>
+    </div>
+
+    <script>
+        document.getElementById("becomeMember").onclick = function () {
+            if (sessionStorage.getItem("userId") === null || sessionStorage.getItem("userId") === "") {
+                window.location.href = "/pages/login.html";
+            } else {
+                window.location.href = "/pages/membership-payment.html";
+            }
+        };
+    </script>
+    <script src="/js/components/navbar.js"></script>
+</body>
+</html>

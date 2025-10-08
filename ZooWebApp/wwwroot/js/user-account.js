@@ -78,6 +78,11 @@ function setupTabs() {
             if (tabId === "payment") {
                 loadPaymentMethod();
             }
+
+            // Load membership status
+            if (tabId === "membership") {
+                loadMembershipStatus();
+            }
             // update url without refresh
             const newUrl = `${window.location.pathname}?tab=${tabId}`;
             history.replaceState(null, '', newUrl);
