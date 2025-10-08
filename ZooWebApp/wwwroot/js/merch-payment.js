@@ -74,5 +74,13 @@ function showStep(step) {
 
 document.getElementById('completeBooking').textContent = "Complete Purchase";
 document.getElementById('completeBooking').addEventListener('click', async () => {
-    alert('Purchase completed successfully!');
+
+    // Show the success modal
+    const modal = document.getElementById('successModal');
+    modal.classList.remove('hidden');
+
+    // Update modal info
+    const total = document.getElementById('total').textContent;
+    document.getElementById('modalTotal').textContent = total;
 });
+
