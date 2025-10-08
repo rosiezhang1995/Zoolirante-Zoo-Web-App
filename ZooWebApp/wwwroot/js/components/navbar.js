@@ -34,7 +34,7 @@ function createNavbar() {
 
     const navbarHTML = `
         <header class="sticky top-0 z-50 bg-zoo-soft shadow">
-            <div class="max-w-7xl mx-auto px-4">
+            <div class="px-4 2xl:px-8">
                 <div class="flex items-center justify-between h-16">
                     <div class="flex-shrink-0">
                         <a href="/" class="flex items-center text-zoo-darkbrown font-medium no-underline hover:underline">
