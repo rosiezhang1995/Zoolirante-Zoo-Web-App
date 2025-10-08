@@ -265,8 +265,8 @@ function displayNoPaymentMethod() {
         <div class="bg-white rounded-lg shadow-lg p-12 text-center">
             <div class="text-6xl mb-4">💳</div>
             <h3 class="text-xl font-bold text-zoo-darkbrown mb-2">No Payment Method Saved</h3>
-            <p class="text-gray-600 mb-6">Add a payment method to make future bookings faster</p>
-            <button onclick="showAddPaymentForm()" class="bg-zoo-primary hover:bg-amber-700 text-white px-6 py-3 rounded-lg font-semibold transition">
+            <p class="text-zoo-brown mb-6">Add a payment method to make future bookings faster</p>
+            <button onclick="showAddPaymentForm()" class="bg-zoo-primary hover:bg-amber-700 text-white px-6 py-3 rounded-lg font-semibold transition mb-3">
                 Add Payment Method
             </button>
         </div>
