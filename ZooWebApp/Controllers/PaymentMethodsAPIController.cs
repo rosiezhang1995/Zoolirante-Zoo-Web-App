@@ -18,38 +18,71 @@ namespace ZooWebApp.Controllers
         }
 
         // GET: api/PaymentMethodsAPI/user/{userId}
+        // Returns the payment method for a user (changed to only one allowed per user)
         [HttpGet("user/{userId}")]
-        public async Task<IActionResult> GetUserPaymentMethods(int userId)
+        public async Task<IActionResult> GetUserPaymentMethod(int userId)
         {
-            var methods = await _context.PaymentMethods
+            var method = await _context.PaymentMethods
                 .Where(pm => pm.UserID == userId)
-                .OrderByDescending(pm => pm.IsDefault)
-                .ThenByDescending(pm => pm.CreatedAt)
-                .ToListAsync();
+                .Select(pm => new
+                {
+                    pm.PaymentMethodID,
+                    pm.UserID,
+                    pm.CardHolderName,
+                    pm.CardType,
+                    pm.LastFourDigits,
+                    pm.ExpiryMonth,
+                    pm.ExpiryYear,
+                    pm.CreatedAt,
+                    CardDisplay = $"{pm.CardType} •••• {pm.LastFourDigits}",
+                    ExpiryDisplay = $"{pm.ExpiryMonth:00}/{pm.ExpiryYear}",
+                    IsExpired = (pm.ExpiryYear < DateTime.Now.Year) ||
+                               (pm.ExpiryYear == DateTime.Now.Year && pm.ExpiryMonth < DateTime.Now.Month)
+                })
+                .FirstOrDefaultAsync();
 
-            return Ok(methods);
+            if (method == null)
+                return NotFound(new { message = "No payment method found" });
+
+            return Ok(method);
         }
 
         // POST: api/PaymentMethodsAPI
         [HttpPost]
         public async Task<IActionResult> AddPaymentMethod([FromBody] AddPaymentMethodRequest request)
         {
-            if (request.CardNumber.Length < 13 || request.CardNumber.Length > 19)
-                return BadRequest(new { message = "Invalid card number" });
-
-            // If setting as default, remove default from other cards
-            if (request.IsDefault)
+            // Validate card number
+            if (string.IsNullOrWhiteSpace(request.CardNumber) ||
+                request.CardNumber.Length < 13 ||
+                request.CardNumber.Length > 19)
             {
-                var existingDefaults = await _context.PaymentMethods
-                    .Where(pm => pm.UserID == request.UserID && pm.IsDefault)
-                    .ToListAsync();
-
-                foreach (var pm in existingDefaults)
-                {
-                    pm.IsDefault = false;
-                }
+                return BadRequest(new { message = "Invalid card number length" });
             }
 
+            // Validate expiry date
+            if (request.ExpiryYear < DateTime.Now.Year ||
+                (request.ExpiryYear == DateTime.Now.Year && request.ExpiryMonth < DateTime.Now.Month))
+            {
+                return BadRequest(new { message = "Card has expired" });
+            }
+
+            // Check if user exists
+            var userExists = await _context.User.AnyAsync(u => u.UserID == request.UserID);
+            if (!userExists)
+            {
+                return NotFound(new { message = "User not found" });
+            }
+
+            // Check if user already has a payment method 
+            var existingMethod = await _context.PaymentMethods
+                .FirstOrDefaultAsync(pm => pm.UserID == request.UserID);
+
+            if (existingMethod != null)
+            {
+                return BadRequest(new { message = "User already has a payment method. Please delete the existing one before adding a new one." });
+            }
+
+            // Create new payment method
             var paymentMethod = new PaymentMethod
             {
                 UserID = request.UserID,
@@ -58,23 +91,40 @@ namespace ZooWebApp.Controllers
                 LastFourDigits = request.CardNumber.Substring(request.CardNumber.Length - 4),
                 ExpiryMonth = request.ExpiryMonth,
                 ExpiryYear = request.ExpiryYear,
-                IsDefault = request.IsDefault,
+                IsDefault = true,
                 CreatedAt = DateTime.Now
             };
 
             _context.PaymentMethods.Add(paymentMethod);
             await _context.SaveChangesAsync();
 
-            return Ok(paymentMethod);
+            return Ok(new
+            {
+                paymentMethod.PaymentMethodID,
+                paymentMethod.UserID,
+                paymentMethod.CardHolderName,
+                paymentMethod.CardType,
+                paymentMethod.LastFourDigits,
+                paymentMethod.ExpiryMonth,
+                paymentMethod.ExpiryYear,
+                paymentMethod.CreatedAt,
+                CardDisplay = $"{paymentMethod.CardType} •••• {paymentMethod.LastFourDigits}",
+                message = "Payment method added successfully"
+            });
         }
 
         // DELETE: api/PaymentMethodsAPI/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePaymentMethod(int id)
+        public async Task<IActionResult> DeletePaymentMethod(int id, [FromQuery] int userId)
         {
             var method = await _context.PaymentMethods.FindAsync(id);
+
             if (method == null)
-                return NotFound();
+                return NotFound(new { message = "Payment method not found" });
+
+            // Verify the payment method belongs to the requesting user
+            if (method.UserID != userId)
+                return Forbid();
 
             _context.PaymentMethods.Remove(method);
             await _context.SaveChangesAsync();
@@ -82,35 +132,19 @@ namespace ZooWebApp.Controllers
             return Ok(new { message = "Payment method deleted successfully" });
         }
 
-        // PUT: api/PaymentMethodsAPI/{id}/set default
-        [HttpPut("{id}/set-default")]
-        public async Task<IActionResult> SetDefaultPaymentMethod(int id)
-        {
-            var method = await _context.PaymentMethods.FindAsync(id);
-            if (method == null)
-                return NotFound();
-
-            // Remove default from other cards
-            var otherDefaults = await _context.PaymentMethods
-                .Where(pm => pm.UserID == method.UserID && pm.PaymentMethodID != id && pm.IsDefault)
-                .ToListAsync();
-
-            foreach (var pm in otherDefaults)
-            {
-                pm.IsDefault = false;
-            }
-
-            method.IsDefault = true;
-            await _context.SaveChangesAsync();
-
-            return Ok(method);
-        }
-
         private string DetermineCardType(string cardNumber)
         {
+            if (string.IsNullOrWhiteSpace(cardNumber))
+                return "Unknown";
+
+            // Remove spaces and dashes
+            cardNumber = cardNumber.Replace(" ", "").Replace("-", "");
+
             if (cardNumber.StartsWith("4")) return "Visa";
             if (cardNumber.StartsWith("5")) return "Mastercard";
-            if (cardNumber.StartsWith("3")) return "Amex";
+            if (cardNumber.StartsWith("37") || cardNumber.StartsWith("34")) return "Amex";
+            if (cardNumber.StartsWith("6")) return "Discover";
+
             return "Unknown";
         }
     }
