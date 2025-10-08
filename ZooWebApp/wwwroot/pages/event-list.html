@@ -10,10 +10,10 @@
     <!-- nav bar -->
     <!-- Image Banner -->
     <div class="relative w-full h-[180px] md:h-[240px] 2xl:h-[400px] bg-cover bg-no-repeat -mt-2"
-        style="background-image: url('/images/events/event-banner.png'); ">
+         style="background-image: url('/images/events/event-banner.png'); ">
         <!-- logo -->
         <img src="/images/homepage/logo.png" alt="Zoo Logo"
-            class="absolute -bottom-8 left-8 w-40 h-auto z-10 " />
+             class="absolute -bottom-8 left-8 w-40 h-auto z-10 " />
     </div>
     <!-- Value badge -->
     <div class="bg-zoo-cream text-center py-4 text-zoo-brown font-semibold tracking-wide text-lg shadow">
@@ -29,25 +29,28 @@
 
         <!-- Event create button -->
         <div id="add-event-button" class="mb-3 flex justify-end" hidden>
-            <a href="/pages/event-add.html"><button class="bg-zoo-primary hover:!bg-amber-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg transition-colors">
-            Add New Event
-            </button></a>
+            <a href="/pages/event-add.html">
+                <button class="bg-zoo-primary hover:!bg-amber-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg transition-colors">
+                    Add New Event
+                </button>
+            </a>
         </div>
         <!-- Month Header -->
         <div class="text-center mt-10 mb-12">
             <div class="flex items-center justify-center mb-4">
                 <div class="flex-1 border-t-2 border-dotted border-gray-400"></div>
-                <h2 class="px-8 text-4xl font-semibold text-zoo-primary">September 2025</h2>
+                <h2 class="px-8 text-4xl font-semibold text-zoo-primary">October 2025</h2>
                 <div class="flex-1 border-t-2 border-dotted border-gray-400"></div>
             </div>
-        </div>         
-        
+        </div>
+
 
         <!-- Event Card, One card per row -->
         <div id="event-list" class="space-y-8"></div>
- 
+
     </div>
-  <script src="/js/components/navbar.js"></script>
-  <script src="/js/event-list.js"></script>
+    <script src="/js/components/navbar.js"></script>
+    <script src="/js/components/notification-badge.js"></script>
+    <script src="/js/event-list.js"></script>
 </body>
 </html>

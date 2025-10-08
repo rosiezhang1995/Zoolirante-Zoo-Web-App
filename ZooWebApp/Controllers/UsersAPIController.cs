@@ -218,6 +218,27 @@ namespace ZooWebApp.Controllers
             return NoContent();
         }
 
+        [HttpGet("{userId}/upcomingEvents")]
+        public async Task<IActionResult> GetUpcomingEvents(int userId)
+        {
+            var user = await _context.User
+                .Include(u => u.SavedEvents)
+                .FirstOrDefaultAsync(u => u.UserID == userId);
+
+            if (user == null)
+                return NotFound("User not found");
+
+            var now = DateTime.Now;
+            var nextDay = now.AddDays(1);
+
+            var upcomingEvents = user.SavedEvents
+                .Where(e => e.EventDate >= now && e.EventDate <= nextDay)
+                .OrderBy(e => e.EventDate)
+                .ToList();
+
+            return Ok(upcomingEvents);
+        }
+
 
         private bool UserExists(int id)
         {
