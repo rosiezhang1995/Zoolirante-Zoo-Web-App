@@ -34,10 +34,10 @@
 
     <script>
         document.getElementById("becomeMember").onclick = function () {
-            if (sessionStorage.getItem("userId") = null) {
-                window.location.href = "login.html";
+            if (sessionStorage.getItem("userId") === null || sessionStorage.getItem("userId") === "") {
+                window.location.href = "/pages/login.html";
             } else {
-                window.location.href = "membership-payment.html";
+                window.location.href = "/pages/membership-payment.html";
             }
         };
     </script>
