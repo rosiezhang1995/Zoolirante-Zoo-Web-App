@@ -1,5 +1,13 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
     loadMerchandiseDetails();
+
+    const buyNowBtn = document.getElementById("buyNowBtn");
+    if (buyNowBtn) {
+        buyNowBtn.addEventListener("click", () => {
+            const merchID = new URLSearchParams(window.location.search).get("id");
+            window.location.href = `/pages/merch-payment.html?id=${merchID}`;
+        });
+    }
 });
 
 function loadMerchandiseDetails() {
