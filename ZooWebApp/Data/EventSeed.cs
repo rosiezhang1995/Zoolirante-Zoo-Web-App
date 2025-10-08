@@ -39,7 +39,7 @@ namespace ZooWebApp.Data
                     {
                         Title = "Morning Safari Parade",
                         Description = "Join our animals for a fun morning parade across the zoo!",
-                        EventDate = new DateTime(2025, 10, 8),
+                        EventDate = new DateTime(2025, 10, 10),
                         EventTime = new TimeSpan(9, 30, 0),
                         EventImage = "/images/events/safari-parade.jpg",
                         Location = "Main Plaza",
