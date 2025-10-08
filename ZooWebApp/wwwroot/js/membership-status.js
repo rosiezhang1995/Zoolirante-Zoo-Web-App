@@ -45,8 +45,8 @@ function displayMembershipStatus(isMember) {
                     </ul>
                 </div>
                 
-                <a href="/pages/ticket-booking.html" class="inline-block bg-zoo-primary hover:bg-amber-700 text-white px-6 py-3 rounded-lg font-semibold transition">
-                    Book Your Visit
+                <a href="/pages/event-list.html" class="inline-block bg-zoo-primary hover:bg-amber-700 text-white px-6 py-3 rounded-lg font-semibold transition">
+                    Explore Zoo Events
                 </a>
             </div>
         `;
