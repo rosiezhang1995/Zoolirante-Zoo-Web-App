@@ -48,7 +48,6 @@ namespace ZooWebApp.Controllers
         }
 
         // PUT: api/UsersAPI/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
@@ -237,6 +236,31 @@ namespace ZooWebApp.Controllers
                 .ToList();
 
             return Ok(upcomingEvents);
+        }
+
+        // PUT: api/UsersAPI/5/membership
+        [HttpPut("{id}/membership")]
+        public async Task<IActionResult> UpdateMembershipStatus(int id, [FromBody] bool isMember)
+        {
+            try
+            {
+                var user = await _context.User.FindAsync(id);
+
+                if (user == null)
+                {
+                    return NotFound(new { message = "User not found" });
+                }
+
+                user.IsMember = isMember;
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Membership status updated successfully", isMember = user.IsMember });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating membership: {ex.Message}");
+                return StatusCode(500, new { message = "Failed to update membership status" });
+            }
         }
 
 
