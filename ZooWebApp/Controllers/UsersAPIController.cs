@@ -109,6 +109,8 @@ namespace ZooWebApp.Controllers
             {
                 userID = user.UserID,
                 username = user.Username,
+                email = user.Email,          
+                fullName = user.FullName,     
                 isAdmin = user.IsAdmin,
                 favouriteAnimals = user.FavouriteAnimals?.Select(a => a.AnimalID).ToList(),
                 savedEvents = user.SavedEvents?.Select(e => e.EventID).ToList()
