@@ -2,7 +2,7 @@
 let selectedTickets = {};
 let currentStep = 1;
 let currentUser = null;
-let savedPaymentMethods = [];
+let savedPaymentMethod = null; // change to single payment method object
 
 document.addEventListener('DOMContentLoaded', () => {
     loadTicketTypes();
@@ -21,7 +21,7 @@ function checkUserLogin() {
     if (userString) {
         currentUser = JSON.parse(userString);
         document.getElementById('saveCardOption').classList.remove('hidden');
-        loadSavedPaymentMethods();
+        loadSavedPaymentMethod();
     }
 }
 
@@ -41,25 +41,25 @@ function displayTicketTypes() {
 
     ticketTypes.forEach(ticket => {
         const card = `
-      <div class="border-2 border-gray-200 rounded-lg p-4 hover:border-zoo-primary transition">
-        <div class="flex justify-between items-center">
-          <div class="flex-1">
-            <h4 class="font-bold text-lg text-zoo-darkbrown">${ticket.typeName}</h4>
-            <p class="text-sm text-gray-600">${ticket.description}</p>
-          </div>
-          <div class="text-right mx-4">
-            <p class="text-2xl font-bold text-zoo-primary">$${ticket.price.toFixed(2)}</p>
-          </div>
-          <div class="flex items-center space-x-2">
-            <button onclick="decrementTicket(${ticket.ticketTypeID})"
-              class="w-10 h-10 bg-gray-200 hover:bg-gray-300 rounded-full font-bold text-xl transition">-</button>
-            <span id="qty-${ticket.ticketTypeID}" class="w-10 text-center font-bold text-lg">0</span>
-            <button onclick="incrementTicket(${ticket.ticketTypeID})"
-              class="w-10 h-10 bg-zoo-primary hover:bg-amber-700 text-white rounded-full font-bold text-xl transition">+</button>
-          </div>
-        </div>
-      </div>
-    `;
+            <div class="border-2 border-gray-200 rounded-lg p-4 hover:border-zoo-primary transition">
+                <div class="flex justify-between items-center">
+                    <div class="flex-1">
+                        <h4 class="font-bold text-lg text-zoo-darkbrown">${ticket.typeName}</h4>
+                        <p class="text-sm text-gray-600">${ticket.description}</p>
+                    </div>
+                    <div class="text-right mx-4">
+                        <p class="text-2xl font-bold text-zoo-primary">$${ticket.price.toFixed(2)}</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="decrementTicket(${ticket.ticketTypeID})"
+                            class="w-10 h-10 bg-gray-200 hover:bg-gray-300 rounded-full font-bold text-xl transition">-</button>
+                        <span id="qty-${ticket.ticketTypeID}" class="w-10 text-center font-bold text-lg">0</span>
+                        <button onclick="incrementTicket(${ticket.ticketTypeID})"
+                            class="w-10 h-10 bg-zoo-primary hover:bg-amber-700 text-white rounded-full font-bold text-xl transition">+</button>
+                    </div>
+                </div>
+            </div>
+        `;
         container.innerHTML += card;
     });
 }
@@ -110,14 +110,14 @@ function updateOrderSummary() {
         subtotal += lineTotal;
 
         summaryHTML += `
-      <div class="flex justify-between items-center py-2 border-b">
-        <div>
-          <p class="font-semibold text-zoo-darkbrown">${ticket.typeName}</p>
-          <p class="text-sm text-gray-600">${ticket.quantity} × $${ticket.price.toFixed(2)}</p>
-        </div>
-        <p class="font-bold text-lg">$${lineTotal.toFixed(2)}</p>
-      </div>
-    `;
+            <div class="flex justify-between items-center py-2 border-b">
+                <div>
+                    <p class="font-semibold text-zoo-darkbrown">${ticket.typeName}</p>
+                    <p class="text-sm text-gray-600">${ticket.quantity} × $${ticket.price.toFixed(2)}</p>
+                </div>
+                <p class="font-bold text-lg">$${lineTotal.toFixed(2)}</p>
+            </div>
+        `;
     }
     summaryHTML += '</div>';
 
@@ -126,47 +126,55 @@ function updateOrderSummary() {
     document.getElementById('total').textContent = `$${subtotal.toFixed(2)}`;
 }
 
-async function loadSavedPaymentMethods() {
+async function loadSavedPaymentMethod() {
     if (!currentUser) return;
 
     try {
         const response = await fetch(`/api/PaymentMethodsAPI/user/${currentUser.userID || currentUser.UserID}`);
-        savedPaymentMethods = await response.json();
 
-        if (savedPaymentMethods.length > 0) {
-            displaySavedPaymentMethods();
+        if (response.ok) {
+            savedPaymentMethod = await response.json();
+            displaySavedPaymentMethod();
+        } else {
+            savedPaymentMethod = null;
         }
     } catch (error) {
-        console.error('Error loading payment methods:', error);
+        console.error('Error loading payment method:', error);
+        savedPaymentMethod = null;
     }
 }
 
-function displaySavedPaymentMethods() {
-    const container = document.getElementById('savedPaymentMethods');
-    container.innerHTML = '';
+function displaySavedPaymentMethod() {
+    if (!savedPaymentMethod) return;
 
-    savedPaymentMethods.forEach(pm => {
-        const methodDiv = `
-      <label class="flex items-center p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-zoo-primary transition">
-        <input type="radio" name="paymentMethod" value="${pm.paymentMethodID}" class="mr-3" ${pm.isDefault ? 'checked' : ''}>
-        <div class="flex-1">
-          <span class="font-semibold">${pm.cardType} •••• ${pm.lastFourDigits}</span>
-          ${pm.isDefault ? '<span class="ml-2 text-xs bg-zoo-primary text-white px-2 py-1 rounded">Default</span>' : ''}
-          <p class="text-sm text-gray-600">Expires ${pm.expiryMonth}/${pm.expiryYear}</p>
+    const container = document.getElementById('savedPaymentMethodSection');
+
+    container.innerHTML = `
+        <div class="mb-4">
+            <h3 class="text-lg font-semibold text-zoo-darkbrown mb-3">Payment Method</h3>
+            <div class="p-4 border-2 border-zoo-primary rounded-lg bg-zoo-cream">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="font-bold text-zoo-darkbrown">${savedPaymentMethod.cardType} •••• ${savedPaymentMethod.lastFourDigits}</p>
+                        <p class="text-sm text-gray-600">Cardholder: ${savedPaymentMethod.cardHolderName}</p>
+                        <p class="text-sm text-gray-600">Expires: ${savedPaymentMethod.expiryMonth}/${savedPaymentMethod.expiryYear}</p>
+                        ${savedPaymentMethod.isExpired ? '<p class="text-sm text-red-600 font-semibold mt-1">⚠️ This card has expired</p>' : ''}
+                    </div>
+                    <div class="text-right">
+                        <span class="bg-zoo-primary text-white px-3 py-1 rounded-full text-xs font-semibold">Saved Card</span>
+                    </div>
+                </div>
+            </div>
+            <p class="text-xs text-gray-600 mt-2">
+                This saved payment method will be used for this booking. You can manage your payment methods in your account settings.
+            </p>
         </div>
-      </label>
     `;
-        container.innerHTML += methodDiv;
-    });
 
-    document.getElementById('savedPaymentMethodsSection').classList.remove('hidden');
+    container.classList.remove('hidden');
     document.getElementById('newCardForm').classList.add('hidden');
+    document.getElementById('saveCardOption').classList.add('hidden');
 }
-
-document.getElementById('showNewCardForm')?.addEventListener('click', () => {
-    document.getElementById('newCardForm').classList.remove('hidden');
-    document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => radio.checked = false);
-});
 
 document.getElementById('continueToDetails').addEventListener('click', () => {
     if (Object.keys(selectedTickets).length === 0) {
@@ -251,36 +259,45 @@ document.getElementById('completeBooking').addEventListener('click', async () =>
     try {
         let paymentMethodID = null;
         let paymentMethodDisplay = 'Simulated Payment';
+        let shouldSaveCard = false;
 
-        const selectedRadio = document.querySelector('input[name="paymentMethod"]:checked');
-        if (selectedRadio) {
-            paymentMethodID = parseInt(selectedRadio.value);
-            const pm = savedPaymentMethods.find(p => p.paymentMethodID === paymentMethodID);
-            if (pm) {
-                paymentMethodDisplay = `${pm.cardType} •••• ${pm.lastFourDigits}`;
+        // Check if using saved payment method
+        if (savedPaymentMethod && !document.getElementById('savedPaymentMethodSection').classList.contains('hidden')) {
+            // Using saved payment method (change to automatically)
+            if (savedPaymentMethod.isExpired) {
+                alert('Your saved card has expired. Please update your payment method in account settings before booking.');
+                button.disabled = false;
+                button.textContent = 'Complete Booking';
+                return;
             }
+            paymentMethodID = savedPaymentMethod.paymentMethodID;
+            paymentMethodDisplay = `${savedPaymentMethod.cardType} •••• ${savedPaymentMethod.lastFourDigits}`;
         } else {
+            // Using new card, if user has no saved card
             const cardNumber = document.getElementById('cardNumber').value;
-            if (cardNumber.length >= 13) {
-                paymentMethodDisplay = `Card ending in ${cardNumber.slice(-4)}`;
+            const cardHolder = document.getElementById('cardHolder').value;
+            const cardExpiry = document.getElementById('cardExpiry').value;
+            const cardCVV = document.getElementById('cardCVV').value;
 
-                if (currentUser && document.getElementById('saveCard').checked) {
-                    const cardHolder = document.getElementById('cardHolder').value;
-                    const cardExpiry = document.getElementById('cardExpiry').value.split('/');
+            if (!cardNumber || !cardHolder || !cardExpiry || !cardCVV) {
+                alert('Please fill in all card details');
+                button.disabled = false;
+                button.textContent = 'Complete Booking';
+                return;
+            }
 
-                    await fetch('/api/PaymentMethodsAPI', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            userID: currentUser.UserID || currentUser.userID,
-                            cardHolderName: cardHolder,
-                            cardNumber: cardNumber,
-                            expiryMonth: parseInt(cardExpiry[0]),
-                            expiryYear: 2000 + parseInt(cardExpiry[1]),
-                            isDefault: savedPaymentMethods.length === 0
-                        })
-                    });
-                }
+            if (cardNumber.length < 13) {
+                alert('Please enter a valid card number');
+                button.disabled = false;
+                button.textContent = 'Complete Booking';
+                return;
+            }
+
+            paymentMethodDisplay = `Card ending in ${cardNumber.slice(-4)}`;
+
+            // Check if user wants to save this card (only shown if logged in and no saved card)
+            if (currentUser && document.getElementById('saveCard').checked) {
+                shouldSaveCard = true;
             }
         }
 
@@ -307,6 +324,29 @@ document.getElementById('completeBooking').addEventListener('click', async () =>
         if (!response.ok) throw new Error('Booking failed');
 
         const result = await response.json();
+
+        // If user wants to save the card, save it after successful booking
+        if (shouldSaveCard) {
+            const cardNumber = document.getElementById('cardNumber').value;
+            const cardHolder = document.getElementById('cardHolder').value;
+            const cardExpiry = document.getElementById('cardExpiry').value.split('/');
+
+            try {
+                await fetch('/api/PaymentMethodsAPI', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        userID: currentUser.UserID || currentUser.userID,
+                        cardHolderName: cardHolder,
+                        cardNumber: cardNumber,
+                        expiryMonth: parseInt(cardExpiry[0]),
+                        expiryYear: 2000 + parseInt(cardExpiry[1])
+                    })
+                });
+            } catch (saveError) {
+                console.error('Error saving payment method:', saveError);
+            }
+        }
 
         document.getElementById('bookingReference').textContent = result.bookingReference;
         document.getElementById('modalTotal').textContent = '$' + result.totalAmount.toFixed(2);
