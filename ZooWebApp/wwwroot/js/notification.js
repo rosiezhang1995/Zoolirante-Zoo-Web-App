@@ -25,16 +25,26 @@
 
         // render messages
         events.forEach(event => {
-            const msg = document.createElement("p");
-            msg.className = "text-zoo-darkbrown text-base font-medium flex items-center gap-2";
+            const msg = document.createElement("div");
+            msg.className =
+                "flex items-start gap-3 bg-white rounded-lg shadow-sm border border-zoo-primary px-4 py-3 transition";
             msg.innerHTML = `
-        🦘 You have an upcoming event:
-        <span class="text-zoo-primary font-semibold">${event.eventName}</span>
-        — <span>${new Date(event.eventDate).toLocaleString("en-AU", {
-                dateStyle: "medium",
-                timeStyle: "short"
-            })}</span>
-      `;
+                <div class="flex-shrink-0 text-2xl">🦘</div>
+                <div class="flex-1">
+                  <p class="text-zoo-darkbrown font-medium">
+                    An event you liked is about to start:
+                    <a href="/pages/event-details.html?id=${event.eventID}" class="text-zoo-primary font-semibold hover:underline"
+                    >${event.title}</a>
+                  </p>
+                  <p class="text-sm text-gray-600 mt-1">
+                    ${new Date(event.eventDate).toLocaleString("en-AU", {
+                            dateStyle: "medium",
+                            timeStyle: "short"
+                        })}
+                  </p>
+                </div>
+            `;
+
             listContainer.appendChild(msg);
         });
 
