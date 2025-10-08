@@ -214,7 +214,7 @@ function displayPaymentMethod(pm) {
             <div class="flex justify-between items-start mb-4">
                 <h3 class="text-xl font-bold text-zoo-darkbrown">Your Saved Payment Method</h3>
                 <button onclick="deletePaymentMethod(${pm.paymentMethodID})" 
-                        class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold transition">
+                        class="bg-white border hover:bg-zoo-brown text-zoo-darkbrown px-4 py-2 rounded-lg font-semibold transition">
                     Delete Card
                 </button>
             </div>
@@ -390,17 +390,25 @@ async function deletePaymentMethod(paymentMethodID) {
     }
 
     const userId = sessionStorage.getItem("userId");
+    if (!userId) {
+        alert('Session expired. Please log in again.');
+        return;
+    }
 
     try {
         const response = await fetch(`/api/PaymentMethodsAPI/${paymentMethodID}?userId=${userId}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
         });
 
-        if (!response.ok) {
-            throw new Error('Failed to delete payment method');
-        }
+        const result = await response.json();
 
-        loadPaymentMethod();
+        if (response.ok) {
+            alert('Payment method deleted successfully!');
+            await loadPaymentMethod();
+        } else {
+            alert(result.message || 'Failed to delete payment method');
+        }
     } catch (error) {
         console.error('Error:', error);
         alert('Failed to delete payment method. Please try again.');
