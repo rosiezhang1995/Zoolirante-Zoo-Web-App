@@ -34,7 +34,8 @@ This project was developed as a **team-based product release** using an **Agile 
 
 - **ASP.NET** 
 - **JavaScript**  
-- **Tailwind CSS** 
+- **Tailwind CSS**
+- **SQL Server** 
 
 ---
 
